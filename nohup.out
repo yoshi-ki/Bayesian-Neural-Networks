@@ -1,0 +1,2856 @@
+[36m
+Data:[0m
+[36m
+Network:[0m
+[36m
+Net:[0m
+[33m Creating Net!! [0m
+    Total params: 4.79M
+[36m
+Train:[0m
+  init cost variables:
+it 0/200, Jtr_KL = 10.094852, Jtr_pred = 1.679960, err = 0.294367, [31m   time: 36.363943 seconds
+[0m
+[32m    Jdev = 0.362065, err = 0.101900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 1/200, Jtr_KL = 9.058589, Jtr_pred = 0.558810, err = 0.156983, [31m   time: 18.189812 seconds
+[0m
+[32m    Jdev = 0.296984, err = 0.081000
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 2/200, Jtr_KL = 8.183190, Jtr_pred = 0.461441, err = 0.130283, [31m   time: 17.899980 seconds
+[0m
+[32m    Jdev = 0.262656, err = 0.073000
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 3/200, Jtr_KL = 7.459077, Jtr_pred = 0.409814, err = 0.116317, [31m   time: 17.993704 seconds
+[0m
+[32m    Jdev = 0.231336, err = 0.065500
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 4/200, Jtr_KL = 6.863349, Jtr_pred = 0.380528, err = 0.109100, [31m   time: 17.970337 seconds
+[0m
+[32m    Jdev = 0.203222, err = 0.058800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 5/200, Jtr_KL = 6.372372, Jtr_pred = 0.355926, err = 0.101167, [31m   time: 17.994001 seconds
+[0m
+[32m    Jdev = 0.185209, err = 0.054200
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 6/200, Jtr_KL = 5.967855, Jtr_pred = 0.336056, err = 0.093783, [31m   time: 17.992930 seconds
+[0m
+[32m    Jdev = 0.176498, err = 0.052400
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 7/200, Jtr_KL = 5.635631, Jtr_pred = 0.322080, err = 0.090717, [31m   time: 19.738016 seconds
+[0m
+[32m    Jdev = 0.164006, err = 0.048200
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 8/200, Jtr_KL = 5.361664, Jtr_pred = 0.309476, err = 0.087050, [31m   time: 17.631000 seconds
+[0m
+[32m    Jdev = 0.162295, err = 0.047800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 9/200, Jtr_KL = 5.135705, Jtr_pred = 0.295010, err = 0.083433, [31m   time: 18.097403 seconds
+[0m
+[32m    Jdev = 0.155672, err = 0.048100
+[0m
+it 10/200, Jtr_KL = 4.949062, Jtr_pred = 0.286453, err = 0.079983, [31m   time: 19.185292 seconds
+[0m
+[32m    Jdev = 0.153287, err = 0.046800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 11/200, Jtr_KL = 4.793931, Jtr_pred = 0.279383, err = 0.077867, [31m   time: 18.212510 seconds
+[0m
+[32m    Jdev = 0.145155, err = 0.044000
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 12/200, Jtr_KL = 4.665967, Jtr_pred = 0.274171, err = 0.077033, [31m   time: 17.982579 seconds
+[0m
+[32m    Jdev = 0.136370, err = 0.040800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 13/200, Jtr_KL = 4.559139, Jtr_pred = 0.264551, err = 0.075200, [31m   time: 18.052259 seconds
+[0m
+[32m    Jdev = 0.129600, err = 0.039000
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 14/200, Jtr_KL = 4.470493, Jtr_pred = 0.261695, err = 0.074433, [31m   time: 18.496021 seconds
+[0m
+[32m    Jdev = 0.130729, err = 0.039400
+[0m
+it 15/200, Jtr_KL = 4.395913, Jtr_pred = 0.254133, err = 0.071017, [31m   time: 18.167445 seconds
+[0m
+[32m    Jdev = 0.124556, err = 0.036900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 16/200, Jtr_KL = 4.333017, Jtr_pred = 0.252347, err = 0.071183, [31m   time: 18.962055 seconds
+[0m
+[32m    Jdev = 0.119234, err = 0.036700
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 17/200, Jtr_KL = 4.280103, Jtr_pred = 0.247309, err = 0.067967, [31m   time: 17.948452 seconds
+[0m
+[32m    Jdev = 0.124931, err = 0.037700
+[0m
+it 18/200, Jtr_KL = 4.234726, Jtr_pred = 0.242025, err = 0.068517, [31m   time: 18.132049 seconds
+[0m
+[32m    Jdev = 0.134275, err = 0.040900
+[0m
+it 19/200, Jtr_KL = 4.195826, Jtr_pred = 0.237910, err = 0.068433, [31m   time: 18.205047 seconds
+[0m
+[32m    Jdev = 0.114708, err = 0.033900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 20/200, Jtr_KL = 4.162932, Jtr_pred = 0.236942, err = 0.066333, [31m   time: 18.072257 seconds
+[0m
+[32m    Jdev = 0.110935, err = 0.032400
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 21/200, Jtr_KL = 4.133973, Jtr_pred = 0.230011, err = 0.065617, [31m   time: 18.021721 seconds
+[0m
+[32m    Jdev = 0.109196, err = 0.031600
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 22/200, Jtr_KL = 4.108797, Jtr_pred = 0.228999, err = 0.066117, [31m   time: 18.366670 seconds
+[0m
+[32m    Jdev = 0.111609, err = 0.031600
+[0m
+it 23/200, Jtr_KL = 4.086252, Jtr_pred = 0.228161, err = 0.064833, [31m   time: 17.946497 seconds
+[0m
+[32m    Jdev = 0.109064, err = 0.032200
+[0m
+it 24/200, Jtr_KL = 4.066328, Jtr_pred = 0.224606, err = 0.064067, [31m   time: 19.521549 seconds
+[0m
+[32m    Jdev = 0.110653, err = 0.032900
+[0m
+it 25/200, Jtr_KL = 4.048058, Jtr_pred = 0.225608, err = 0.063650, [31m   time: 19.038989 seconds
+[0m
+[32m    Jdev = 0.108408, err = 0.032800
+[0m
+it 26/200, Jtr_KL = 4.031614, Jtr_pred = 0.220316, err = 0.062317, [31m   time: 17.901090 seconds
+[0m
+[32m    Jdev = 0.104863, err = 0.032600
+[0m
+it 27/200, Jtr_KL = 4.016595, Jtr_pred = 0.215634, err = 0.061667, [31m   time: 18.407108 seconds
+[0m
+[32m    Jdev = 0.101784, err = 0.029600
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 28/200, Jtr_KL = 4.002571, Jtr_pred = 0.219386, err = 0.063667, [31m   time: 18.870961 seconds
+[0m
+[32m    Jdev = 0.107828, err = 0.032400
+[0m
+it 29/200, Jtr_KL = 3.990088, Jtr_pred = 0.215322, err = 0.062033, [31m   time: 18.231042 seconds
+[0m
+[32m    Jdev = 0.106126, err = 0.031600
+[0m
+it 30/200, Jtr_KL = 3.977488, Jtr_pred = 0.212206, err = 0.060233, [31m   time: 17.945655 seconds
+[0m
+[32m    Jdev = 0.101837, err = 0.030800
+[0m
+it 31/200, Jtr_KL = 3.966052, Jtr_pred = 0.214239, err = 0.061333, [31m   time: 18.065861 seconds
+[0m
+[32m    Jdev = 0.100404, err = 0.030300
+[0m
+it 32/200, Jtr_KL = 3.954845, Jtr_pred = 0.211478, err = 0.060467, [31m   time: 18.601094 seconds
+[0m
+[32m    Jdev = 0.099666, err = 0.028800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 33/200, Jtr_KL = 3.944141, Jtr_pred = 0.210460, err = 0.059083, [31m   time: 18.164779 seconds
+[0m
+[32m    Jdev = 0.105941, err = 0.032100
+[0m
+it 34/200, Jtr_KL = 3.933580, Jtr_pred = 0.207426, err = 0.059850, [31m   time: 17.975051 seconds
+[0m
+[32m    Jdev = 0.096929, err = 0.027400
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 35/200, Jtr_KL = 3.924030, Jtr_pred = 0.209841, err = 0.059550, [31m   time: 17.831446 seconds
+[0m
+[32m    Jdev = 0.102165, err = 0.029700
+[0m
+it 36/200, Jtr_KL = 3.915003, Jtr_pred = 0.207414, err = 0.059250, [31m   time: 17.937178 seconds
+[0m
+[32m    Jdev = 0.098884, err = 0.029900
+[0m
+it 37/200, Jtr_KL = 3.905415, Jtr_pred = 0.205077, err = 0.059950, [31m   time: 18.889953 seconds
+[0m
+[32m    Jdev = 0.107393, err = 0.032300
+[0m
+it 38/200, Jtr_KL = 3.896291, Jtr_pred = 0.203706, err = 0.058417, [31m   time: 19.802901 seconds
+[0m
+[32m    Jdev = 0.103218, err = 0.030100
+[0m
+it 39/200, Jtr_KL = 3.886923, Jtr_pred = 0.201637, err = 0.057333, [31m   time: 18.169561 seconds
+[0m
+[32m    Jdev = 0.098548, err = 0.029300
+[0m
+it 40/200, Jtr_KL = 3.877579, Jtr_pred = 0.198031, err = 0.058167, [31m   time: 17.925470 seconds
+[0m
+[32m    Jdev = 0.099557, err = 0.029200
+[0m
+it 41/200, Jtr_KL = 3.868372, Jtr_pred = 0.200657, err = 0.058050, [31m   time: 18.172082 seconds
+[0m
+[32m    Jdev = 0.096165, err = 0.028800
+[0m
+it 42/200, Jtr_KL = 3.859792, Jtr_pred = 0.199822, err = 0.056800, [31m   time: 18.162548 seconds
+[0m
+[32m    Jdev = 0.094251, err = 0.028100
+[0m
+it 43/200, Jtr_KL = 3.850880, Jtr_pred = 0.195758, err = 0.056483, [31m   time: 17.881362 seconds
+[0m
+[32m    Jdev = 0.101027, err = 0.031000
+[0m
+it 44/200, Jtr_KL = 3.842536, Jtr_pred = 0.198683, err = 0.058150, [31m   time: 18.200078 seconds
+[0m
+[32m    Jdev = 0.102027, err = 0.030700
+[0m
+it 45/200, Jtr_KL = 3.834218, Jtr_pred = 0.197080, err = 0.056950, [31m   time: 18.120885 seconds
+[0m
+[32m    Jdev = 0.099963, err = 0.030100
+[0m
+it 46/200, Jtr_KL = 3.825571, Jtr_pred = 0.195030, err = 0.056600, [31m   time: 19.251682 seconds
+[0m
+[32m    Jdev = 0.089439, err = 0.025800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 47/200, Jtr_KL = 3.817714, Jtr_pred = 0.195766, err = 0.057017, [31m   time: 19.308787 seconds
+[0m
+[32m    Jdev = 0.097256, err = 0.027700
+[0m
+it 48/200, Jtr_KL = 3.808634, Jtr_pred = 0.191787, err = 0.055350, [31m   time: 18.592204 seconds
+[0m
+[32m    Jdev = 0.087963, err = 0.025100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 49/200, Jtr_KL = 3.800270, Jtr_pred = 0.193342, err = 0.056583, [31m   time: 17.933286 seconds
+[0m
+[32m    Jdev = 0.100900, err = 0.029500
+[0m
+it 50/200, Jtr_KL = 3.791726, Jtr_pred = 0.190428, err = 0.055100, [31m   time: 17.904014 seconds
+[0m
+[32m    Jdev = 0.094317, err = 0.027500
+[0m
+it 51/200, Jtr_KL = 3.783582, Jtr_pred = 0.192554, err = 0.055567, [31m   time: 17.963008 seconds
+[0m
+[32m    Jdev = 0.100080, err = 0.030400
+[0m
+it 52/200, Jtr_KL = 3.775717, Jtr_pred = 0.191409, err = 0.055633, [31m   time: 17.963129 seconds
+[0m
+[32m    Jdev = 0.088101, err = 0.024900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 53/200, Jtr_KL = 3.767461, Jtr_pred = 0.190257, err = 0.054933, [31m   time: 18.125071 seconds
+[0m
+[32m    Jdev = 0.095070, err = 0.027500
+[0m
+it 54/200, Jtr_KL = 3.759340, Jtr_pred = 0.190386, err = 0.055367, [31m   time: 19.829048 seconds
+[0m
+[32m    Jdev = 0.097665, err = 0.028700
+[0m
+it 55/200, Jtr_KL = 3.751619, Jtr_pred = 0.188466, err = 0.054783, [31m   time: 17.368279 seconds
+[0m
+[32m    Jdev = 0.094515, err = 0.026700
+[0m
+it 56/200, Jtr_KL = 3.743648, Jtr_pred = 0.188136, err = 0.055233, [31m   time: 19.117674 seconds
+[0m
+[32m    Jdev = 0.089359, err = 0.027300
+[0m
+it 57/200, Jtr_KL = 3.735773, Jtr_pred = 0.188736, err = 0.055883, [31m   time: 18.214752 seconds
+[0m
+[32m    Jdev = 0.089748, err = 0.025300
+[0m
+it 58/200, Jtr_KL = 3.727814, Jtr_pred = 0.187933, err = 0.055067, [31m   time: 17.680946 seconds
+[0m
+[32m    Jdev = 0.091751, err = 0.026800
+[0m
+it 59/200, Jtr_KL = 3.719498, Jtr_pred = 0.185872, err = 0.054600, [31m   time: 18.348621 seconds
+[0m
+[32m    Jdev = 0.092045, err = 0.027100
+[0m
+it 60/200, Jtr_KL = 3.711199, Jtr_pred = 0.187325, err = 0.055483, [31m   time: 18.201452 seconds
+[0m
+[32m    Jdev = 0.088282, err = 0.026400
+[0m
+it 61/200, Jtr_KL = 3.703200, Jtr_pred = 0.186885, err = 0.054267, [31m   time: 18.072301 seconds
+[0m
+[32m    Jdev = 0.089188, err = 0.027200
+[0m
+it 62/200, Jtr_KL = 3.695416, Jtr_pred = 0.183257, err = 0.054383, [31m   time: 18.382704 seconds
+[0m
+[32m    Jdev = 0.088180, err = 0.026200
+[0m
+it 63/200, Jtr_KL = 3.686896, Jtr_pred = 0.184227, err = 0.054800, [31m   time: 18.087469 seconds
+[0m
+[32m    Jdev = 0.086858, err = 0.026000
+[0m
+it 64/200, Jtr_KL = 3.678755, Jtr_pred = 0.183725, err = 0.052600, [31m   time: 18.093138 seconds
+[0m
+[32m    Jdev = 0.098603, err = 0.030800
+[0m
+it 65/200, Jtr_KL = 3.671360, Jtr_pred = 0.185745, err = 0.055550, [31m   time: 19.147699 seconds
+[0m
+[32m    Jdev = 0.090809, err = 0.028400
+[0m
+it 66/200, Jtr_KL = 3.663513, Jtr_pred = 0.184178, err = 0.054467, [31m   time: 17.774559 seconds
+[0m
+[32m    Jdev = 0.086006, err = 0.025900
+[0m
+it 67/200, Jtr_KL = 3.655948, Jtr_pred = 0.183764, err = 0.055017, [31m   time: 19.600579 seconds
+[0m
+[32m    Jdev = 0.095671, err = 0.028700
+[0m
+it 68/200, Jtr_KL = 3.648222, Jtr_pred = 0.184336, err = 0.054900, [31m   time: 18.577020 seconds
+[0m
+[32m    Jdev = 0.089320, err = 0.026900
+[0m
+it 69/200, Jtr_KL = 3.640127, Jtr_pred = 0.184419, err = 0.052383, [31m   time: 18.092402 seconds
+[0m
+[32m    Jdev = 0.087882, err = 0.026400
+[0m
+it 70/200, Jtr_KL = 3.632465, Jtr_pred = 0.182636, err = 0.054483, [31m   time: 19.036032 seconds
+[0m
+[32m    Jdev = 0.089528, err = 0.026700
+[0m
+it 71/200, Jtr_KL = 3.624686, Jtr_pred = 0.180256, err = 0.052350, [31m   time: 18.801303 seconds
+[0m
+[32m    Jdev = 0.089211, err = 0.026100
+[0m
+it 72/200, Jtr_KL = 3.616796, Jtr_pred = 0.177864, err = 0.051833, [31m   time: 18.115964 seconds
+[0m
+[32m    Jdev = 0.094174, err = 0.027900
+[0m
+it 73/200, Jtr_KL = 3.608670, Jtr_pred = 0.183651, err = 0.054150, [31m   time: 18.561284 seconds
+[0m
+[32m    Jdev = 0.088140, err = 0.025100
+[0m
+it 74/200, Jtr_KL = 3.601564, Jtr_pred = 0.178233, err = 0.052433, [31m   time: 18.136884 seconds
+[0m
+[32m    Jdev = 0.095578, err = 0.028400
+[0m
+it 75/200, Jtr_KL = 3.593651, Jtr_pred = 0.180797, err = 0.053500, [31m   time: 18.023860 seconds
+[0m
+[32m    Jdev = 0.089643, err = 0.027500
+[0m
+it 76/200, Jtr_KL = 3.586380, Jtr_pred = 0.178713, err = 0.053550, [31m   time: 18.178022 seconds
+[0m
+[32m    Jdev = 0.101744, err = 0.031700
+[0m
+it 77/200, Jtr_KL = 3.578623, Jtr_pred = 0.178282, err = 0.052833, [31m   time: 18.185781 seconds
+[0m
+[32m    Jdev = 0.091079, err = 0.026100
+[0m
+it 78/200, Jtr_KL = 3.571406, Jtr_pred = 0.181523, err = 0.054150, [31m   time: 18.078145 seconds
+[0m
+[32m    Jdev = 0.083718, err = 0.026400
+[0m
+it 79/200, Jtr_KL = 3.563796, Jtr_pred = 0.177032, err = 0.052150, [31m   time: 18.253494 seconds
+[0m
+[32m    Jdev = 0.096782, err = 0.030500
+[0m
+it 80/200, Jtr_KL = 3.556061, Jtr_pred = 0.178912, err = 0.053317, [31m   time: 18.185958 seconds
+[0m
+[32m    Jdev = 0.083495, err = 0.025300
+[0m
+it 81/200, Jtr_KL = 3.548771, Jtr_pred = 0.178164, err = 0.053533, [31m   time: 17.725702 seconds
+[0m
+[32m    Jdev = 0.091987, err = 0.026800
+[0m
+it 82/200, Jtr_KL = 3.540724, Jtr_pred = 0.176457, err = 0.052467, [31m   time: 18.013620 seconds
+[0m
+[32m    Jdev = 0.087720, err = 0.027000
+[0m
+it 83/200, Jtr_KL = 3.533142, Jtr_pred = 0.175041, err = 0.050833, [31m   time: 18.048054 seconds
+[0m
+[32m    Jdev = 0.090967, err = 0.027500
+[0m
+it 84/200, Jtr_KL = 3.525739, Jtr_pred = 0.177002, err = 0.052017, [31m   time: 18.075079 seconds
+[0m
+[32m    Jdev = 0.097178, err = 0.029000
+[0m
+it 85/200, Jtr_KL = 3.517855, Jtr_pred = 0.174009, err = 0.051633, [31m   time: 18.165817 seconds
+[0m
+[32m    Jdev = 0.094622, err = 0.027700
+[0m
+it 86/200, Jtr_KL = 3.510404, Jtr_pred = 0.177272, err = 0.051183, [31m   time: 18.121809 seconds
+[0m
+[32m    Jdev = 0.093524, err = 0.026800
+[0m
+it 87/200, Jtr_KL = 3.502939, Jtr_pred = 0.176820, err = 0.052500, [31m   time: 18.149798 seconds
+[0m
+[32m    Jdev = 0.094777, err = 0.029200
+[0m
+it 88/200, Jtr_KL = 3.495914, Jtr_pred = 0.176822, err = 0.052000, [31m   time: 18.251938 seconds
+[0m
+[32m    Jdev = 0.094000, err = 0.029400
+[0m
+it 89/200, Jtr_KL = 3.488830, Jtr_pred = 0.175980, err = 0.050867, [31m   time: 18.319111 seconds
+[0m
+[32m    Jdev = 0.084850, err = 0.025100
+[0m
+it 90/200, Jtr_KL = 3.481250, Jtr_pred = 0.174446, err = 0.050200, [31m   time: 18.001548 seconds
+[0m
+[32m    Jdev = 0.092274, err = 0.028300
+[0m
+it 91/200, Jtr_KL = 3.473759, Jtr_pred = 0.172247, err = 0.051100, [31m   time: 19.079634 seconds
+[0m
+[32m    Jdev = 0.084871, err = 0.024500
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 92/200, Jtr_KL = 3.466180, Jtr_pred = 0.176322, err = 0.052467, [31m   time: 17.753675 seconds
+[0m
+[32m    Jdev = 0.085624, err = 0.026900
+[0m
+it 93/200, Jtr_KL = 3.459366, Jtr_pred = 0.173376, err = 0.050167, [31m   time: 19.538405 seconds
+[0m
+[32m    Jdev = 0.083780, err = 0.024500
+[0m
+it 94/200, Jtr_KL = 3.451631, Jtr_pred = 0.173705, err = 0.051517, [31m   time: 17.500804 seconds
+[0m
+[32m    Jdev = 0.088000, err = 0.026000
+[0m
+it 95/200, Jtr_KL = 3.444356, Jtr_pred = 0.170624, err = 0.050217, [31m   time: 18.179123 seconds
+[0m
+[32m    Jdev = 0.087626, err = 0.024900
+[0m
+it 96/200, Jtr_KL = 3.436916, Jtr_pred = 0.172197, err = 0.051017, [31m   time: 18.102193 seconds
+[0m
+[32m    Jdev = 0.088044, err = 0.027500
+[0m
+it 97/200, Jtr_KL = 3.429610, Jtr_pred = 0.172709, err = 0.052217, [31m   time: 18.114714 seconds
+[0m
+[32m    Jdev = 0.091338, err = 0.027500
+[0m
+it 98/200, Jtr_KL = 3.422632, Jtr_pred = 0.172144, err = 0.051667, [31m   time: 18.298301 seconds
+[0m
+[32m    Jdev = 0.085953, err = 0.025600
+[0m
+it 99/200, Jtr_KL = 3.415417, Jtr_pred = 0.173037, err = 0.050600, [31m   time: 18.406132 seconds
+[0m
+[32m    Jdev = 0.088667, err = 0.026900
+[0m
+it 100/200, Jtr_KL = 3.408464, Jtr_pred = 0.172240, err = 0.051317, [31m   time: 18.109819 seconds
+[0m
+[32m    Jdev = 0.086271, err = 0.025200
+[0m
+it 101/200, Jtr_KL = 3.401337, Jtr_pred = 0.172390, err = 0.050917, [31m   time: 19.723695 seconds
+[0m
+[32m    Jdev = 0.090978, err = 0.027800
+[0m
+it 102/200, Jtr_KL = 3.394070, Jtr_pred = 0.173029, err = 0.050300, [31m   time: 19.049427 seconds
+[0m
+[32m    Jdev = 0.089454, err = 0.027700
+[0m
+it 103/200, Jtr_KL = 3.387224, Jtr_pred = 0.172382, err = 0.051583, [31m   time: 18.258471 seconds
+[0m
+[32m    Jdev = 0.088209, err = 0.028200
+[0m
+it 104/200, Jtr_KL = 3.379778, Jtr_pred = 0.170272, err = 0.051283, [31m   time: 18.038661 seconds
+[0m
+[32m    Jdev = 0.086137, err = 0.026100
+[0m
+it 105/200, Jtr_KL = 3.372966, Jtr_pred = 0.170756, err = 0.051267, [31m   time: 18.355260 seconds
+[0m
+[32m    Jdev = 0.087536, err = 0.025700
+[0m
+it 106/200, Jtr_KL = 3.365874, Jtr_pred = 0.170737, err = 0.050833, [31m   time: 17.831043 seconds
+[0m
+[32m    Jdev = 0.083357, err = 0.024100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 107/200, Jtr_KL = 3.358484, Jtr_pred = 0.168112, err = 0.050617, [31m   time: 18.126613 seconds
+[0m
+[32m    Jdev = 0.088454, err = 0.027200
+[0m
+it 108/200, Jtr_KL = 3.351165, Jtr_pred = 0.171809, err = 0.051017, [31m   time: 19.663550 seconds
+[0m
+[32m    Jdev = 0.087811, err = 0.025600
+[0m
+it 109/200, Jtr_KL = 3.343968, Jtr_pred = 0.167610, err = 0.050550, [31m   time: 17.899964 seconds
+[0m
+[32m    Jdev = 0.091512, err = 0.027000
+[0m
+it 110/200, Jtr_KL = 3.336457, Jtr_pred = 0.170154, err = 0.050267, [31m   time: 18.137345 seconds
+[0m
+[32m    Jdev = 0.090636, err = 0.027800
+[0m
+it 111/200, Jtr_KL = 3.329452, Jtr_pred = 0.171688, err = 0.051800, [31m   time: 18.022358 seconds
+[0m
+[32m    Jdev = 0.094630, err = 0.030200
+[0m
+it 112/200, Jtr_KL = 3.322512, Jtr_pred = 0.168047, err = 0.049717, [31m   time: 18.167154 seconds
+[0m
+[32m    Jdev = 0.083154, err = 0.025000
+[0m
+it 113/200, Jtr_KL = 3.315372, Jtr_pred = 0.168896, err = 0.050367, [31m   time: 19.731471 seconds
+[0m
+[32m    Jdev = 0.082305, err = 0.024300
+[0m
+it 114/200, Jtr_KL = 3.308611, Jtr_pred = 0.168258, err = 0.050350, [31m   time: 19.305055 seconds
+[0m
+[32m    Jdev = 0.080241, err = 0.025100
+[0m
+it 115/200, Jtr_KL = 3.301854, Jtr_pred = 0.169337, err = 0.051283, [31m   time: 18.096654 seconds
+[0m
+[32m    Jdev = 0.088625, err = 0.026500
+[0m
+it 116/200, Jtr_KL = 3.294639, Jtr_pred = 0.167059, err = 0.050167, [31m   time: 17.833946 seconds
+[0m
+[32m    Jdev = 0.091468, err = 0.027600
+[0m
+it 117/200, Jtr_KL = 3.288084, Jtr_pred = 0.168815, err = 0.050767, [31m   time: 19.590309 seconds
+[0m
+[32m    Jdev = 0.086647, err = 0.025600
+[0m
+it 118/200, Jtr_KL = 3.281048, Jtr_pred = 0.169387, err = 0.051117, [31m   time: 18.132192 seconds
+[0m
+[32m    Jdev = 0.093383, err = 0.029400
+[0m
+it 119/200, Jtr_KL = 3.274313, Jtr_pred = 0.170238, err = 0.051133, [31m   time: 18.119292 seconds
+[0m
+[32m    Jdev = 0.084944, err = 0.025200
+[0m
+it 120/200, Jtr_KL = 3.267653, Jtr_pred = 0.169093, err = 0.050300, [31m   time: 18.438680 seconds
+[0m
+[32m    Jdev = 0.083831, err = 0.025800
+[0m
+it 121/200, Jtr_KL = 3.260847, Jtr_pred = 0.165837, err = 0.049767, [31m   time: 17.882776 seconds
+[0m
+[32m    Jdev = 0.094093, err = 0.029500
+[0m
+it 122/200, Jtr_KL = 3.253763, Jtr_pred = 0.166626, err = 0.050200, [31m   time: 18.111629 seconds
+[0m
+[32m    Jdev = 0.083507, err = 0.025100
+[0m
+it 123/200, Jtr_KL = 3.246792, Jtr_pred = 0.166879, err = 0.049533, [31m   time: 16.779047 seconds
+[0m
+[32m    Jdev = 0.083549, err = 0.024000
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 124/200, Jtr_KL = 3.239966, Jtr_pred = 0.167139, err = 0.050133, [31m   time: 17.799067 seconds
+[0m
+[32m    Jdev = 0.086661, err = 0.027300
+[0m
+it 125/200, Jtr_KL = 3.232969, Jtr_pred = 0.165250, err = 0.049733, [31m   time: 17.834361 seconds
+[0m
+[32m    Jdev = 0.090986, err = 0.027300
+[0m
+it 126/200, Jtr_KL = 3.225925, Jtr_pred = 0.168566, err = 0.050467, [31m   time: 18.111595 seconds
+[0m
+[32m    Jdev = 0.095045, err = 0.029500
+[0m
+it 127/200, Jtr_KL = 3.219305, Jtr_pred = 0.169205, err = 0.049750, [31m   time: 18.017264 seconds
+[0m
+[32m    Jdev = 0.098878, err = 0.029900
+[0m
+it 128/200, Jtr_KL = 3.212784, Jtr_pred = 0.167058, err = 0.049383, [31m   time: 18.051331 seconds
+[0m
+[32m    Jdev = 0.087079, err = 0.026400
+[0m
+it 129/200, Jtr_KL = 3.206006, Jtr_pred = 0.168223, err = 0.051083, [31m   time: 18.022633 seconds
+[0m
+[32m    Jdev = 0.087215, err = 0.027700
+[0m
+it 130/200, Jtr_KL = 3.199631, Jtr_pred = 0.166415, err = 0.049417, [31m   time: 18.150433 seconds
+[0m
+[32m    Jdev = 0.080741, err = 0.024300
+[0m
+it 131/200, Jtr_KL = 3.192549, Jtr_pred = 0.165593, err = 0.050050, [31m   time: 18.212676 seconds
+[0m
+[32m    Jdev = 0.087626, err = 0.028100
+[0m
+it 132/200, Jtr_KL = 3.185763, Jtr_pred = 0.167688, err = 0.049783, [31m   time: 17.894237 seconds
+[0m
+[32m    Jdev = 0.085903, err = 0.027100
+[0m
+it 133/200, Jtr_KL = 3.179364, Jtr_pred = 0.165508, err = 0.050017, [31m   time: 18.105315 seconds
+[0m
+[32m    Jdev = 0.083860, err = 0.025600
+[0m
+it 134/200, Jtr_KL = 3.172209, Jtr_pred = 0.167776, err = 0.050767, [31m   time: 18.279944 seconds
+[0m
+[32m    Jdev = 0.082136, err = 0.025200
+[0m
+it 135/200, Jtr_KL = 3.166101, Jtr_pred = 0.165868, err = 0.049817, [31m   time: 18.009914 seconds
+[0m
+[32m    Jdev = 0.084102, err = 0.025100
+[0m
+it 136/200, Jtr_KL = 3.159389, Jtr_pred = 0.166287, err = 0.049917, [31m   time: 18.074115 seconds
+[0m
+[32m    Jdev = 0.083496, err = 0.026600
+[0m
+it 137/200, Jtr_KL = 3.152496, Jtr_pred = 0.164858, err = 0.050500, [31m   time: 17.812090 seconds
+[0m
+[32m    Jdev = 0.082568, err = 0.024800
+[0m
+it 138/200, Jtr_KL = 3.146028, Jtr_pred = 0.163294, err = 0.048983, [31m   time: 17.065385 seconds
+[0m
+[32m    Jdev = 0.084998, err = 0.024600
+[0m
+it 139/200, Jtr_KL = 3.139000, Jtr_pred = 0.166493, err = 0.049600, [31m   time: 17.028646 seconds
+[0m
+[32m    Jdev = 0.087751, err = 0.026900
+[0m
+it 140/200, Jtr_KL = 3.132593, Jtr_pred = 0.167020, err = 0.050283, [31m   time: 17.076461 seconds
+[0m
+[32m    Jdev = 0.082792, err = 0.025000
+[0m
+it 141/200, Jtr_KL = 3.126229, Jtr_pred = 0.165566, err = 0.049917, [31m   time: 17.439006 seconds
+[0m
+[32m    Jdev = 0.085021, err = 0.026400
+[0m
+it 142/200, Jtr_KL = 3.119896, Jtr_pred = 0.164011, err = 0.049617, [31m   time: 17.243030 seconds
+[0m
+[32m    Jdev = 0.087783, err = 0.027700
+[0m
+it 143/200, Jtr_KL = 3.112886, Jtr_pred = 0.163860, err = 0.049267, [31m   time: 17.479693 seconds
+[0m
+[32m    Jdev = 0.093985, err = 0.029200
+[0m
+it 144/200, Jtr_KL = 3.106551, Jtr_pred = 0.164284, err = 0.049200, [31m   time: 17.284253 seconds
+[0m
+[32m    Jdev = 0.084671, err = 0.025500
+[0m
+it 145/200, Jtr_KL = 3.100027, Jtr_pred = 0.162034, err = 0.048883, [31m   time: 17.240111 seconds
+[0m
+[32m    Jdev = 0.083408, err = 0.026300
+[0m
+it 146/200, Jtr_KL = 3.093508, Jtr_pred = 0.163471, err = 0.049367, [31m   time: 17.509422 seconds
+[0m
+[32m    Jdev = 0.089249, err = 0.028300
+[0m
+it 147/200, Jtr_KL = 3.086966, Jtr_pred = 0.166807, err = 0.049583, [31m   time: 17.024331 seconds
+[0m
+[32m    Jdev = 0.087319, err = 0.025600
+[0m
+it 148/200, Jtr_KL = 3.080963, Jtr_pred = 0.164266, err = 0.050833, [31m   time: 17.061733 seconds
+[0m
+[32m    Jdev = 0.083202, err = 0.025300
+[0m
+it 149/200, Jtr_KL = 3.074420, Jtr_pred = 0.164865, err = 0.049217, [31m   time: 17.647089 seconds
+[0m
+[32m    Jdev = 0.085932, err = 0.026400
+[0m
+it 150/200, Jtr_KL = 3.068325, Jtr_pred = 0.166350, err = 0.049750, [31m   time: 17.109799 seconds
+[0m
+[32m    Jdev = 0.080808, err = 0.025500
+[0m
+it 151/200, Jtr_KL = 3.062021, Jtr_pred = 0.167407, err = 0.050067, [31m   time: 17.524199 seconds
+[0m
+[32m    Jdev = 0.084112, err = 0.024200
+[0m
+it 152/200, Jtr_KL = 3.055306, Jtr_pred = 0.162669, err = 0.047967, [31m   time: 16.980450 seconds
+[0m
+[32m    Jdev = 0.079603, err = 0.024200
+[0m
+it 153/200, Jtr_KL = 3.048515, Jtr_pred = 0.164643, err = 0.049833, [31m   time: 17.365430 seconds
+[0m
+[32m    Jdev = 0.082400, err = 0.026400
+[0m
+it 154/200, Jtr_KL = 3.042452, Jtr_pred = 0.164176, err = 0.049317, [31m   time: 17.340279 seconds
+[0m
+[32m    Jdev = 0.083335, err = 0.025000
+[0m
+it 155/200, Jtr_KL = 3.035684, Jtr_pred = 0.163056, err = 0.049483, [31m   time: 17.153066 seconds
+[0m
+[32m    Jdev = 0.084748, err = 0.024500
+[0m
+it 156/200, Jtr_KL = 3.029343, Jtr_pred = 0.164063, err = 0.048833, [31m   time: 17.438708 seconds
+[0m
+[32m    Jdev = 0.093383, err = 0.029300
+[0m
+it 157/200, Jtr_KL = 3.023302, Jtr_pred = 0.162516, err = 0.048550, [31m   time: 17.475907 seconds
+[0m
+[32m    Jdev = 0.083246, err = 0.025500
+[0m
+it 158/200, Jtr_KL = 3.016989, Jtr_pred = 0.162932, err = 0.048200, [31m   time: 17.231369 seconds
+[0m
+[32m    Jdev = 0.087424, err = 0.026000
+[0m
+it 159/200, Jtr_KL = 3.010546, Jtr_pred = 0.163773, err = 0.050533, [31m   time: 17.329904 seconds
+[0m
+[32m    Jdev = 0.085242, err = 0.025900
+[0m
+it 160/200, Jtr_KL = 3.004286, Jtr_pred = 0.164077, err = 0.049483, [31m   time: 17.496172 seconds
+[0m
+[32m    Jdev = 0.087043, err = 0.027100
+[0m
+it 161/200, Jtr_KL = 2.998558, Jtr_pred = 0.162533, err = 0.048550, [31m   time: 17.250430 seconds
+[0m
+[32m    Jdev = 0.084664, err = 0.024700
+[0m
+it 162/200, Jtr_KL = 2.991832, Jtr_pred = 0.162313, err = 0.048567, [31m   time: 17.189061 seconds
+[0m
+[32m    Jdev = 0.081254, err = 0.024700
+[0m
+it 163/200, Jtr_KL = 2.985175, Jtr_pred = 0.162274, err = 0.049450, [31m   time: 17.054262 seconds
+[0m
+[32m    Jdev = 0.084380, err = 0.025000
+[0m
+it 164/200, Jtr_KL = 2.979216, Jtr_pred = 0.163439, err = 0.048683, [31m   time: 17.254810 seconds
+[0m
+[32m    Jdev = 0.084029, err = 0.026000
+[0m
+it 165/200, Jtr_KL = 2.973140, Jtr_pred = 0.160948, err = 0.049533, [31m   time: 17.363085 seconds
+[0m
+[32m    Jdev = 0.078145, err = 0.022700
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 166/200, Jtr_KL = 2.966840, Jtr_pred = 0.162965, err = 0.049483, [31m   time: 17.466616 seconds
+[0m
+[32m    Jdev = 0.089926, err = 0.028000
+[0m
+it 167/200, Jtr_KL = 2.960540, Jtr_pred = 0.162873, err = 0.049633, [31m   time: 17.179521 seconds
+[0m
+[32m    Jdev = 0.079615, err = 0.023600
+[0m
+it 168/200, Jtr_KL = 2.954608, Jtr_pred = 0.163027, err = 0.049517, [31m   time: 17.133739 seconds
+[0m
+[32m    Jdev = 0.081829, err = 0.025300
+[0m
+it 169/200, Jtr_KL = 2.948741, Jtr_pred = 0.161536, err = 0.049067, [31m   time: 17.342278 seconds
+[0m
+[32m    Jdev = 0.080552, err = 0.024600
+[0m
+it 170/200, Jtr_KL = 2.942536, Jtr_pred = 0.164908, err = 0.049300, [31m   time: 17.053237 seconds
+[0m
+[32m    Jdev = 0.085091, err = 0.026100
+[0m
+it 171/200, Jtr_KL = 2.936389, Jtr_pred = 0.162921, err = 0.049567, [31m   time: 17.162384 seconds
+[0m
+[32m    Jdev = 0.091404, err = 0.026800
+[0m
+it 172/200, Jtr_KL = 2.930239, Jtr_pred = 0.163841, err = 0.049283, [31m   time: 17.061531 seconds
+[0m
+[32m    Jdev = 0.091223, err = 0.026800
+[0m
+it 173/200, Jtr_KL = 2.923936, Jtr_pred = 0.160760, err = 0.049183, [31m   time: 17.222230 seconds
+[0m
+[32m    Jdev = 0.078557, err = 0.023200
+[0m
+it 174/200, Jtr_KL = 2.917385, Jtr_pred = 0.163976, err = 0.050350, [31m   time: 17.376922 seconds
+[0m
+[32m    Jdev = 0.078821, err = 0.023400
+[0m
+it 175/200, Jtr_KL = 2.911739, Jtr_pred = 0.160282, err = 0.048300, [31m   time: 17.237667 seconds
+[0m
+[32m    Jdev = 0.092916, err = 0.028000
+[0m
+it 176/200, Jtr_KL = 2.905751, Jtr_pred = 0.158792, err = 0.048333, [31m   time: 17.476497 seconds
+[0m
+[32m    Jdev = 0.079380, err = 0.024300
+[0m
+it 177/200, Jtr_KL = 2.899393, Jtr_pred = 0.160597, err = 0.048667, [31m   time: 17.356178 seconds
+[0m
+[32m    Jdev = 0.085900, err = 0.026000
+[0m
+it 178/200, Jtr_KL = 2.893366, Jtr_pred = 0.163150, err = 0.050867, [31m   time: 17.190778 seconds
+[0m
+[32m    Jdev = 0.084094, err = 0.027700
+[0m
+it 179/200, Jtr_KL = 2.887738, Jtr_pred = 0.162352, err = 0.049650, [31m   time: 17.294361 seconds
+[0m
+[32m    Jdev = 0.082766, err = 0.025200
+[0m
+it 180/200, Jtr_KL = 2.882121, Jtr_pred = 0.161237, err = 0.049333, [31m   time: 17.366124 seconds
+[0m
+[32m    Jdev = 0.085333, err = 0.026600
+[0m
+it 181/200, Jtr_KL = 2.875439, Jtr_pred = 0.160153, err = 0.048333, [31m   time: 17.306706 seconds
+[0m
+[32m    Jdev = 0.079681, err = 0.022500
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 182/200, Jtr_KL = 2.869269, Jtr_pred = 0.160264, err = 0.048667, [31m   time: 17.346140 seconds
+[0m
+[32m    Jdev = 0.092483, err = 0.028000
+[0m
+it 183/200, Jtr_KL = 2.863451, Jtr_pred = 0.161906, err = 0.048983, [31m   time: 17.269294 seconds
+[0m
+[32m    Jdev = 0.081549, err = 0.025700
+[0m
+it 184/200, Jtr_KL = 2.857766, Jtr_pred = 0.163159, err = 0.049333, [31m   time: 17.523342 seconds
+[0m
+[32m    Jdev = 0.084120, err = 0.025400
+[0m
+it 185/200, Jtr_KL = 2.851936, Jtr_pred = 0.160375, err = 0.047967, [31m   time: 17.252125 seconds
+[0m
+[32m    Jdev = 0.082003, err = 0.026800
+[0m
+it 186/200, Jtr_KL = 2.845984, Jtr_pred = 0.160055, err = 0.048550, [31m   time: 17.093090 seconds
+[0m
+[32m    Jdev = 0.090720, err = 0.028900
+[0m
+it 187/200, Jtr_KL = 2.839574, Jtr_pred = 0.160605, err = 0.048550, [31m   time: 17.378377 seconds
+[0m
+[32m    Jdev = 0.079588, err = 0.024900
+[0m
+it 188/200, Jtr_KL = 2.833722, Jtr_pred = 0.161060, err = 0.048850, [31m   time: 17.441505 seconds
+[0m
+[32m    Jdev = 0.088197, err = 0.027600
+[0m
+it 189/200, Jtr_KL = 2.828609, Jtr_pred = 0.160948, err = 0.048883, [31m   time: 17.673990 seconds
+[0m
+[32m    Jdev = 0.088836, err = 0.026700
+[0m
+it 190/200, Jtr_KL = 2.822336, Jtr_pred = 0.161141, err = 0.048450, [31m   time: 17.476640 seconds
+[0m
+[32m    Jdev = 0.080264, err = 0.024100
+[0m
+it 191/200, Jtr_KL = 2.816405, Jtr_pred = 0.160165, err = 0.049167, [31m   time: 17.123694 seconds
+[0m
+[32m    Jdev = 0.078654, err = 0.023200
+[0m
+it 192/200, Jtr_KL = 2.810592, Jtr_pred = 0.160080, err = 0.048483, [31m   time: 17.448639 seconds
+[0m
+[32m    Jdev = 0.083115, err = 0.025400
+[0m
+it 193/200, Jtr_KL = 2.804807, Jtr_pred = 0.162489, err = 0.049800, [31m   time: 17.008386 seconds
+[0m
+[32m    Jdev = 0.081842, err = 0.025600
+[0m
+it 194/200, Jtr_KL = 2.798683, Jtr_pred = 0.161246, err = 0.048950, [31m   time: 17.167198 seconds
+[0m
+[32m    Jdev = 0.083654, err = 0.025200
+[0m
+it 195/200, Jtr_KL = 2.793098, Jtr_pred = 0.160287, err = 0.048133, [31m   time: 17.504934 seconds
+[0m
+[32m    Jdev = 0.087783, err = 0.027400
+[0m
+it 196/200, Jtr_KL = 2.787130, Jtr_pred = 0.156599, err = 0.048017, [31m   time: 17.275540 seconds
+[0m
+[32m    Jdev = 0.090364, err = 0.028900
+[0m
+it 197/200, Jtr_KL = 2.780983, Jtr_pred = 0.159457, err = 0.047433, [31m   time: 17.088541 seconds
+[0m
+[32m    Jdev = 0.087102, err = 0.027400
+[0m
+it 198/200, Jtr_KL = 2.775041, Jtr_pred = 0.160324, err = 0.049567, [31m   time: 17.329113 seconds
+[0m
+[32m    Jdev = 0.083337, err = 0.025600
+[0m
+it 199/200, Jtr_KL = 2.769856, Jtr_pred = 0.161187, err = 0.049367, [31m   time: 17.213308 seconds
+[0m
+[32m    Jdev = 0.091857, err = 0.027000
+[0m
+[31m   average time: 18.744244 seconds
+[0m
+[36mWritting BBP_models/theta_last.dat
+[0m
+[36m
+RESULTS:[0m
+train_BayesByBackprop_MNIST.py:259: MatplotlibDeprecationWarning: savefig() got unexpected keyword argument "box_inches" which is no longer supported as of 3.3 and will become an error two minor releases later
+  plt.savefig(results_dir + '/err.png', bbox_extra_artists=(lgd,), box_inches='tight')
+  cost_dev: 0.078145 (cost_train 0.156599)
+  err_dev: 0.022500
+  nb_parameters: 4790420 (4.57MB)
+  time_per_it: 18.744244s
+
+usage: train_BayesByBackprop_MNIST.py [-h] [--model [MODEL]]
+                                      [--prior_sig [PRIOR_SIG]]
+                                      [--epochs [EPOCHS]] [--lr [LR]]
+                                      [--n_samples [N_SAMPLES]]
+                                      [--models_dir [MODELS_DIR]]
+                                      [--results_dir [RESULTS_DIR]]
+
+Train Bayesian Neural Net on MNIST with Variational Inference
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --model [MODEL]       Model to run. Options are 'Gaussian_prior',
+                        'Laplace_prior', 'GMM_prior', 'Local_Reparam'.
+                        Default: 'Local_Reparam'.
+  --prior_sig [PRIOR_SIG]
+                        Standard deviation of prior. Default: 0.1.
+  --epochs [EPOCHS]     How many epochs to train. Default: 200.
+  --lr [LR]             learning rate. Default: 1e-3.
+  --n_samples [N_SAMPLES]
+                        How many MC samples to take when approximating the
+                        ELBO. Default: 3.
+  --models_dir [MODELS_DIR]
+                        Where to save learnt weights and train vectors.
+                        Default: 'BBP_models'.
+  --results_dir [RESULTS_DIR]
+                        Where to save learnt training plots. Default:
+                        'BBP_results'.
+[36m
+Data:[0m
+[36m
+Network:[0m
+[36m
+Net:[0m
+[33m Creating Net!! [0m
+    Total params: 4.79M
+[36m
+Train:[0m
+  init cost variables:
+it 0/200, Jtr_KL = 10.116598, Jtr_pred = 1.676676, err = 0.275783, [31m   time: 29.728882 seconds
+[0m
+[32m    Jdev = 0.353576, err = 0.108400
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 1/200, Jtr_KL = 9.078382, Jtr_pred = 0.537076, err = 0.151250, [31m   time: 16.899659 seconds
+[0m
+[32m    Jdev = 0.272195, err = 0.077100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 2/200, Jtr_KL = 8.202188, Jtr_pred = 0.454029, err = 0.127400, [31m   time: 16.449944 seconds
+[0m
+[32m    Jdev = 0.244048, err = 0.073100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 3/200, Jtr_KL = 7.476377, Jtr_pred = 0.397986, err = 0.112833, [31m   time: 17.631821 seconds
+[0m
+[32m    Jdev = 0.210564, err = 0.061900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 4/200, Jtr_KL = 6.878730, Jtr_pred = 0.369865, err = 0.105400, [31m   time: 18.475876 seconds
+[0m
+[32m    Jdev = 0.185189, err = 0.056400
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 5/200, Jtr_KL = 6.385540, Jtr_pred = 0.342607, err = 0.095933, [31m   time: 16.360954 seconds
+[0m
+[32m    Jdev = 0.168176, err = 0.051100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 6/200, Jtr_KL = 5.979434, Jtr_pred = 0.330055, err = 0.092950, [31m   time: 16.968673 seconds
+[0m
+[32m    Jdev = 0.170574, err = 0.054800
+[0m
+it 7/200, Jtr_KL = 5.646230, Jtr_pred = 0.316030, err = 0.090817, [31m   time: 16.535627 seconds
+[0m
+[32m    Jdev = 0.154657, err = 0.047800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 8/200, Jtr_KL = 5.370724, Jtr_pred = 0.308196, err = 0.086833, [31m   time: 17.256685 seconds
+[0m
+[32m    Jdev = 0.161126, err = 0.048400
+[0m
+it 9/200, Jtr_KL = 5.143860, Jtr_pred = 0.292839, err = 0.082617, [31m   time: 16.902207 seconds
+[0m
+[32m    Jdev = 0.139349, err = 0.044100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 10/200, Jtr_KL = 4.956905, Jtr_pred = 0.289205, err = 0.080383, [31m   time: 15.964938 seconds
+[0m
+[32m    Jdev = 0.147330, err = 0.047200
+[0m
+it 11/200, Jtr_KL = 4.801390, Jtr_pred = 0.278933, err = 0.079250, [31m   time: 16.584821 seconds
+[0m
+[32m    Jdev = 0.131653, err = 0.041800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 12/200, Jtr_KL = 4.672878, Jtr_pred = 0.273332, err = 0.076017, [31m   time: 18.084002 seconds
+[0m
+[32m    Jdev = 0.130278, err = 0.041300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 13/200, Jtr_KL = 4.565035, Jtr_pred = 0.270009, err = 0.075867, [31m   time: 17.125682 seconds
+[0m
+[32m    Jdev = 0.124735, err = 0.040200
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 14/200, Jtr_KL = 4.476003, Jtr_pred = 0.260974, err = 0.075033, [31m   time: 15.940940 seconds
+[0m
+[32m    Jdev = 0.124267, err = 0.038200
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 15/200, Jtr_KL = 4.400948, Jtr_pred = 0.259671, err = 0.072733, [31m   time: 16.992583 seconds
+[0m
+[32m    Jdev = 0.125933, err = 0.037600
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 16/200, Jtr_KL = 4.337830, Jtr_pred = 0.252228, err = 0.070200, [31m   time: 16.361356 seconds
+[0m
+[32m    Jdev = 0.118166, err = 0.036900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 17/200, Jtr_KL = 4.284546, Jtr_pred = 0.247660, err = 0.069183, [31m   time: 16.341387 seconds
+[0m
+[32m    Jdev = 0.125596, err = 0.038400
+[0m
+it 18/200, Jtr_KL = 4.239282, Jtr_pred = 0.242778, err = 0.068767, [31m   time: 16.792523 seconds
+[0m
+[32m    Jdev = 0.123709, err = 0.039800
+[0m
+it 19/200, Jtr_KL = 4.201002, Jtr_pred = 0.240197, err = 0.067500, [31m   time: 17.088364 seconds
+[0m
+[32m    Jdev = 0.109605, err = 0.032300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 20/200, Jtr_KL = 4.167935, Jtr_pred = 0.235886, err = 0.066500, [31m   time: 16.572038 seconds
+[0m
+[32m    Jdev = 0.108935, err = 0.032900
+[0m
+it 21/200, Jtr_KL = 4.138671, Jtr_pred = 0.230785, err = 0.066500, [31m   time: 16.646390 seconds
+[0m
+[32m    Jdev = 0.110156, err = 0.033300
+[0m
+it 22/200, Jtr_KL = 4.113595, Jtr_pred = 0.228132, err = 0.064050, [31m   time: 16.843135 seconds
+[0m
+[32m    Jdev = 0.107653, err = 0.032700
+[0m
+it 23/200, Jtr_KL = 4.090010, Jtr_pred = 0.227544, err = 0.065117, [31m   time: 16.755482 seconds
+[0m
+[32m    Jdev = 0.105758, err = 0.030400
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 24/200, Jtr_KL = 4.070708, Jtr_pred = 0.227851, err = 0.065150, [31m   time: 16.751028 seconds
+[0m
+[32m    Jdev = 0.111600, err = 0.033400
+[0m
+it 25/200, Jtr_KL = 4.052712, Jtr_pred = 0.223737, err = 0.063483, [31m   time: 16.500237 seconds
+[0m
+[32m    Jdev = 0.107587, err = 0.032800
+[0m
+it 26/200, Jtr_KL = 4.036582, Jtr_pred = 0.221233, err = 0.063517, [31m   time: 16.656745 seconds
+[0m
+[32m    Jdev = 0.104072, err = 0.032100
+[0m
+it 27/200, Jtr_KL = 4.021333, Jtr_pred = 0.216121, err = 0.061417, [31m   time: 16.516063 seconds
+[0m
+[32m    Jdev = 0.101680, err = 0.029400
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 28/200, Jtr_KL = 4.007723, Jtr_pred = 0.216735, err = 0.061600, [31m   time: 16.418948 seconds
+[0m
+[32m    Jdev = 0.108046, err = 0.033300
+[0m
+it 29/200, Jtr_KL = 3.993945, Jtr_pred = 0.211755, err = 0.060033, [31m   time: 16.470777 seconds
+[0m
+[32m    Jdev = 0.100661, err = 0.030500
+[0m
+it 30/200, Jtr_KL = 3.981785, Jtr_pred = 0.213098, err = 0.060567, [31m   time: 17.521249 seconds
+[0m
+[32m    Jdev = 0.100074, err = 0.031200
+[0m
+it 31/200, Jtr_KL = 3.969562, Jtr_pred = 0.213623, err = 0.060900, [31m   time: 16.507407 seconds
+[0m
+[32m    Jdev = 0.099553, err = 0.029400
+[0m
+it 32/200, Jtr_KL = 3.958727, Jtr_pred = 0.209011, err = 0.059133, [31m   time: 17.175340 seconds
+[0m
+[32m    Jdev = 0.101435, err = 0.032100
+[0m
+it 33/200, Jtr_KL = 3.947762, Jtr_pred = 0.206600, err = 0.059183, [31m   time: 16.935335 seconds
+[0m
+[32m    Jdev = 0.108321, err = 0.034200
+[0m
+it 34/200, Jtr_KL = 3.936428, Jtr_pred = 0.206151, err = 0.059033, [31m   time: 18.850347 seconds
+[0m
+[32m    Jdev = 0.094010, err = 0.027900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 35/200, Jtr_KL = 3.927028, Jtr_pred = 0.203886, err = 0.059750, [31m   time: 15.816331 seconds
+[0m
+[32m    Jdev = 0.099679, err = 0.030000
+[0m
+it 36/200, Jtr_KL = 3.917214, Jtr_pred = 0.200546, err = 0.057650, [31m   time: 16.897906 seconds
+[0m
+[32m    Jdev = 0.091441, err = 0.027900
+[0m
+it 37/200, Jtr_KL = 3.907622, Jtr_pred = 0.202354, err = 0.057333, [31m   time: 16.770323 seconds
+[0m
+[32m    Jdev = 0.104948, err = 0.032100
+[0m
+it 38/200, Jtr_KL = 3.897598, Jtr_pred = 0.201176, err = 0.058983, [31m   time: 16.349904 seconds
+[0m
+[32m    Jdev = 0.098904, err = 0.029900
+[0m
+it 39/200, Jtr_KL = 3.888068, Jtr_pred = 0.199570, err = 0.057233, [31m   time: 16.872969 seconds
+[0m
+[32m    Jdev = 0.100425, err = 0.030400
+[0m
+it 40/200, Jtr_KL = 3.878919, Jtr_pred = 0.197689, err = 0.057583, [31m   time: 17.022356 seconds
+[0m
+[32m    Jdev = 0.094622, err = 0.028900
+[0m
+it 41/200, Jtr_KL = 3.870178, Jtr_pred = 0.197734, err = 0.056467, [31m   time: 16.649556 seconds
+[0m
+[32m    Jdev = 0.091581, err = 0.027700
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 42/200, Jtr_KL = 3.860869, Jtr_pred = 0.195484, err = 0.056817, [31m   time: 17.311434 seconds
+[0m
+[32m    Jdev = 0.089719, err = 0.026300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 43/200, Jtr_KL = 3.852183, Jtr_pred = 0.196543, err = 0.057200, [31m   time: 16.391845 seconds
+[0m
+[32m    Jdev = 0.094642, err = 0.028600
+[0m
+it 44/200, Jtr_KL = 3.843902, Jtr_pred = 0.192264, err = 0.056033, [31m   time: 16.589233 seconds
+[0m
+[32m    Jdev = 0.090540, err = 0.028000
+[0m
+it 45/200, Jtr_KL = 3.834579, Jtr_pred = 0.193776, err = 0.055717, [31m   time: 17.984290 seconds
+[0m
+[32m    Jdev = 0.097391, err = 0.029000
+[0m
+it 46/200, Jtr_KL = 3.826119, Jtr_pred = 0.193712, err = 0.056567, [31m   time: 16.304917 seconds
+[0m
+[32m    Jdev = 0.093479, err = 0.027800
+[0m
+it 47/200, Jtr_KL = 3.818411, Jtr_pred = 0.189822, err = 0.055233, [31m   time: 16.364823 seconds
+[0m
+[32m    Jdev = 0.094551, err = 0.028600
+[0m
+it 48/200, Jtr_KL = 3.808747, Jtr_pred = 0.192170, err = 0.055767, [31m   time: 16.608495 seconds
+[0m
+[32m    Jdev = 0.088133, err = 0.026500
+[0m
+it 49/200, Jtr_KL = 3.800598, Jtr_pred = 0.187433, err = 0.055950, [31m   time: 18.341780 seconds
+[0m
+[32m    Jdev = 0.098478, err = 0.028700
+[0m
+it 50/200, Jtr_KL = 3.792139, Jtr_pred = 0.189123, err = 0.054750, [31m   time: 19.076501 seconds
+[0m
+[32m    Jdev = 0.095942, err = 0.028700
+[0m
+it 51/200, Jtr_KL = 3.783840, Jtr_pred = 0.187852, err = 0.055383, [31m   time: 18.912635 seconds
+[0m
+[32m    Jdev = 0.096541, err = 0.031300
+[0m
+it 52/200, Jtr_KL = 3.775457, Jtr_pred = 0.187021, err = 0.055750, [31m   time: 17.689913 seconds
+[0m
+[32m    Jdev = 0.090466, err = 0.027400
+[0m
+it 53/200, Jtr_KL = 3.767700, Jtr_pred = 0.187251, err = 0.055150, [31m   time: 16.292514 seconds
+[0m
+[32m    Jdev = 0.093661, err = 0.027800
+[0m
+it 54/200, Jtr_KL = 3.759701, Jtr_pred = 0.186649, err = 0.055567, [31m   time: 16.630707 seconds
+[0m
+[32m    Jdev = 0.094930, err = 0.028100
+[0m
+it 55/200, Jtr_KL = 3.751229, Jtr_pred = 0.186436, err = 0.054733, [31m   time: 16.685071 seconds
+[0m
+[32m    Jdev = 0.090158, err = 0.027400
+[0m
+it 56/200, Jtr_KL = 3.742537, Jtr_pred = 0.186435, err = 0.053333, [31m   time: 16.607934 seconds
+[0m
+[32m    Jdev = 0.090059, err = 0.027600
+[0m
+it 57/200, Jtr_KL = 3.734680, Jtr_pred = 0.184927, err = 0.054583, [31m   time: 16.891147 seconds
+[0m
+[32m    Jdev = 0.087384, err = 0.025200
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 58/200, Jtr_KL = 3.726635, Jtr_pred = 0.186198, err = 0.054567, [31m   time: 16.361919 seconds
+[0m
+[32m    Jdev = 0.093341, err = 0.028800
+[0m
+it 59/200, Jtr_KL = 3.717962, Jtr_pred = 0.183446, err = 0.053350, [31m   time: 16.213851 seconds
+[0m
+[32m    Jdev = 0.089368, err = 0.027100
+[0m
+it 60/200, Jtr_KL = 3.710370, Jtr_pred = 0.183670, err = 0.053900, [31m   time: 16.869382 seconds
+[0m
+[32m    Jdev = 0.088475, err = 0.027300
+[0m
+it 61/200, Jtr_KL = 3.701858, Jtr_pred = 0.185081, err = 0.055667, [31m   time: 17.018911 seconds
+[0m
+[32m    Jdev = 0.089089, err = 0.027100
+[0m
+it 62/200, Jtr_KL = 3.695238, Jtr_pred = 0.184537, err = 0.053683, [31m   time: 17.721915 seconds
+[0m
+[32m    Jdev = 0.083827, err = 0.024900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 63/200, Jtr_KL = 3.687420, Jtr_pred = 0.181769, err = 0.052067, [31m   time: 17.081329 seconds
+[0m
+[32m    Jdev = 0.087189, err = 0.026400
+[0m
+it 64/200, Jtr_KL = 3.679428, Jtr_pred = 0.182829, err = 0.053600, [31m   time: 16.724570 seconds
+[0m
+[32m    Jdev = 0.094210, err = 0.029800
+[0m
+it 65/200, Jtr_KL = 3.671779, Jtr_pred = 0.180797, err = 0.053733, [31m   time: 17.029384 seconds
+[0m
+[32m    Jdev = 0.090170, err = 0.026100
+[0m
+it 66/200, Jtr_KL = 3.663925, Jtr_pred = 0.181119, err = 0.053983, [31m   time: 16.480376 seconds
+[0m
+[32m    Jdev = 0.088343, err = 0.026100
+[0m
+it 67/200, Jtr_KL = 3.656521, Jtr_pred = 0.180652, err = 0.053800, [31m   time: 16.366170 seconds
+[0m
+[32m    Jdev = 0.094596, err = 0.028700
+[0m
+it 68/200, Jtr_KL = 3.648270, Jtr_pred = 0.180402, err = 0.053350, [31m   time: 15.173291 seconds
+[0m
+[32m    Jdev = 0.089415, err = 0.027700
+[0m
+it 69/200, Jtr_KL = 3.640325, Jtr_pred = 0.179969, err = 0.051867, [31m   time: 17.363098 seconds
+[0m
+[32m    Jdev = 0.087522, err = 0.025800
+[0m
+it 70/200, Jtr_KL = 3.631497, Jtr_pred = 0.180085, err = 0.053450, [31m   time: 16.255562 seconds
+[0m
+[32m    Jdev = 0.086389, err = 0.026800
+[0m
+it 71/200, Jtr_KL = 3.624968, Jtr_pred = 0.181091, err = 0.054367, [31m   time: 17.415502 seconds
+[0m
+[32m    Jdev = 0.087784, err = 0.026700
+[0m
+it 72/200, Jtr_KL = 3.617615, Jtr_pred = 0.177514, err = 0.052600, [31m   time: 16.857152 seconds
+[0m
+[32m    Jdev = 0.088050, err = 0.026000
+[0m
+it 73/200, Jtr_KL = 3.609242, Jtr_pred = 0.179820, err = 0.053767, [31m   time: 16.081455 seconds
+[0m
+[32m    Jdev = 0.084460, err = 0.024800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 74/200, Jtr_KL = 3.601897, Jtr_pred = 0.180257, err = 0.053483, [31m   time: 16.304542 seconds
+[0m
+[32m    Jdev = 0.087370, err = 0.027100
+[0m
+it 75/200, Jtr_KL = 3.594796, Jtr_pred = 0.177309, err = 0.052900, [31m   time: 16.597082 seconds
+[0m
+[32m    Jdev = 0.089955, err = 0.027000
+[0m
+it 76/200, Jtr_KL = 3.586979, Jtr_pred = 0.179158, err = 0.052717, [31m   time: 17.771749 seconds
+[0m
+[32m    Jdev = 0.089019, err = 0.027700
+[0m
+it 77/200, Jtr_KL = 3.578671, Jtr_pred = 0.175878, err = 0.052083, [31m   time: 16.353454 seconds
+[0m
+[32m    Jdev = 0.087913, err = 0.026400
+[0m
+it 78/200, Jtr_KL = 3.571859, Jtr_pred = 0.176167, err = 0.052300, [31m   time: 16.269097 seconds
+[0m
+[32m    Jdev = 0.087273, err = 0.028000
+[0m
+it 79/200, Jtr_KL = 3.564465, Jtr_pred = 0.180648, err = 0.053250, [31m   time: 17.508744 seconds
+[0m
+[32m    Jdev = 0.096532, err = 0.029100
+[0m
+it 80/200, Jtr_KL = 3.557462, Jtr_pred = 0.177399, err = 0.052617, [31m   time: 16.804614 seconds
+[0m
+[32m    Jdev = 0.086870, err = 0.027300
+[0m
+it 81/200, Jtr_KL = 3.550316, Jtr_pred = 0.174812, err = 0.054000, [31m   time: 17.370182 seconds
+[0m
+[32m    Jdev = 0.085090, err = 0.025200
+[0m
+it 82/200, Jtr_KL = 3.541934, Jtr_pred = 0.175723, err = 0.052067, [31m   time: 16.058720 seconds
+[0m
+[32m    Jdev = 0.091747, err = 0.028500
+[0m
+it 83/200, Jtr_KL = 3.534605, Jtr_pred = 0.178140, err = 0.051650, [31m   time: 16.937438 seconds
+[0m
+[32m    Jdev = 0.089052, err = 0.025900
+[0m
+it 84/200, Jtr_KL = 3.527067, Jtr_pred = 0.174631, err = 0.052767, [31m   time: 17.606216 seconds
+[0m
+[32m    Jdev = 0.087981, err = 0.027200
+[0m
+it 85/200, Jtr_KL = 3.519792, Jtr_pred = 0.175570, err = 0.052983, [31m   time: 16.391002 seconds
+[0m
+[32m    Jdev = 0.092660, err = 0.027700
+[0m
+it 86/200, Jtr_KL = 3.511792, Jtr_pred = 0.174228, err = 0.052017, [31m   time: 17.313176 seconds
+[0m
+[32m    Jdev = 0.094579, err = 0.027900
+[0m
+it 87/200, Jtr_KL = 3.505083, Jtr_pred = 0.176054, err = 0.052433, [31m   time: 16.560383 seconds
+[0m
+[32m    Jdev = 0.094542, err = 0.028900
+[0m
+it 88/200, Jtr_KL = 3.497114, Jtr_pred = 0.176208, err = 0.052200, [31m   time: 16.683049 seconds
+[0m
+[32m    Jdev = 0.098623, err = 0.032400
+[0m
+it 89/200, Jtr_KL = 3.490277, Jtr_pred = 0.176103, err = 0.052417, [31m   time: 16.263047 seconds
+[0m
+[32m    Jdev = 0.086047, err = 0.026400
+[0m
+it 90/200, Jtr_KL = 3.483083, Jtr_pred = 0.174135, err = 0.052400, [31m   time: 15.619830 seconds
+[0m
+[32m    Jdev = 0.110113, err = 0.034400
+[0m
+it 91/200, Jtr_KL = 3.475271, Jtr_pred = 0.174450, err = 0.051700, [31m   time: 16.095490 seconds
+[0m
+[32m    Jdev = 0.086419, err = 0.025500
+[0m
+it 92/200, Jtr_KL = 3.468442, Jtr_pred = 0.174441, err = 0.052867, [31m   time: 17.225142 seconds
+[0m
+[32m    Jdev = 0.084223, err = 0.025500
+[0m
+it 93/200, Jtr_KL = 3.461311, Jtr_pred = 0.173512, err = 0.051767, [31m   time: 17.376356 seconds
+[0m
+[32m    Jdev = 0.084614, err = 0.026300
+[0m
+it 94/200, Jtr_KL = 3.453842, Jtr_pred = 0.171533, err = 0.052383, [31m   time: 17.851730 seconds
+[0m
+[32m    Jdev = 0.084467, err = 0.025800
+[0m
+it 95/200, Jtr_KL = 3.446512, Jtr_pred = 0.173598, err = 0.050300, [31m   time: 16.472264 seconds
+[0m
+[32m    Jdev = 0.085227, err = 0.025800
+[0m
+it 96/200, Jtr_KL = 3.438497, Jtr_pred = 0.173277, err = 0.051233, [31m   time: 17.112781 seconds
+[0m
+[32m    Jdev = 0.089610, err = 0.027800
+[0m
+it 97/200, Jtr_KL = 3.431061, Jtr_pred = 0.171782, err = 0.050683, [31m   time: 17.215575 seconds
+[0m
+[32m    Jdev = 0.084615, err = 0.025500
+[0m
+it 98/200, Jtr_KL = 3.424371, Jtr_pred = 0.174686, err = 0.051550, [31m   time: 17.249985 seconds
+[0m
+[32m    Jdev = 0.087981, err = 0.025800
+[0m
+it 99/200, Jtr_KL = 3.417419, Jtr_pred = 0.172721, err = 0.051933, [31m   time: 16.377966 seconds
+[0m
+[32m    Jdev = 0.087626, err = 0.025100
+[0m
+it 100/200, Jtr_KL = 3.410225, Jtr_pred = 0.171641, err = 0.050683, [31m   time: 16.845016 seconds
+[0m
+[32m    Jdev = 0.087539, err = 0.026700
+[0m
+it 101/200, Jtr_KL = 3.403054, Jtr_pred = 0.173719, err = 0.050967, [31m   time: 16.631899 seconds
+[0m
+[32m    Jdev = 0.088459, err = 0.028000
+[0m
+it 102/200, Jtr_KL = 3.396695, Jtr_pred = 0.171824, err = 0.050500, [31m   time: 16.711281 seconds
+[0m
+[32m    Jdev = 0.087310, err = 0.027300
+[0m
+it 103/200, Jtr_KL = 3.389308, Jtr_pred = 0.172856, err = 0.050783, [31m   time: 16.483247 seconds
+[0m
+[32m    Jdev = 0.089536, err = 0.026600
+[0m
+it 104/200, Jtr_KL = 3.382353, Jtr_pred = 0.170683, err = 0.050600, [31m   time: 16.529694 seconds
+[0m
+[32m    Jdev = 0.094327, err = 0.028300
+[0m
+it 105/200, Jtr_KL = 3.375344, Jtr_pred = 0.171992, err = 0.050300, [31m   time: 16.275017 seconds
+[0m
+[32m    Jdev = 0.088442, err = 0.026200
+[0m
+it 106/200, Jtr_KL = 3.368819, Jtr_pred = 0.172047, err = 0.051600, [31m   time: 16.392583 seconds
+[0m
+[32m    Jdev = 0.081180, err = 0.023700
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 107/200, Jtr_KL = 3.361928, Jtr_pred = 0.170870, err = 0.050600, [31m   time: 16.106156 seconds
+[0m
+[32m    Jdev = 0.086718, err = 0.028000
+[0m
+it 108/200, Jtr_KL = 3.354310, Jtr_pred = 0.171726, err = 0.051383, [31m   time: 16.341525 seconds
+[0m
+[32m    Jdev = 0.092570, err = 0.028200
+[0m
+it 109/200, Jtr_KL = 3.347580, Jtr_pred = 0.168909, err = 0.050150, [31m   time: 16.884996 seconds
+[0m
+[32m    Jdev = 0.083977, err = 0.026300
+[0m
+it 110/200, Jtr_KL = 3.339768, Jtr_pred = 0.169532, err = 0.050783, [31m   time: 16.170607 seconds
+[0m
+[32m    Jdev = 0.095446, err = 0.029900
+[0m
+it 111/200, Jtr_KL = 3.332446, Jtr_pred = 0.171777, err = 0.050617, [31m   time: 16.605602 seconds
+[0m
+[32m    Jdev = 0.093436, err = 0.029500
+[0m
+it 112/200, Jtr_KL = 3.325663, Jtr_pred = 0.169158, err = 0.050433, [31m   time: 18.174655 seconds
+[0m
+[32m    Jdev = 0.090025, err = 0.027100
+[0m
+it 113/200, Jtr_KL = 3.319256, Jtr_pred = 0.170930, err = 0.051417, [31m   time: 17.295130 seconds
+[0m
+[32m    Jdev = 0.086156, err = 0.025500
+[0m
+it 114/200, Jtr_KL = 3.312751, Jtr_pred = 0.171629, err = 0.051383, [31m   time: 16.293088 seconds
+[0m
+[32m    Jdev = 0.084940, err = 0.026800
+[0m
+it 115/200, Jtr_KL = 3.305857, Jtr_pred = 0.167000, err = 0.049867, [31m   time: 17.681952 seconds
+[0m
+[32m    Jdev = 0.081474, err = 0.023600
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 116/200, Jtr_KL = 3.298551, Jtr_pred = 0.169810, err = 0.051600, [31m   time: 16.581870 seconds
+[0m
+[32m    Jdev = 0.094430, err = 0.028500
+[0m
+it 117/200, Jtr_KL = 3.291962, Jtr_pred = 0.169518, err = 0.050417, [31m   time: 17.585965 seconds
+[0m
+[32m    Jdev = 0.083452, err = 0.024400
+[0m
+it 118/200, Jtr_KL = 3.284293, Jtr_pred = 0.167890, err = 0.050367, [31m   time: 16.942460 seconds
+[0m
+[32m    Jdev = 0.088947, err = 0.027400
+[0m
+it 119/200, Jtr_KL = 3.277555, Jtr_pred = 0.171792, err = 0.051233, [31m   time: 18.583285 seconds
+[0m
+[32m    Jdev = 0.087744, err = 0.027600
+[0m
+it 120/200, Jtr_KL = 3.271014, Jtr_pred = 0.169730, err = 0.049817, [31m   time: 16.558813 seconds
+[0m
+[32m    Jdev = 0.094805, err = 0.031400
+[0m
+it 121/200, Jtr_KL = 3.264346, Jtr_pred = 0.167346, err = 0.049850, [31m   time: 16.998130 seconds
+[0m
+[32m    Jdev = 0.094318, err = 0.028900
+[0m
+it 122/200, Jtr_KL = 3.257249, Jtr_pred = 0.170100, err = 0.049850, [31m   time: 16.706482 seconds
+[0m
+[32m    Jdev = 0.086632, err = 0.025900
+[0m
+it 123/200, Jtr_KL = 3.249868, Jtr_pred = 0.168579, err = 0.049983, [31m   time: 16.746850 seconds
+[0m
+[32m    Jdev = 0.084716, err = 0.025300
+[0m
+it 124/200, Jtr_KL = 3.243778, Jtr_pred = 0.168769, err = 0.050883, [31m   time: 16.339581 seconds
+[0m
+[32m    Jdev = 0.085874, err = 0.026000
+[0m
+it 125/200, Jtr_KL = 3.236652, Jtr_pred = 0.168797, err = 0.051933, [31m   time: 16.631085 seconds
+[0m
+[32m    Jdev = 0.099610, err = 0.031200
+[0m
+it 126/200, Jtr_KL = 3.229970, Jtr_pred = 0.167361, err = 0.050467, [31m   time: 17.956513 seconds
+[0m
+[32m    Jdev = 0.094345, err = 0.029400
+[0m
+it 127/200, Jtr_KL = 3.224223, Jtr_pred = 0.169032, err = 0.049950, [31m   time: 16.722452 seconds
+[0m
+[32m    Jdev = 0.094272, err = 0.028800
+[0m
+it 128/200, Jtr_KL = 3.216845, Jtr_pred = 0.166743, err = 0.049217, [31m   time: 16.249647 seconds
+[0m
+[32m    Jdev = 0.087829, err = 0.025600
+[0m
+it 129/200, Jtr_KL = 3.210259, Jtr_pred = 0.167886, err = 0.050217, [31m   time: 17.185490 seconds
+[0m
+[32m    Jdev = 0.083484, err = 0.025300
+[0m
+it 130/200, Jtr_KL = 3.203602, Jtr_pred = 0.165672, err = 0.049200, [31m   time: 16.162066 seconds
+[0m
+[32m    Jdev = 0.083608, err = 0.025900
+[0m
+it 131/200, Jtr_KL = 3.196895, Jtr_pred = 0.165853, err = 0.049783, [31m   time: 17.367123 seconds
+[0m
+[32m    Jdev = 0.087335, err = 0.027800
+[0m
+it 132/200, Jtr_KL = 3.190142, Jtr_pred = 0.169475, err = 0.051967, [31m   time: 16.755305 seconds
+[0m
+[32m    Jdev = 0.085639, err = 0.026400
+[0m
+it 133/200, Jtr_KL = 3.183686, Jtr_pred = 0.167401, err = 0.048850, [31m   time: 16.707667 seconds
+[0m
+[32m    Jdev = 0.090717, err = 0.026200
+[0m
+it 134/200, Jtr_KL = 3.176537, Jtr_pred = 0.168093, err = 0.050433, [31m   time: 18.912619 seconds
+[0m
+[32m    Jdev = 0.087331, err = 0.027300
+[0m
+it 135/200, Jtr_KL = 3.170536, Jtr_pred = 0.166237, err = 0.049483, [31m   time: 18.167732 seconds
+[0m
+[32m    Jdev = 0.087964, err = 0.027000
+[0m
+it 136/200, Jtr_KL = 3.163505, Jtr_pred = 0.167900, err = 0.050500, [31m   time: 17.313727 seconds
+[0m
+[32m    Jdev = 0.087735, err = 0.027300
+[0m
+it 137/200, Jtr_KL = 3.156498, Jtr_pred = 0.166995, err = 0.049983, [31m   time: 16.766922 seconds
+[0m
+[32m    Jdev = 0.093532, err = 0.028900
+[0m
+it 138/200, Jtr_KL = 3.150279, Jtr_pred = 0.165104, err = 0.048883, [31m   time: 16.011871 seconds
+[0m
+[32m    Jdev = 0.086515, err = 0.026100
+[0m
+it 139/200, Jtr_KL = 3.142947, Jtr_pred = 0.167919, err = 0.049717, [31m   time: 16.965316 seconds
+[0m
+[32m    Jdev = 0.086610, err = 0.026100
+[0m
+it 140/200, Jtr_KL = 3.137382, Jtr_pred = 0.167260, err = 0.050067, [31m   time: 16.741688 seconds
+[0m
+[32m    Jdev = 0.082927, err = 0.024700
+[0m
+it 141/200, Jtr_KL = 3.131052, Jtr_pred = 0.168157, err = 0.050200, [31m   time: 16.691383 seconds
+[0m
+[32m    Jdev = 0.083644, err = 0.026400
+[0m
+it 142/200, Jtr_KL = 3.124558, Jtr_pred = 0.166354, err = 0.049833, [31m   time: 16.474393 seconds
+[0m
+[32m    Jdev = 0.086817, err = 0.027100
+[0m
+it 143/200, Jtr_KL = 3.117033, Jtr_pred = 0.164355, err = 0.050183, [31m   time: 16.977604 seconds
+[0m
+[32m    Jdev = 0.092005, err = 0.029300
+[0m
+it 144/200, Jtr_KL = 3.110632, Jtr_pred = 0.166158, err = 0.049450, [31m   time: 16.185247 seconds
+[0m
+[32m    Jdev = 0.091513, err = 0.028200
+[0m
+it 145/200, Jtr_KL = 3.104175, Jtr_pred = 0.164744, err = 0.048750, [31m   time: 16.879183 seconds
+[0m
+[32m    Jdev = 0.084575, err = 0.025800
+[0m
+it 146/200, Jtr_KL = 3.097462, Jtr_pred = 0.167028, err = 0.049767, [31m   time: 16.569299 seconds
+[0m
+[32m    Jdev = 0.092852, err = 0.029200
+[0m
+it 147/200, Jtr_KL = 3.090817, Jtr_pred = 0.166023, err = 0.049583, [31m   time: 17.497805 seconds
+[0m
+[32m    Jdev = 0.094358, err = 0.028900
+[0m
+it 148/200, Jtr_KL = 3.084529, Jtr_pred = 0.163811, err = 0.048500, [31m   time: 17.932869 seconds
+[0m
+[32m    Jdev = 0.081444, err = 0.024100
+[0m
+it 149/200, Jtr_KL = 3.077917, Jtr_pred = 0.165479, err = 0.049317, [31m   time: 17.519808 seconds
+[0m
+[32m    Jdev = 0.087239, err = 0.027300
+[0m
+it 150/200, Jtr_KL = 3.071821, Jtr_pred = 0.165909, err = 0.050350, [31m   time: 16.539129 seconds
+[0m
+[32m    Jdev = 0.081952, err = 0.025200
+[0m
+it 151/200, Jtr_KL = 3.066627, Jtr_pred = 0.167799, err = 0.050267, [31m   time: 16.441890 seconds
+[0m
+[32m    Jdev = 0.078162, err = 0.023000
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 152/200, Jtr_KL = 3.060107, Jtr_pred = 0.165490, err = 0.049417, [31m   time: 15.603352 seconds
+[0m
+[32m    Jdev = 0.078786, err = 0.023200
+[0m
+it 153/200, Jtr_KL = 3.053767, Jtr_pred = 0.166295, err = 0.050150, [31m   time: 17.548093 seconds
+[0m
+[32m    Jdev = 0.085343, err = 0.026500
+[0m
+it 154/200, Jtr_KL = 3.047174, Jtr_pred = 0.164996, err = 0.049833, [31m   time: 15.845538 seconds
+[0m
+[32m    Jdev = 0.088244, err = 0.026000
+[0m
+it 155/200, Jtr_KL = 3.040216, Jtr_pred = 0.166139, err = 0.049200, [31m   time: 16.419343 seconds
+[0m
+[32m    Jdev = 0.093611, err = 0.028300
+[0m
+it 156/200, Jtr_KL = 3.034074, Jtr_pred = 0.163731, err = 0.049433, [31m   time: 16.573084 seconds
+[0m
+[32m    Jdev = 0.088106, err = 0.027000
+[0m
+it 157/200, Jtr_KL = 3.027542, Jtr_pred = 0.164459, err = 0.049667, [31m   time: 16.419553 seconds
+[0m
+[32m    Jdev = 0.088011, err = 0.026600
+[0m
+it 158/200, Jtr_KL = 3.021614, Jtr_pred = 0.163584, err = 0.049167, [31m   time: 16.621950 seconds
+[0m
+[32m    Jdev = 0.082774, err = 0.025500
+[0m
+it 159/200, Jtr_KL = 3.015472, Jtr_pred = 0.166062, err = 0.050350, [31m   time: 16.434682 seconds
+[0m
+[32m    Jdev = 0.092830, err = 0.029300
+[0m
+it 160/200, Jtr_KL = 3.008748, Jtr_pred = 0.163109, err = 0.049333, [31m   time: 16.801687 seconds
+[0m
+[32m    Jdev = 0.080910, err = 0.024500
+[0m
+it 161/200, Jtr_KL = 3.002246, Jtr_pred = 0.163183, err = 0.048767, [31m   time: 16.041045 seconds
+[0m
+[32m    Jdev = 0.084603, err = 0.025000
+[0m
+it 162/200, Jtr_KL = 2.995715, Jtr_pred = 0.164372, err = 0.049433, [31m   time: 16.866914 seconds
+[0m
+[32m    Jdev = 0.083296, err = 0.024800
+[0m
+it 163/200, Jtr_KL = 2.989762, Jtr_pred = 0.162404, err = 0.048050, [31m   time: 18.021711 seconds
+[0m
+[32m    Jdev = 0.080774, err = 0.024700
+[0m
+it 164/200, Jtr_KL = 2.983186, Jtr_pred = 0.167493, err = 0.050150, [31m   time: 16.466186 seconds
+[0m
+[32m    Jdev = 0.085699, err = 0.025900
+[0m
+it 165/200, Jtr_KL = 2.977820, Jtr_pred = 0.162909, err = 0.049550, [31m   time: 17.081264 seconds
+[0m
+[32m    Jdev = 0.095106, err = 0.031000
+[0m
+it 166/200, Jtr_KL = 2.971373, Jtr_pred = 0.165148, err = 0.048617, [31m   time: 16.933557 seconds
+[0m
+[32m    Jdev = 0.089850, err = 0.028000
+[0m
+it 167/200, Jtr_KL = 2.965693, Jtr_pred = 0.164889, err = 0.051150, [31m   time: 16.633899 seconds
+[0m
+[32m    Jdev = 0.083405, err = 0.024300
+[0m
+it 168/200, Jtr_KL = 2.959214, Jtr_pred = 0.163045, err = 0.048917, [31m   time: 16.752050 seconds
+[0m
+[32m    Jdev = 0.084251, err = 0.024400
+[0m
+it 169/200, Jtr_KL = 2.952295, Jtr_pred = 0.162290, err = 0.049250, [31m   time: 17.342344 seconds
+[0m
+[32m    Jdev = 0.077626, err = 0.024400
+[0m
+it 170/200, Jtr_KL = 2.945990, Jtr_pred = 0.165136, err = 0.049533, [31m   time: 16.303222 seconds
+[0m
+[32m    Jdev = 0.093130, err = 0.029100
+[0m
+it 171/200, Jtr_KL = 2.940348, Jtr_pred = 0.165092, err = 0.049017, [31m   time: 16.500406 seconds
+[0m
+[32m    Jdev = 0.100047, err = 0.030400
+[0m
+it 172/200, Jtr_KL = 2.934553, Jtr_pred = 0.163280, err = 0.049000, [31m   time: 16.483557 seconds
+[0m
+[32m    Jdev = 0.087805, err = 0.026200
+[0m
+it 173/200, Jtr_KL = 2.927917, Jtr_pred = 0.165490, err = 0.049700, [31m   time: 16.420191 seconds
+[0m
+[32m    Jdev = 0.081040, err = 0.024100
+[0m
+it 174/200, Jtr_KL = 2.921688, Jtr_pred = 0.164179, err = 0.049017, [31m   time: 16.724114 seconds
+[0m
+[32m    Jdev = 0.085503, err = 0.024600
+[0m
+it 175/200, Jtr_KL = 2.915198, Jtr_pred = 0.164523, err = 0.049667, [31m   time: 16.797268 seconds
+[0m
+[32m    Jdev = 0.088422, err = 0.027200
+[0m
+it 176/200, Jtr_KL = 2.909274, Jtr_pred = 0.163280, err = 0.049467, [31m   time: 16.418039 seconds
+[0m
+[32m    Jdev = 0.080379, err = 0.025200
+[0m
+it 177/200, Jtr_KL = 2.902819, Jtr_pred = 0.162756, err = 0.050183, [31m   time: 17.312855 seconds
+[0m
+[32m    Jdev = 0.083326, err = 0.025800
+[0m
+it 178/200, Jtr_KL = 2.897006, Jtr_pred = 0.163514, err = 0.048367, [31m   time: 16.205886 seconds
+[0m
+[32m    Jdev = 0.085312, err = 0.027600
+[0m
+it 179/200, Jtr_KL = 2.890879, Jtr_pred = 0.163324, err = 0.048083, [31m   time: 16.512733 seconds
+[0m
+[32m    Jdev = 0.084267, err = 0.025200
+[0m
+it 180/200, Jtr_KL = 2.884855, Jtr_pred = 0.161770, err = 0.049150, [31m   time: 17.058853 seconds
+[0m
+[32m    Jdev = 0.090687, err = 0.027800
+[0m
+it 181/200, Jtr_KL = 2.878833, Jtr_pred = 0.163504, err = 0.048067, [31m   time: 16.633944 seconds
+[0m
+[32m    Jdev = 0.085972, err = 0.025900
+[0m
+it 182/200, Jtr_KL = 2.873147, Jtr_pred = 0.163403, err = 0.049700, [31m   time: 17.005149 seconds
+[0m
+[32m    Jdev = 0.100642, err = 0.030400
+[0m
+it 183/200, Jtr_KL = 2.866816, Jtr_pred = 0.162682, err = 0.049900, [31m   time: 18.138160 seconds
+[0m
+[32m    Jdev = 0.088203, err = 0.027900
+[0m
+it 184/200, Jtr_KL = 2.861330, Jtr_pred = 0.165539, err = 0.049933, [31m   time: 17.553427 seconds
+[0m
+[32m    Jdev = 0.093186, err = 0.028500
+[0m
+it 185/200, Jtr_KL = 2.855285, Jtr_pred = 0.162497, err = 0.047583, [31m   time: 17.086442 seconds
+[0m
+[32m    Jdev = 0.077550, err = 0.023300
+[0m
+it 186/200, Jtr_KL = 2.848902, Jtr_pred = 0.161815, err = 0.048617, [31m   time: 18.386534 seconds
+[0m
+[32m    Jdev = 0.094287, err = 0.028300
+[0m
+it 187/200, Jtr_KL = 2.843074, Jtr_pred = 0.166076, err = 0.049500, [31m   time: 18.807710 seconds
+[0m
+[32m    Jdev = 0.079746, err = 0.023600
+[0m
+it 188/200, Jtr_KL = 2.837195, Jtr_pred = 0.160439, err = 0.049883, [31m   time: 18.006124 seconds
+[0m
+[32m    Jdev = 0.084688, err = 0.025400
+[0m
+it 189/200, Jtr_KL = 2.831808, Jtr_pred = 0.159928, err = 0.048650, [31m   time: 18.245116 seconds
+[0m
+[32m    Jdev = 0.087975, err = 0.025800
+[0m
+it 190/200, Jtr_KL = 2.825000, Jtr_pred = 0.162628, err = 0.050267, [31m   time: 17.373128 seconds
+[0m
+[32m    Jdev = 0.088698, err = 0.026400
+[0m
+it 191/200, Jtr_KL = 2.819266, Jtr_pred = 0.164284, err = 0.048833, [31m   time: 17.135281 seconds
+[0m
+[32m    Jdev = 0.080062, err = 0.024700
+[0m
+it 192/200, Jtr_KL = 2.813821, Jtr_pred = 0.161979, err = 0.047500, [31m   time: 16.433767 seconds
+[0m
+[32m    Jdev = 0.080657, err = 0.025600
+[0m
+it 193/200, Jtr_KL = 2.807407, Jtr_pred = 0.161408, err = 0.048100, [31m   time: 18.206704 seconds
+[0m
+[32m    Jdev = 0.088425, err = 0.027100
+[0m
+it 194/200, Jtr_KL = 2.801365, Jtr_pred = 0.162965, err = 0.049467, [31m   time: 16.123864 seconds
+[0m
+[32m    Jdev = 0.090906, err = 0.027800
+[0m
+it 195/200, Jtr_KL = 2.796551, Jtr_pred = 0.164858, err = 0.050050, [31m   time: 16.906126 seconds
+[0m
+[32m    Jdev = 0.100627, err = 0.030500
+[0m
+it 196/200, Jtr_KL = 2.790509, Jtr_pred = 0.161022, err = 0.048117, [31m   time: 17.195234 seconds
+[0m
+[32m    Jdev = 0.085618, err = 0.026300
+[0m
+it 197/200, Jtr_KL = 2.784681, Jtr_pred = 0.161900, err = 0.048933, [31m   time: 16.618715 seconds
+[0m
+[32m    Jdev = 0.087580, err = 0.024700
+[0m
+it 198/200, Jtr_KL = 2.778052, Jtr_pred = 0.161463, err = 0.048517, [31m   time: 16.790400 seconds
+[0m
+[32m    Jdev = 0.086299, err = 0.025600
+[0m
+it 199/200, Jtr_KL = 2.772441, Jtr_pred = 0.161955, err = 0.047517, [31m   time: 16.226247 seconds
+[0m
+[32m    Jdev = 0.082869, err = 0.024800
+[0m
+[31m   average time: 17.613034 seconds
+[0m
+[36mWritting BBP_models/theta_last.dat
+[0m
+[36m
+RESULTS:[0m
+train_BayesByBackprop_MNIST.py:259: MatplotlibDeprecationWarning: savefig() got unexpected keyword argument "box_inches" which is no longer supported as of 3.3 and will become an error two minor releases later
+  plt.savefig(results_dir + '/err.png', bbox_extra_artists=(lgd,), box_inches='tight')
+  cost_dev: 0.077550 (cost_train 0.159928)
+  err_dev: 0.023000
+  nb_parameters: 4790420 (4.57MB)
+  time_per_it: 17.613034s
+
+[36m
+Data:[0m
+[36m
+Network:[0m
+[36m
+Net:[0m
+[33m Creating Net!! [0m
+    Total params: 4.79M
+[36m
+Train:[0m
+  init cost variables:
+it 0/200, Jtr_KL = 1281705.710933, Jtr_pred = 38284.642133, err = 0.898650, [31m   time: 42.495177 seconds
+[0m
+[32m    Jdev = 591.967700, err = 0.886400
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 1/200, Jtr_KL = 1545447.697067, Jtr_pred = 1131.809333, err = 0.898967, [31m   time: 16.775661 seconds
+[0m
+[32m    Jdev = 2.300724, err = 0.886400
+[0m
+it 2/200, Jtr_KL = 1269211.136000, Jtr_pred = 203.391550, err = 0.898867, [31m   time: 16.664045 seconds
+[0m
+[32m    Jdev = 2.301010, err = 0.886400
+[0m
+it 3/200, Jtr_KL = 1070902.681600, Jtr_pred = 2342.493600, err = 0.898900, [31m   time: 16.792683 seconds
+[0m
+[32m    Jdev = 961.563500, err = 0.886300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 4/200, Jtr_KL = 884256.017067, Jtr_pred = 170.920650, err = 0.897167, [31m   time: 16.670312 seconds
+[0m
+[32m    Jdev = 233.068500, err = 0.886300
+[0m
+it 5/200, Jtr_KL = 725785.668267, Jtr_pred = 219.157700, err = 0.896583, [31m   time: 16.715399 seconds
+[0m
+[32m    Jdev = 172.900512, err = 0.886300
+[0m
+it 6/200, Jtr_KL = 595310.796800, Jtr_pred = 58.287758, err = 0.895267, [31m   time: 16.438471 seconds
+[0m
+[32m    Jdev = 128.500325, err = 0.886300
+[0m
+it 7/200, Jtr_KL = 487877.495467, Jtr_pred = 58.854633, err = 0.894933, [31m   time: 16.657745 seconds
+[0m
+[32m    Jdev = 95.331100, err = 0.886300
+[0m
+it 8/200, Jtr_KL = 400293.580800, Jtr_pred = 180.240483, err = 0.896383, [31m   time: 16.644421 seconds
+[0m
+[32m    Jdev = 75.733956, err = 0.886300
+[0m
+it 9/200, Jtr_KL = 329099.946667, Jtr_pred = 19.343940, err = 0.896167, [31m   time: 16.757712 seconds
+[0m
+[32m    Jdev = 53.398975, err = 0.886200
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 10/200, Jtr_KL = 269926.673067, Jtr_pred = 45.937162, err = 0.895917, [31m   time: 16.729938 seconds
+[0m
+[32m    Jdev = 41.976709, err = 0.886100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 11/200, Jtr_KL = 221478.621867, Jtr_pred = 32.586479, err = 0.894883, [31m   time: 16.801314 seconds
+[0m
+[32m    Jdev = 104.636162, err = 0.886100
+[0m
+it 12/200, Jtr_KL = 181655.091200, Jtr_pred = 30.688196, err = 0.894183, [31m   time: 16.637529 seconds
+[0m
+[32m    Jdev = 25.053605, err = 0.885900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 13/200, Jtr_KL = 148954.811733, Jtr_pred = 13.531652, err = 0.894317, [31m   time: 16.704567 seconds
+[0m
+[32m    Jdev = 17.460634, err = 0.886300
+[0m
+it 14/200, Jtr_KL = 122187.579733, Jtr_pred = 26.323744, err = 0.894450, [31m   time: 16.662158 seconds
+[0m
+[32m    Jdev = 14.898169, err = 0.886100
+[0m
+it 15/200, Jtr_KL = 100367.274667, Jtr_pred = 43.271083, err = 0.896250, [31m   time: 16.642721 seconds
+[0m
+[32m    Jdev = 11.066190, err = 0.886300
+[0m
+it 16/200, Jtr_KL = 82423.893333, Jtr_pred = 13.012655, err = 0.895333, [31m   time: 16.682068 seconds
+[0m
+[32m    Jdev = 8.691721, err = 0.886300
+[0m
+it 17/200, Jtr_KL = 67671.436800, Jtr_pred = 15.754053, err = 0.896183, [31m   time: 16.836618 seconds
+[0m
+[32m    Jdev = 7.046090, err = 0.904100
+[0m
+it 18/200, Jtr_KL = 55568.448000, Jtr_pred = 4.648143, err = 0.897550, [31m   time: 16.841078 seconds
+[0m
+[32m    Jdev = 5.802716, err = 0.904100
+[0m
+it 19/200, Jtr_KL = 45633.053867, Jtr_pred = 11.264976, err = 0.898533, [31m   time: 16.815114 seconds
+[0m
+[32m    Jdev = 4.885484, err = 0.904100
+[0m
+it 20/200, Jtr_KL = 37510.980267, Jtr_pred = 11.907214, err = 0.896933, [31m   time: 16.733397 seconds
+[0m
+[32m    Jdev = 4.211791, err = 0.904100
+[0m
+it 21/200, Jtr_KL = 30829.627733, Jtr_pred = 4.715594, err = 0.898317, [31m   time: 16.629562 seconds
+[0m
+[32m    Jdev = 3.951767, err = 0.904100
+[0m
+it 22/200, Jtr_KL = 25348.693333, Jtr_pred = 5.053605, err = 0.895717, [31m   time: 16.672145 seconds
+[0m
+[32m    Jdev = 3.499879, err = 0.903900
+[0m
+it 23/200, Jtr_KL = 20856.718933, Jtr_pred = 4.429519, err = 0.896933, [31m   time: 16.663737 seconds
+[0m
+[32m    Jdev = 3.205089, err = 0.904100
+[0m
+it 24/200, Jtr_KL = 17172.389333, Jtr_pred = 4.612891, err = 0.896950, [31m   time: 16.671124 seconds
+[0m
+[32m    Jdev = 2.960452, err = 0.904000
+[0m
+it 25/200, Jtr_KL = 14151.289600, Jtr_pred = 3.932916, err = 0.898033, [31m   time: 16.632499 seconds
+[0m
+[32m    Jdev = 2.762564, err = 0.904100
+[0m
+it 26/200, Jtr_KL = 11673.752533, Jtr_pred = 4.320132, err = 0.898200, [31m   time: 16.720360 seconds
+[0m
+[32m    Jdev = 2.643615, err = 0.904100
+[0m
+it 27/200, Jtr_KL = 9643.221333, Jtr_pred = 5.054461, err = 0.899067, [31m   time: 16.804862 seconds
+[0m
+[32m    Jdev = 2.551642, err = 0.904100
+[0m
+it 28/200, Jtr_KL = 7979.671467, Jtr_pred = 4.557129, err = 0.897450, [31m   time: 16.781783 seconds
+[0m
+[32m    Jdev = 2.471833, err = 0.904100
+[0m
+it 29/200, Jtr_KL = 6613.810133, Jtr_pred = 4.089985, err = 0.896517, [31m   time: 16.648215 seconds
+[0m
+[32m    Jdev = 2.436945, err = 0.904000
+[0m
+it 30/200, Jtr_KL = 5489.838933, Jtr_pred = 3.552525, err = 0.895917, [31m   time: 16.774423 seconds
+[0m
+[32m    Jdev = 2.399632, err = 0.904200
+[0m
+it 31/200, Jtr_KL = 4566.184000, Jtr_pred = 3.670068, err = 0.896733, [31m   time: 16.739296 seconds
+[0m
+[32m    Jdev = 2.375882, err = 0.904200
+[0m
+it 32/200, Jtr_KL = 3807.595733, Jtr_pred = 3.851969, err = 0.895100, [31m   time: 16.690100 seconds
+[0m
+[32m    Jdev = 2.355743, err = 0.904200
+[0m
+it 33/200, Jtr_KL = 3184.922933, Jtr_pred = 3.901240, err = 0.896750, [31m   time: 16.709341 seconds
+[0m
+[32m    Jdev = 2.349413, err = 0.904100
+[0m
+it 34/200, Jtr_KL = 2671.759200, Jtr_pred = 3.632215, err = 0.896033, [31m   time: 16.755202 seconds
+[0m
+[32m    Jdev = 2.335245, err = 0.904100
+[0m
+it 35/200, Jtr_KL = 2249.839733, Jtr_pred = 3.345359, err = 0.896583, [31m   time: 16.562701 seconds
+[0m
+[32m    Jdev = 2.327249, err = 0.904100
+[0m
+it 36/200, Jtr_KL = 1901.529600, Jtr_pred = 3.465671, err = 0.894050, [31m   time: 16.566894 seconds
+[0m
+[32m    Jdev = 2.319671, err = 0.903900
+[0m
+it 37/200, Jtr_KL = 1614.502933, Jtr_pred = 3.503876, err = 0.895867, [31m   time: 16.638074 seconds
+[0m
+[32m    Jdev = 2.316723, err = 0.903900
+[0m
+it 38/200, Jtr_KL = 1378.071067, Jtr_pred = 3.469093, err = 0.896483, [31m   time: 16.594297 seconds
+[0m
+[32m    Jdev = 2.316163, err = 0.903900
+[0m
+it 39/200, Jtr_KL = 1182.433200, Jtr_pred = 3.448060, err = 0.894933, [31m   time: 16.532648 seconds
+[0m
+[32m    Jdev = 2.312714, err = 0.903800
+[0m
+it 40/200, Jtr_KL = 1020.632467, Jtr_pred = 3.481186, err = 0.895550, [31m   time: 16.716966 seconds
+[0m
+[32m    Jdev = 2.309230, err = 0.903100
+[0m
+it 41/200, Jtr_KL = 886.592400, Jtr_pred = 3.379775, err = 0.890767, [31m   time: 16.694584 seconds
+[0m
+[32m    Jdev = 2.304680, err = 0.901200
+[0m
+it 42/200, Jtr_KL = 775.400000, Jtr_pred = 3.247451, err = 0.889083, [31m   time: 16.736332 seconds
+[0m
+[32m    Jdev = 2.290949, err = 0.896300
+[0m
+it 43/200, Jtr_KL = 682.797733, Jtr_pred = 3.359648, err = 0.883233, [31m   time: 16.718129 seconds
+[0m
+[32m    Jdev = 2.289152, err = 0.895500
+[0m
+it 44/200, Jtr_KL = 605.696133, Jtr_pred = 3.371942, err = 0.880000, [31m   time: 16.626605 seconds
+[0m
+[32m    Jdev = 2.278442, err = 0.891800
+[0m
+it 45/200, Jtr_KL = 541.175033, Jtr_pred = 3.275821, err = 0.881417, [31m   time: 16.959776 seconds
+[0m
+[32m    Jdev = 2.281469, err = 0.893400
+[0m
+it 46/200, Jtr_KL = 487.271867, Jtr_pred = 3.231811, err = 0.876067, [31m   time: 16.566722 seconds
+[0m
+[32m    Jdev = 2.271229, err = 0.888900
+[0m
+it 47/200, Jtr_KL = 441.897867, Jtr_pred = 3.302584, err = 0.868183, [31m   time: 16.771627 seconds
+[0m
+[32m    Jdev = 2.249709, err = 0.879700
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 48/200, Jtr_KL = 403.610000, Jtr_pred = 3.288363, err = 0.859283, [31m   time: 16.848167 seconds
+[0m
+[32m    Jdev = 2.226544, err = 0.849900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 49/200, Jtr_KL = 371.300000, Jtr_pred = 3.265667, err = 0.851533, [31m   time: 16.612948 seconds
+[0m
+[32m    Jdev = 2.217011, err = 0.845000
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 50/200, Jtr_KL = 343.741567, Jtr_pred = 3.194826, err = 0.844417, [31m   time: 16.783344 seconds
+[0m
+[32m    Jdev = 2.189571, err = 0.832900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 51/200, Jtr_KL = 320.190000, Jtr_pred = 3.095479, err = 0.826567, [31m   time: 16.682862 seconds
+[0m
+[32m    Jdev = 2.135702, err = 0.809300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 52/200, Jtr_KL = 300.008567, Jtr_pred = 3.166823, err = 0.814083, [31m   time: 16.571941 seconds
+[0m
+[32m    Jdev = 2.108082, err = 0.794700
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 53/200, Jtr_KL = 282.586667, Jtr_pred = 3.125417, err = 0.789750, [31m   time: 16.772689 seconds
+[0m
+[32m    Jdev = 2.076588, err = 0.786000
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 54/200, Jtr_KL = 267.493700, Jtr_pred = 3.043077, err = 0.782150, [31m   time: 16.846111 seconds
+[0m
+[32m    Jdev = 2.042625, err = 0.773400
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 55/200, Jtr_KL = 254.344500, Jtr_pred = 3.074227, err = 0.771350, [31m   time: 16.673419 seconds
+[0m
+[32m    Jdev = 2.015328, err = 0.762600
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 56/200, Jtr_KL = 242.795600, Jtr_pred = 3.052323, err = 0.764800, [31m   time: 16.829303 seconds
+[0m
+[32m    Jdev = 2.051142, err = 0.779900
+[0m
+it 57/200, Jtr_KL = 232.574183, Jtr_pred = 3.016011, err = 0.765000, [31m   time: 16.705917 seconds
+[0m
+[32m    Jdev = 2.016404, err = 0.747600
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 58/200, Jtr_KL = 223.469767, Jtr_pred = 2.999379, err = 0.757350, [31m   time: 16.744146 seconds
+[0m
+[32m    Jdev = 1.999689, err = 0.745600
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 59/200, Jtr_KL = 215.327450, Jtr_pred = 2.982146, err = 0.756700, [31m   time: 16.590998 seconds
+[0m
+[32m    Jdev = 2.004209, err = 0.753800
+[0m
+it 60/200, Jtr_KL = 208.003467, Jtr_pred = 2.931559, err = 0.756150, [31m   time: 16.485376 seconds
+[0m
+[32m    Jdev = 1.990703, err = 0.750300
+[0m
+it 61/200, Jtr_KL = 201.332033, Jtr_pred = 2.893953, err = 0.750967, [31m   time: 16.625768 seconds
+[0m
+[32m    Jdev = 1.976209, err = 0.741500
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 62/200, Jtr_KL = 195.203550, Jtr_pred = 2.867860, err = 0.746933, [31m   time: 16.672986 seconds
+[0m
+[32m    Jdev = 1.986281, err = 0.738100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 63/200, Jtr_KL = 189.610550, Jtr_pred = 2.865504, err = 0.747267, [31m   time: 16.704201 seconds
+[0m
+[32m    Jdev = 1.949739, err = 0.736300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 64/200, Jtr_KL = 184.435600, Jtr_pred = 2.856109, err = 0.743200, [31m   time: 16.697584 seconds
+[0m
+[32m    Jdev = 1.949673, err = 0.735100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 65/200, Jtr_KL = 179.622883, Jtr_pred = 2.821906, err = 0.744017, [31m   time: 16.799689 seconds
+[0m
+[32m    Jdev = 1.955386, err = 0.740100
+[0m
+it 66/200, Jtr_KL = 175.141550, Jtr_pred = 2.801694, err = 0.740683, [31m   time: 16.699020 seconds
+[0m
+[32m    Jdev = 1.948768, err = 0.731500
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 67/200, Jtr_KL = 170.943550, Jtr_pred = 2.776588, err = 0.731017, [31m   time: 16.637409 seconds
+[0m
+[32m    Jdev = 1.923331, err = 0.742800
+[0m
+it 68/200, Jtr_KL = 166.975783, Jtr_pred = 2.739067, err = 0.717017, [31m   time: 16.586434 seconds
+[0m
+[32m    Jdev = 1.914582, err = 0.729600
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 69/200, Jtr_KL = 163.226733, Jtr_pred = 2.687357, err = 0.699183, [31m   time: 16.669244 seconds
+[0m
+[32m    Jdev = 1.855689, err = 0.707800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 70/200, Jtr_KL = 159.692333, Jtr_pred = 2.639765, err = 0.691150, [31m   time: 16.768078 seconds
+[0m
+[32m    Jdev = 1.828682, err = 0.672700
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 71/200, Jtr_KL = 156.293533, Jtr_pred = 2.620324, err = 0.681900, [31m   time: 16.721366 seconds
+[0m
+[32m    Jdev = 1.792276, err = 0.684000
+[0m
+it 72/200, Jtr_KL = 153.077117, Jtr_pred = 2.573599, err = 0.675650, [31m   time: 16.647205 seconds
+[0m
+[32m    Jdev = 1.811732, err = 0.691300
+[0m
+it 73/200, Jtr_KL = 149.988367, Jtr_pred = 2.578686, err = 0.674933, [31m   time: 16.644147 seconds
+[0m
+[32m    Jdev = 1.749502, err = 0.670800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 74/200, Jtr_KL = 147.045867, Jtr_pred = 2.559828, err = 0.675333, [31m   time: 16.820877 seconds
+[0m
+[32m    Jdev = 1.762897, err = 0.678900
+[0m
+it 75/200, Jtr_KL = 144.213117, Jtr_pred = 2.537047, err = 0.668817, [31m   time: 16.497811 seconds
+[0m
+[32m    Jdev = 1.754788, err = 0.678300
+[0m
+it 76/200, Jtr_KL = 141.513167, Jtr_pred = 2.507139, err = 0.669633, [31m   time: 16.709340 seconds
+[0m
+[32m    Jdev = 1.753231, err = 0.669800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 77/200, Jtr_KL = 138.879625, Jtr_pred = 2.486592, err = 0.667717, [31m   time: 16.848768 seconds
+[0m
+[32m    Jdev = 1.754192, err = 0.673800
+[0m
+it 78/200, Jtr_KL = 136.363442, Jtr_pred = 2.472816, err = 0.665133, [31m   time: 16.635883 seconds
+[0m
+[32m    Jdev = 1.733550, err = 0.669200
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 79/200, Jtr_KL = 133.924375, Jtr_pred = 2.456890, err = 0.665700, [31m   time: 16.712012 seconds
+[0m
+[32m    Jdev = 1.704458, err = 0.661700
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 80/200, Jtr_KL = 131.569292, Jtr_pred = 2.426366, err = 0.658750, [31m   time: 16.645495 seconds
+[0m
+[32m    Jdev = 1.743646, err = 0.674500
+[0m
+it 81/200, Jtr_KL = 129.286367, Jtr_pred = 2.406749, err = 0.659850, [31m   time: 16.926103 seconds
+[0m
+[32m    Jdev = 1.710298, err = 0.660900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 82/200, Jtr_KL = 127.072600, Jtr_pred = 2.404431, err = 0.657733, [31m   time: 16.814809 seconds
+[0m
+[32m    Jdev = 1.727936, err = 0.666700
+[0m
+it 83/200, Jtr_KL = 124.934150, Jtr_pred = 2.382518, err = 0.657600, [31m   time: 16.643657 seconds
+[0m
+[32m    Jdev = 1.722721, err = 0.661300
+[0m
+it 84/200, Jtr_KL = 122.853758, Jtr_pred = 2.358752, err = 0.648300, [31m   time: 16.547472 seconds
+[0m
+[32m    Jdev = 1.690723, err = 0.648300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 85/200, Jtr_KL = 120.825550, Jtr_pred = 2.288047, err = 0.616283, [31m   time: 16.842424 seconds
+[0m
+[32m    Jdev = 1.636415, err = 0.618300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 86/200, Jtr_KL = 118.855800, Jtr_pred = 2.242112, err = 0.595383, [31m   time: 16.757806 seconds
+[0m
+[32m    Jdev = 1.649758, err = 0.620100
+[0m
+it 87/200, Jtr_KL = 116.937250, Jtr_pred = 2.202443, err = 0.588317, [31m   time: 16.598783 seconds
+[0m
+[32m    Jdev = 1.682669, err = 0.627100
+[0m
+it 88/200, Jtr_KL = 115.109083, Jtr_pred = 2.204802, err = 0.585367, [31m   time: 16.623656 seconds
+[0m
+[32m    Jdev = 1.669085, err = 0.642600
+[0m
+it 89/200, Jtr_KL = 113.305550, Jtr_pred = 2.167288, err = 0.586950, [31m   time: 16.574867 seconds
+[0m
+[32m    Jdev = 1.631989, err = 0.620800
+[0m
+it 90/200, Jtr_KL = 111.566633, Jtr_pred = 2.150804, err = 0.576717, [31m   time: 16.622491 seconds
+[0m
+[32m    Jdev = 1.593254, err = 0.596000
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 91/200, Jtr_KL = 109.859767, Jtr_pred = 2.143227, err = 0.573667, [31m   time: 16.590178 seconds
+[0m
+[32m    Jdev = 1.582224, err = 0.619500
+[0m
+it 92/200, Jtr_KL = 108.212975, Jtr_pred = 2.100834, err = 0.573133, [31m   time: 16.964911 seconds
+[0m
+[32m    Jdev = 1.548226, err = 0.591800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 93/200, Jtr_KL = 106.595867, Jtr_pred = 2.094734, err = 0.567250, [31m   time: 16.711894 seconds
+[0m
+[32m    Jdev = 1.533638, err = 0.583500
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 94/200, Jtr_KL = 105.028933, Jtr_pred = 2.059068, err = 0.558133, [31m   time: 16.682700 seconds
+[0m
+[32m    Jdev = 1.572991, err = 0.620100
+[0m
+it 95/200, Jtr_KL = 103.479183, Jtr_pred = 2.004489, err = 0.543450, [31m   time: 16.781830 seconds
+[0m
+[32m    Jdev = 1.348344, err = 0.500600
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 96/200, Jtr_KL = 101.956717, Jtr_pred = 1.836514, err = 0.532400, [31m   time: 16.723510 seconds
+[0m
+[32m    Jdev = 1.277241, err = 0.474300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 97/200, Jtr_KL = 100.349208, Jtr_pred = 1.634762, err = 0.524333, [31m   time: 16.762863 seconds
+[0m
+[32m    Jdev = 1.466328, err = 0.505700
+[0m
+it 98/200, Jtr_KL = 98.704567, Jtr_pred = 1.503552, err = 0.504133, [31m   time: 16.587980 seconds
+[0m
+[32m    Jdev = 1.184440, err = 0.460300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 99/200, Jtr_KL = 97.103975, Jtr_pred = 1.423085, err = 0.496117, [31m   time: 16.744668 seconds
+[0m
+[32m    Jdev = 1.150434, err = 0.451800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 100/200, Jtr_KL = 95.572900, Jtr_pred = 1.340362, err = 0.459467, [31m   time: 16.741797 seconds
+[0m
+[32m    Jdev = 1.078185, err = 0.434100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 101/200, Jtr_KL = 94.120858, Jtr_pred = 1.293612, err = 0.447983, [31m   time: 16.704374 seconds
+[0m
+[32m    Jdev = 1.248597, err = 0.465700
+[0m
+it 102/200, Jtr_KL = 92.736525, Jtr_pred = 1.268719, err = 0.440983, [31m   time: 16.693595 seconds
+[0m
+[32m    Jdev = 1.039831, err = 0.337800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 103/200, Jtr_KL = 91.399708, Jtr_pred = 1.225623, err = 0.410617, [31m   time: 16.579612 seconds
+[0m
+[32m    Jdev = 1.301131, err = 0.454700
+[0m
+it 104/200, Jtr_KL = 90.123700, Jtr_pred = 1.252052, err = 0.415717, [31m   time: 16.873643 seconds
+[0m
+[32m    Jdev = 1.065613, err = 0.366800
+[0m
+it 105/200, Jtr_KL = 88.897400, Jtr_pred = 1.279167, err = 0.437733, [31m   time: 16.993684 seconds
+[0m
+[32m    Jdev = 1.459079, err = 0.554500
+[0m
+it 106/200, Jtr_KL = 87.698450, Jtr_pred = 1.306586, err = 0.454833, [31m   time: 16.706185 seconds
+[0m
+[32m    Jdev = 1.442078, err = 0.573200
+[0m
+it 107/200, Jtr_KL = 86.534625, Jtr_pred = 1.316808, err = 0.452567, [31m   time: 16.739436 seconds
+[0m
+[32m    Jdev = 1.381304, err = 0.494200
+[0m
+it 108/200, Jtr_KL = 85.421725, Jtr_pred = 1.301689, err = 0.447633, [31m   time: 16.937805 seconds
+[0m
+[32m    Jdev = 1.531943, err = 0.581700
+[0m
+it 109/200, Jtr_KL = 84.328767, Jtr_pred = 1.337642, err = 0.461917, [31m   time: 16.780051 seconds
+[0m
+[32m    Jdev = 1.728694, err = 0.659200
+[0m
+it 110/200, Jtr_KL = 83.278275, Jtr_pred = 1.360572, err = 0.462033, [31m   time: 16.804341 seconds
+[0m
+[32m    Jdev = 1.440566, err = 0.494300
+[0m
+it 111/200, Jtr_KL = 82.241892, Jtr_pred = 1.322521, err = 0.449233, [31m   time: 16.725664 seconds
+[0m
+[32m    Jdev = 1.384227, err = 0.528100
+[0m
+it 112/200, Jtr_KL = 81.233558, Jtr_pred = 1.327834, err = 0.452667, [31m   time: 16.635737 seconds
+[0m
+[32m    Jdev = 1.369318, err = 0.450700
+[0m
+it 113/200, Jtr_KL = 80.239358, Jtr_pred = 1.318354, err = 0.443900, [31m   time: 16.703272 seconds
+[0m
+[32m    Jdev = 1.452875, err = 0.473500
+[0m
+it 114/200, Jtr_KL = 79.274808, Jtr_pred = 1.320303, err = 0.440767, [31m   time: 16.635623 seconds
+[0m
+[32m    Jdev = 1.324721, err = 0.456900
+[0m
+it 115/200, Jtr_KL = 78.337458, Jtr_pred = 1.311226, err = 0.444767, [31m   time: 16.792440 seconds
+[0m
+[32m    Jdev = 1.536386, err = 0.553200
+[0m
+it 116/200, Jtr_KL = 77.422675, Jtr_pred = 1.305828, err = 0.442850, [31m   time: 16.701510 seconds
+[0m
+[32m    Jdev = 1.405689, err = 0.492700
+[0m
+it 117/200, Jtr_KL = 76.518225, Jtr_pred = 1.293587, err = 0.437033, [31m   time: 16.680248 seconds
+[0m
+[32m    Jdev = 1.337147, err = 0.446200
+[0m
+it 118/200, Jtr_KL = 75.634208, Jtr_pred = 1.296710, err = 0.441333, [31m   time: 16.657959 seconds
+[0m
+[32m    Jdev = 1.571219, err = 0.580700
+[0m
+it 119/200, Jtr_KL = 74.771325, Jtr_pred = 1.355709, err = 0.469133, [31m   time: 16.718198 seconds
+[0m
+[32m    Jdev = 1.522204, err = 0.554500
+[0m
+it 120/200, Jtr_KL = 73.926608, Jtr_pred = 1.294496, err = 0.442233, [31m   time: 16.734129 seconds
+[0m
+[32m    Jdev = 1.333620, err = 0.485700
+[0m
+it 121/200, Jtr_KL = 73.100100, Jtr_pred = 1.294720, err = 0.436950, [31m   time: 16.612412 seconds
+[0m
+[32m    Jdev = 1.518292, err = 0.515400
+[0m
+it 122/200, Jtr_KL = 72.284575, Jtr_pred = 1.260116, err = 0.429000, [31m   time: 16.921114 seconds
+[0m
+[32m    Jdev = 1.359070, err = 0.477300
+[0m
+it 123/200, Jtr_KL = 71.488992, Jtr_pred = 1.220381, err = 0.413450, [31m   time: 16.735101 seconds
+[0m
+[32m    Jdev = 1.431888, err = 0.469400
+[0m
+it 124/200, Jtr_KL = 70.711417, Jtr_pred = 1.202793, err = 0.409517, [31m   time: 16.696250 seconds
+[0m
+[32m    Jdev = 1.142916, err = 0.424800
+[0m
+it 125/200, Jtr_KL = 69.944550, Jtr_pred = 1.184379, err = 0.406333, [31m   time: 16.741549 seconds
+[0m
+[32m    Jdev = 1.429081, err = 0.525500
+[0m
+it 126/200, Jtr_KL = 69.191275, Jtr_pred = 1.203899, err = 0.411800, [31m   time: 16.699810 seconds
+[0m
+[32m    Jdev = 1.290155, err = 0.465400
+[0m
+it 127/200, Jtr_KL = 68.445821, Jtr_pred = 1.172006, err = 0.411183, [31m   time: 16.701938 seconds
+[0m
+[32m    Jdev = 1.275514, err = 0.458300
+[0m
+it 128/200, Jtr_KL = 67.722463, Jtr_pred = 1.142024, err = 0.388150, [31m   time: 16.815804 seconds
+[0m
+[32m    Jdev = 1.229112, err = 0.432100
+[0m
+it 129/200, Jtr_KL = 67.014525, Jtr_pred = 1.130145, err = 0.385383, [31m   time: 16.518684 seconds
+[0m
+[32m    Jdev = 1.342475, err = 0.479100
+[0m
+it 130/200, Jtr_KL = 66.315925, Jtr_pred = 1.130216, err = 0.384383, [31m   time: 16.662062 seconds
+[0m
+[32m    Jdev = 1.273048, err = 0.445600
+[0m
+it 131/200, Jtr_KL = 65.632021, Jtr_pred = 1.047384, err = 0.354417, [31m   time: 16.553467 seconds
+[0m
+[32m    Jdev = 1.167269, err = 0.391300
+[0m
+it 132/200, Jtr_KL = 64.959650, Jtr_pred = 1.011354, err = 0.333750, [31m   time: 16.719953 seconds
+[0m
+[32m    Jdev = 1.118480, err = 0.374400
+[0m
+it 133/200, Jtr_KL = 64.299712, Jtr_pred = 0.980340, err = 0.326667, [31m   time: 16.776387 seconds
+[0m
+[32m    Jdev = 1.077330, err = 0.392700
+[0m
+it 134/200, Jtr_KL = 63.654987, Jtr_pred = 0.911245, err = 0.295783, [31m   time: 16.699143 seconds
+[0m
+[32m    Jdev = 0.947194, err = 0.335900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 135/200, Jtr_KL = 63.017196, Jtr_pred = 0.886271, err = 0.279267, [31m   time: 16.614946 seconds
+[0m
+[32m    Jdev = 0.984329, err = 0.317700
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 136/200, Jtr_KL = 62.392683, Jtr_pred = 0.862153, err = 0.263383, [31m   time: 16.500160 seconds
+[0m
+[32m    Jdev = 1.000143, err = 0.333300
+[0m
+it 137/200, Jtr_KL = 61.783946, Jtr_pred = 0.821893, err = 0.246050, [31m   time: 16.912193 seconds
+[0m
+[32m    Jdev = 0.899143, err = 0.314700
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 138/200, Jtr_KL = 61.183862, Jtr_pred = 0.868212, err = 0.267433, [31m   time: 16.793671 seconds
+[0m
+[32m    Jdev = 0.991322, err = 0.320700
+[0m
+it 139/200, Jtr_KL = 60.589754, Jtr_pred = 0.850635, err = 0.256883, [31m   time: 16.848178 seconds
+[0m
+[32m    Jdev = 0.909621, err = 0.303900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 140/200, Jtr_KL = 60.011321, Jtr_pred = 0.801779, err = 0.239067, [31m   time: 16.625654 seconds
+[0m
+[32m    Jdev = 0.866131, err = 0.305000
+[0m
+it 141/200, Jtr_KL = 59.431050, Jtr_pred = 0.758506, err = 0.221450, [31m   time: 17.008065 seconds
+[0m
+[32m    Jdev = 0.815548, err = 0.269500
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 142/200, Jtr_KL = 58.869725, Jtr_pred = 0.738727, err = 0.207717, [31m   time: 16.863234 seconds
+[0m
+[32m    Jdev = 0.854876, err = 0.265700
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 143/200, Jtr_KL = 58.315250, Jtr_pred = 0.715528, err = 0.194717, [31m   time: 16.789504 seconds
+[0m
+[32m    Jdev = 0.792011, err = 0.264100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 144/200, Jtr_KL = 57.768329, Jtr_pred = 0.696969, err = 0.191633, [31m   time: 16.729405 seconds
+[0m
+[32m    Jdev = 0.641377, err = 0.219300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 145/200, Jtr_KL = 57.229925, Jtr_pred = 0.727817, err = 0.196867, [31m   time: 16.871950 seconds
+[0m
+[32m    Jdev = 0.654089, err = 0.217900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 146/200, Jtr_KL = 56.705312, Jtr_pred = 0.707095, err = 0.191650, [31m   time: 16.993752 seconds
+[0m
+[32m    Jdev = 0.628951, err = 0.216100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 147/200, Jtr_KL = 56.187154, Jtr_pred = 0.676945, err = 0.184750, [31m   time: 16.878368 seconds
+[0m
+[32m    Jdev = 0.472803, err = 0.129300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 148/200, Jtr_KL = 55.675783, Jtr_pred = 0.669129, err = 0.182217, [31m   time: 16.678535 seconds
+[0m
+[32m    Jdev = 0.502909, err = 0.137100
+[0m
+it 149/200, Jtr_KL = 55.168838, Jtr_pred = 0.656519, err = 0.176733, [31m   time: 16.730511 seconds
+[0m
+[32m    Jdev = 0.509289, err = 0.147300
+[0m
+it 150/200, Jtr_KL = 54.672575, Jtr_pred = 0.644969, err = 0.172333, [31m   time: 16.851650 seconds
+[0m
+[32m    Jdev = 0.425953, err = 0.123900
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 151/200, Jtr_KL = 54.183037, Jtr_pred = 0.623052, err = 0.165733, [31m   time: 16.736934 seconds
+[0m
+[32m    Jdev = 0.409929, err = 0.116000
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 152/200, Jtr_KL = 53.701058, Jtr_pred = 0.611473, err = 0.165700, [31m   time: 16.931093 seconds
+[0m
+[32m    Jdev = 0.394815, err = 0.115500
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 153/200, Jtr_KL = 53.226429, Jtr_pred = 0.610664, err = 0.163117, [31m   time: 16.638268 seconds
+[0m
+[32m    Jdev = 0.376247, err = 0.108100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 154/200, Jtr_KL = 52.762279, Jtr_pred = 0.586758, err = 0.155883, [31m   time: 16.599096 seconds
+[0m
+[32m    Jdev = 0.389429, err = 0.108500
+[0m
+it 155/200, Jtr_KL = 52.300579, Jtr_pred = 0.582995, err = 0.158150, [31m   time: 16.763221 seconds
+[0m
+[32m    Jdev = 0.375336, err = 0.110300
+[0m
+it 156/200, Jtr_KL = 51.846562, Jtr_pred = 0.568590, err = 0.151900, [31m   time: 16.755622 seconds
+[0m
+[32m    Jdev = 0.418772, err = 0.121800
+[0m
+it 157/200, Jtr_KL = 51.404738, Jtr_pred = 0.552937, err = 0.145100, [31m   time: 16.699389 seconds
+[0m
+[32m    Jdev = 0.488827, err = 0.139500
+[0m
+it 158/200, Jtr_KL = 50.970312, Jtr_pred = 0.582695, err = 0.154283, [31m   time: 16.779163 seconds
+[0m
+[32m    Jdev = 0.360780, err = 0.099400
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 159/200, Jtr_KL = 50.539017, Jtr_pred = 0.546236, err = 0.145017, [31m   time: 16.622640 seconds
+[0m
+[32m    Jdev = 0.415156, err = 0.115700
+[0m
+it 160/200, Jtr_KL = 50.117229, Jtr_pred = 0.543147, err = 0.143917, [31m   time: 16.670190 seconds
+[0m
+[32m    Jdev = 0.385126, err = 0.107000
+[0m
+it 161/200, Jtr_KL = 49.695304, Jtr_pred = 0.528994, err = 0.141567, [31m   time: 16.701145 seconds
+[0m
+[32m    Jdev = 0.607204, err = 0.159600
+[0m
+it 162/200, Jtr_KL = 49.284550, Jtr_pred = 0.522328, err = 0.138750, [31m   time: 16.651377 seconds
+[0m
+[32m    Jdev = 0.471395, err = 0.135100
+[0m
+it 163/200, Jtr_KL = 48.878092, Jtr_pred = 0.512510, err = 0.137000, [31m   time: 16.624518 seconds
+[0m
+[32m    Jdev = 0.317784, err = 0.090600
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 164/200, Jtr_KL = 48.481525, Jtr_pred = 0.517247, err = 0.138450, [31m   time: 16.654210 seconds
+[0m
+[32m    Jdev = 0.394012, err = 0.117200
+[0m
+it 165/200, Jtr_KL = 48.086038, Jtr_pred = 0.514990, err = 0.137000, [31m   time: 16.681586 seconds
+[0m
+[32m    Jdev = 0.550167, err = 0.183300
+[0m
+it 166/200, Jtr_KL = 47.698483, Jtr_pred = 0.502431, err = 0.133317, [31m   time: 16.676963 seconds
+[0m
+[32m    Jdev = 0.361094, err = 0.102600
+[0m
+it 167/200, Jtr_KL = 47.318204, Jtr_pred = 0.490662, err = 0.132150, [31m   time: 16.589164 seconds
+[0m
+[32m    Jdev = 0.326171, err = 0.091700
+[0m
+it 168/200, Jtr_KL = 46.939729, Jtr_pred = 0.496070, err = 0.132467, [31m   time: 16.848636 seconds
+[0m
+[32m    Jdev = 0.352624, err = 0.097700
+[0m
+it 169/200, Jtr_KL = 46.569412, Jtr_pred = 0.491967, err = 0.133233, [31m   time: 16.855468 seconds
+[0m
+[32m    Jdev = 0.332059, err = 0.094500
+[0m
+it 170/200, Jtr_KL = 46.204071, Jtr_pred = 0.486070, err = 0.129083, [31m   time: 16.791328 seconds
+[0m
+[32m    Jdev = 0.416500, err = 0.131000
+[0m
+it 171/200, Jtr_KL = 45.846221, Jtr_pred = 0.476429, err = 0.128017, [31m   time: 16.872747 seconds
+[0m
+[32m    Jdev = 0.331696, err = 0.091500
+[0m
+it 172/200, Jtr_KL = 45.490379, Jtr_pred = 0.501467, err = 0.133167, [31m   time: 16.946664 seconds
+[0m
+[32m    Jdev = 0.361707, err = 0.103400
+[0m
+it 173/200, Jtr_KL = 45.143617, Jtr_pred = 0.486954, err = 0.129783, [31m   time: 16.745965 seconds
+[0m
+[32m    Jdev = 0.310860, err = 0.087200
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 174/200, Jtr_KL = 44.801854, Jtr_pred = 0.482821, err = 0.126733, [31m   time: 16.626870 seconds
+[0m
+[32m    Jdev = 0.293643, err = 0.084000
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 175/200, Jtr_KL = 44.459604, Jtr_pred = 0.470522, err = 0.126100, [31m   time: 16.660186 seconds
+[0m
+[32m    Jdev = 0.335269, err = 0.094700
+[0m
+it 176/200, Jtr_KL = 44.124342, Jtr_pred = 0.465658, err = 0.125500, [31m   time: 16.750763 seconds
+[0m
+[32m    Jdev = 0.341017, err = 0.097700
+[0m
+it 177/200, Jtr_KL = 43.792021, Jtr_pred = 0.468906, err = 0.124617, [31m   time: 16.671441 seconds
+[0m
+[32m    Jdev = 0.389060, err = 0.110100
+[0m
+it 178/200, Jtr_KL = 43.466396, Jtr_pred = 0.460708, err = 0.123217, [31m   time: 16.582329 seconds
+[0m
+[32m    Jdev = 0.316141, err = 0.089300
+[0m
+it 179/200, Jtr_KL = 43.144633, Jtr_pred = 0.461673, err = 0.124200, [31m   time: 16.604504 seconds
+[0m
+[32m    Jdev = 0.316143, err = 0.089600
+[0m
+it 180/200, Jtr_KL = 42.824867, Jtr_pred = 0.456759, err = 0.122533, [31m   time: 16.657513 seconds
+[0m
+[32m    Jdev = 0.392965, err = 0.106100
+[0m
+it 181/200, Jtr_KL = 42.512079, Jtr_pred = 0.454732, err = 0.123450, [31m   time: 16.654585 seconds
+[0m
+[32m    Jdev = 0.299389, err = 0.082200
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 182/200, Jtr_KL = 42.202454, Jtr_pred = 0.457726, err = 0.123083, [31m   time: 16.562293 seconds
+[0m
+[32m    Jdev = 0.314233, err = 0.090900
+[0m
+it 183/200, Jtr_KL = 41.899096, Jtr_pred = 0.455614, err = 0.122483, [31m   time: 16.823840 seconds
+[0m
+[32m    Jdev = 0.301624, err = 0.085500
+[0m
+it 184/200, Jtr_KL = 41.595950, Jtr_pred = 0.452060, err = 0.121017, [31m   time: 16.581614 seconds
+[0m
+[32m    Jdev = 0.284526, err = 0.080800
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 185/200, Jtr_KL = 41.300650, Jtr_pred = 0.448754, err = 0.121000, [31m   time: 17.031518 seconds
+[0m
+[32m    Jdev = 0.312240, err = 0.085900
+[0m
+it 186/200, Jtr_KL = 41.008058, Jtr_pred = 0.442312, err = 0.119800, [31m   time: 16.726654 seconds
+[0m
+[32m    Jdev = 0.321154, err = 0.094200
+[0m
+it 187/200, Jtr_KL = 40.716992, Jtr_pred = 0.441295, err = 0.118667, [31m   time: 16.711162 seconds
+[0m
+[32m    Jdev = 0.280551, err = 0.079100
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 188/200, Jtr_KL = 40.432075, Jtr_pred = 0.437193, err = 0.119717, [31m   time: 16.800662 seconds
+[0m
+[32m    Jdev = 0.319892, err = 0.092700
+[0m
+it 189/200, Jtr_KL = 40.149800, Jtr_pred = 0.436926, err = 0.118583, [31m   time: 16.676744 seconds
+[0m
+[32m    Jdev = 0.304417, err = 0.087100
+[0m
+it 190/200, Jtr_KL = 39.872771, Jtr_pred = 0.437698, err = 0.118917, [31m   time: 16.414233 seconds
+[0m
+[32m    Jdev = 0.283648, err = 0.078500
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 191/200, Jtr_KL = 39.601808, Jtr_pred = 0.435664, err = 0.117767, [31m   time: 16.729520 seconds
+[0m
+[32m    Jdev = 0.287374, err = 0.078300
+[0m
+[34mbest test error[0m
+[36mWritting BBP_models/theta_best.dat
+[0m
+it 192/200, Jtr_KL = 39.330321, Jtr_pred = 0.434331, err = 0.117267, [31m   time: 16.656447 seconds
+[0m
+[32m    Jdev = 0.307519, err = 0.089000
+[0m
+it 193/200, Jtr_KL = 39.062629, Jtr_pred = 0.427193, err = 0.116883, [31m   time: 16.847037 seconds
+[0m
+[32m    Jdev = 0.310060, err = 0.087300
+[0m
+it 194/200, Jtr_KL = 38.794513, Jtr_pred = 0.429054, err = 0.115767, [31m   time: 16.629216 seconds
+[0m
+[32m    Jdev = 0.282730, err = 0.080200
+[0m
+it 195/200, Jtr_KL = 38.535337, Jtr_pred = 0.436018, err = 0.117483, [31m   time: 16.487519 seconds
+[0m
+[32m    Jdev = 0.306750, err = 0.086400
+[0m
+it 196/200, Jtr_KL = 38.279792, Jtr_pred = 0.426500, err = 0.115083, [31m   time: 16.746173 seconds
+[0m
+[32m    Jdev = 0.310154, err = 0.091300
+[0m
+it 197/200, Jtr_KL = 38.023546, Jtr_pred = 0.426849, err = 0.116033, [31m   time: 16.573183 seconds
+[0m
+[32m    Jdev = 0.346167, err = 0.099300
+[0m
+it 198/200, Jtr_KL = 37.772692, Jtr_pred = 0.421452, err = 0.115817, [31m   time: 16.660372 seconds
+[0m
+[32m    Jdev = 0.300257, err = 0.082800
+[0m
+it 199/200, Jtr_KL = 37.525754, Jtr_pred = 0.420507, err = 0.113317, [31m   time: 16.655990 seconds
+[0m
+[32m    Jdev = 0.299443, err = 0.083200
+[0m
+[31m   average time: 17.585738 seconds
+[0m
+[36mWritting BBP_models/theta_last.dat
+[0m
+[36m
+RESULTS:[0m
+train_BayesByBackprop_MNIST.py:259: MatplotlibDeprecationWarning: savefig() got unexpected keyword argument "box_inches" which is no longer supported as of 3.3 and will become an error two minor releases later
+  plt.savefig(results_dir + '/err.png', bbox_extra_artists=(lgd,), box_inches='tight')
+  cost_dev: 0.280551 (cost_train 0.420507)
+  err_dev: 0.078300
+  nb_parameters: 4790420 (4.57MB)
+  time_per_it: 17.585738s
+

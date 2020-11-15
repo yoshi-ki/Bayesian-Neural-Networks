@@ -36,10 +36,12 @@ class BayesLinear_Normalq(nn.Module):
 
         # Learnable parameters -> Initialisation is set empirically.
         self.W_mu = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-0.1, 0.1))
-        self.W_p = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-3, -2))
+        #self.W_p = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-3, -2))
+        self.W_p = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(0, 2))
 
         self.b_mu = nn.Parameter(torch.Tensor(self.n_out).uniform_(-0.1, 0.1))
-        self.b_p = nn.Parameter(torch.Tensor(self.n_out).uniform_(-3, -2))
+        #self.b_p = nn.Parameter(torch.Tensor(self.n_out).uniform_(-3, -2))
+        self.b_p = nn.Parameter(torch.Tensor(self.n_out).uniform_(0, 2))
 
         self.lpw = 0
         self.lqw = 0
@@ -207,7 +209,11 @@ class BBP_Bayes_Net(BaseNet):
 
         loss = Edkl + mlpdw
         loss.backward()
+
+        #print(self.model.bfc1.W_mu.grad)
+
         self.optimizer.step()
+
 
         # out: (batch_size, out_channels, out_caps_dims)
         pred = out.data.max(dim=1, keepdim=False)[1]  # get the index of the max log-probability
