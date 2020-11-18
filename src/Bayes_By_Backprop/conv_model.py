@@ -22,6 +22,17 @@ def sample_weights(W_mu, b_mu, W_p, b_p):
 
     return W, b
 
+def KL_gaussian(p_mu, p_sigma, q_mu, q_sigma):
+    # compute KL(p||q)
+    return (torch.log(q_sigma/p_sigma) + (p_sigma ** 2 + (p_mu - q_mu) ** 2) / (2 * q_sigma ** 2) - 1/2).sum()
+
+def inverse_softplus(x, beta = 1, threshold=20):
+    if x >= threshold :
+      return x
+    else :
+      return np.log(np.exp(beta * x) - 1) / beta
+
+
 class BayesLinear_Normalq(nn.Module):
     """Linear Layer where weights are sampled from a fully factorised Normal with learnable parameters. The likelihood
      of the weight samples under the prior and the approximate posterior are returned with each forward pass in order
@@ -34,13 +45,17 @@ class BayesLinear_Normalq(nn.Module):
         self.prior = prior_class
 
         # Learnable parameters -> Initialisation is set empirically.
-        self.W_mu = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-0.1, 0.1))
-        #self.W_p = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-3, -2))
-        self.W_p = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-3, -2))
+        self.W_mu = nn.Parameter(torch.zeros(self.n_in, self.n_out))
+        # self.W_mu = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-0.1, 0.1))
+        self.W_p = nn.Parameter(torch.full_like(torch.zeros(self.n_in, self.n_out), inverse_softplus(np.sqrt(2/self.n_in)) ))
+        # self.W_p = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-3, -2))
 
-        self.b_mu = nn.Parameter(torch.Tensor(self.n_out).uniform_(-0.1, 0.1))
-        #self.b_p = nn.Parameter(torch.Tensor(self.n_out).uniform_(-3, -2))
-        self.b_p = nn.Parameter(torch.Tensor(self.n_out).uniform_(-3, -2))
+        self.b_mu = nn.Parameter(torch.zeros(self.n_out))
+        # self.b_mu = nn.Parameter(torch.Tensor(self.n_out).uniform_(-0.1, 0.1))
+        # self.b_mu = nn.Parameter(nn.init.xavier_normal_(torch.empty(self.n_out)))
+        self.b_p = nn.Parameter(torch.full_like(torch.zeros(self.n_out), inverse_softplus(1e-5)) )
+        # self.b_p = nn.Parameter(torch.Tensor(self.n_out).uniform_(-3, -2))
+        # self.b_p = nn.Parameter(nn.init.xavier_normal_(torch.empty(self.n_out)))
 
         self.lpw = 0
         self.lqw = 0
@@ -68,10 +83,7 @@ class BayesLinear_Normalq(nn.Module):
 
             output = torch.mm(X, W) + b.unsqueeze(0).expand(X.shape[0], -1)  # (batch_size, n_output)
 
-            lqw = isotropic_gauss_loglike(W, self.W_mu, std_w) + isotropic_gauss_loglike(b, self.b_mu, std_b)
-            lpw = self.prior.loglike(W) + self.prior.loglike(b)
-            return output, lqw, lpw
-
+            return output, KL_gaussian(self.W_mu, std_w, self.prior.mu, self.prior.sigma), KL_gaussian(self.b_mu, std_b, self.prior.mu, self.prior.sigma)
 
 class BayesConv_Normalq(nn.Module):
     """Conv Layer where weights are sampled from a fully factorised Normal with learnable parameters. The likelihood
@@ -88,11 +100,16 @@ class BayesConv_Normalq(nn.Module):
         self.prior = prior_class
 
         # Learnable parameters -> Initialisation is set empirically.
-        self.W_mu = nn.Parameter(torch.Tensor(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size).uniform_(-0.1, 0.1))
-        self.W_p = nn.Parameter(torch.Tensor(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size).uniform_(-2, 0))
+        self.W_mu = nn.Parameter(torch.zeros(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size))
+        # self.W_mu = nn.Parameter(torch.Tensor(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size).uniform_(-0.1, 0.1))
+        self.W_p = nn.Parameter(torch.full_like(torch.zeros(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size), inverse_softplus(np.sqrt(2/(self.in_channels*self.kernel_size*self.kernel_size))) ))
+        # self.W_p = nn.Parameter(torch.Tensor(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size).uniform_(-3, -2))
 
-        self.b_mu = nn.Parameter(torch.Tensor(self.out_channels).uniform_(-0.1, 0.1))
-        self.b_p = nn.Parameter(torch.Tensor(self.out_channels).uniform_(-2, 0))
+        self.b_mu = nn.Parameter(torch.zeros(self.out_channels))
+        # self.b_mu = nn.Parameter(torch.Tensor(self.out_channels).uniform_(-0.1, 0.1))
+
+        self.b_p = nn.Parameter(torch.full_like(torch.zeros(self.out_channels), inverse_softplus(1e-5)) )
+        # self.b_p = nn.Parameter(torch.Tensor(self.out_channels).uniform_(-3, -2))
 
         self.lpw = 0
         self.lqw = 0
@@ -122,9 +139,7 @@ class BayesConv_Normalq(nn.Module):
             # output = torch.mm(X, W) + b.unsqueeze(0).expand(X.shape[0], -1)  # (batch_size, n_output)
             output = F.conv2d(X, W, b)
 
-            lqw = isotropic_gauss_loglike(W, self.W_mu, std_w) + isotropic_gauss_loglike(b, self.b_mu, std_b)
-            lpw = self.prior.loglike(W) + self.prior.loglike(b)
-            return output, lqw, lpw
+            return output, KL_gaussian(self.W_mu, std_w, self.prior.mu, self.prior.sigma), KL_gaussian(self.b_mu, std_b, self.prior.mu, self.prior.sigma)
 
 
 
@@ -158,50 +173,50 @@ class bayes_conv_2L(nn.Module):
         # self.act = nn.SELU(inplace=True)
 
     def forward(self, x, sample=False):
-        tlqw = 0
-        tlpw = 0
+        tklw = 0
+        tklb = 0
 
         # x = x.view(-1, self.input_dim)  # view(batch_size, input_dim)
         # -----------------
-        x, lqw, lpw = self.conv1(x, sample)
-        tlqw = tlqw + lqw
-        tlpw = tlpw + lpw
+        x, klw, klb = self.conv1(x, sample)
+        tklw = tklw + klw
+        tklb = tklb + klb
         # -----------------
         x = self.act(x)
         # -----------------
-        x, lqw, lpw = self.conv2(x, sample)
-        tlqw = tlqw + lqw
-        tlpw = tlpw + lpw
+        x, klw, klb = self.conv2(x, sample)
+        tklw = tklw + klw
+        tklb = tklb + klb
         # -----------------
         x = self.act(x)
         x = self.pool(x)
         x = x.view(x.shape[0],-1)
         # -----------------
-        x, lqw, lpw = self.bfc1(x, sample)
-        tlqw = tlqw + lqw
-        tlpw = tlpw + lpw
+        x, klw, klb = self.bfc1(x, sample)
+        tklw = tklw + klw
+        tklb = tklb + klb
         x = self.act(x)
         # -----------------
-        y, lqw, lpw = self.bfc2(x, sample)
-        tlqw = tlqw + lqw
-        tlpw = tlpw + lpw
+        y, klw, klb = self.bfc2(x, sample)
+        tklw = tklw + klw
+        tklb = tklb + klb
 
-        return y, tlqw, tlpw
+        return y, tklw, tklb
 
     def sample_predict(self, x, Nsamples):
         """Used for estimating the data's likelihood by approximately marginalising the weights with MC"""
         # Just copies type from x, initializes new vector
         predictions = x.data.new(Nsamples, x.shape[0], self.output_dim)
-        tlqw_vec = np.zeros(Nsamples)
-        tlpw_vec = np.zeros(Nsamples)
+        tklw_vec = np.zeros(Nsamples)
+        tklb_vec = np.zeros(Nsamples)
 
         for i in range(Nsamples):
-            y, tlqw, tlpw = self.forward(x, sample=True)
+            y, tklw, tklb = self.forward(x, sample=True)
             predictions[i] = y
-            tlqw_vec[i] = tlqw
-            tlpw_vec[i] = tlpw
+            tklw_vec[i] = tklw
+            tklb_vec[i] = tklb
 
-        return predictions, tlqw_vec, tlpw_vec
+        return predictions, tklw_vec, tklb_vec
 
 class BBP_Bayes_Conv_Net(BaseNet):
     """Full network wrapper for Bayes By Backprop nets with methods for training, prediction and weight prunning"""
@@ -248,33 +263,43 @@ class BBP_Bayes_Conv_Net(BaseNet):
     def fit(self, x, y, samples=1):
         x, y = to_variable(var=(x, y.long()), cuda=self.cuda)
 
-        self.optimizer.zero_grad()
+        for i in range(samples):
+            self.optimizer.zero_grad()
+            out, tklw, tklb = self.model(x)
+            mlpdw = F.cross_entropy(out,y,reduction='sum')
+            Edkl = (tklw + tklb) / self.Nbatches
+            loss = Edkl + mlpdw
+            loss.backward()
+            self.optimizer.step()
 
-        if samples == 1:
-            out, tlqw, tlpw = self.model(x)
-            mlpdw = F.cross_entropy(out, y, reduction='sum')
-            Edkl = (tlqw - tlpw) / self.Nbatches
+        # ---------    samples and train ----------- #
+        # self.optimizer.zero_grad()
+        # if samples == 1:
+        #     out, tlqw, tlpw = self.model(x)
+        #     mlpdw = F.cross_entropy(out, y, reduction='sum')
+        #     Edkl = (tlqw - tlpw) / self.Nbatches
 
-        elif samples > 1:
-            mlpdw_cum = 0
-            Edkl_cum = 0
+        # elif samples > 1:
+        #     mlpdw_cum = 0
+        #     Edkl_cum = 0
 
-            for i in range(samples):
-                out, tlqw, tlpw = self.model(x, sample=True)
-                mlpdw_i = F.cross_entropy(out, y, reduction='sum')
-                Edkl_i = (tlqw - tlpw) / self.Nbatches
-                mlpdw_cum = mlpdw_cum + mlpdw_i
-                Edkl_cum = Edkl_cum + Edkl_i
+        #     for i in range(samples):
+        #         out, tlqw, tlpw = self.model(x, sample=True)
+        #         mlpdw_i = F.cross_entropy(out, y, reduction='sum')
+        #         Edkl_i = (tlqw - tlpw) / self.Nbatches
+        #         mlpdw_cum = mlpdw_cum + mlpdw_i
+        #         Edkl_cum = Edkl_cum + Edkl_i
 
-            mlpdw = mlpdw_cum / samples
-            Edkl = Edkl_cum / samples
+        #     mlpdw = mlpdw_cum / samples
+        #     Edkl = Edkl_cum / samples
 
-        loss = Edkl + mlpdw
-        loss.backward()
+        # loss = Edkl + mlpdw
+        # loss.backward()
 
-        #print(self.model.bfc1.W_mu.grad)
+        # #print(self.model.bfc1.W_mu.grad)
 
-        self.optimizer.step()
+        # self.optimizer.step()
+        # ---------    samples and train ----------- #
 
 
         # out: (batch_size, out_channels, out_caps_dims)
