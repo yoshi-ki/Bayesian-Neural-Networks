@@ -4,29 +4,23 @@ import torch.utils.data
 from torchvision import transforms, datasets
 import argparse
 import matplotlib
-from src.Bayes_By_Backprop.VGG11 import *
-from src.Bayes_By_Backprop_Local_Reparametrization.model import *
+from src.Bayes_By_Backprop.test_VGG11 import *
 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
-parser = argparse.ArgumentParser(description='Train Bayesian Convolutional Neural Net on MNIST with Variational Inference')
-parser.add_argument('--model', type=str, nargs='?', action='store', default='Local_Reparam',
-                    help='Model to run. Options are \'Gaussian_prior\', \'Laplace_prior\', \'GMM_prior\','
-                         ' \'Local_Reparam\'. Default: \'Local_Reparam\'.')
+parser = argparse.ArgumentParser(description='Test Bayesian Convolutional Neural Net on cifar10 with Variational Inference')
+parser.add_argument('n_samples', type=float, nargs='?', action='store', default=10,
+                    help='How many MC samples to take when approximating the ELBO. Default: 10.')
+parser.add_argument('--models_dir', type=str, nargs='?', action='store', default='Models/BBP_VGG11_models/theta_best.dat',
+                    help='Where to save learnt weights and train vectors. Default: \'Models/BBP_VGG11_models/theta_best.dat\'.')
+parser.add_argument('--results_dir', type=str, nargs='?', action='store', default='Results/BBP_VGG11_results/compare_sample.png',
+                    help='Where to save learnt training plots. Default: \'Results/BBP_VGG11_results/compare_sample.png\'.')
 parser.add_argument('--prior_sig', type=float, nargs='?', action='store', default=0.1,
                     help='Standard deviation of prior. Default: 0.1.')
-parser.add_argument('--epochs', type=int, nargs='?', action='store', default=200,
-                    help='How many epochs to train. Default: 200.')
 parser.add_argument('--lr', type=float, nargs='?', action='store', default=1e-3,
                     help='learning rate. Default: 1e-3.')
-parser.add_argument('--n_samples', type=float, nargs='?', action='store', default=10,
-                    help='How many MC samples to take when approximating the ELBO. Default: 10.')
-parser.add_argument('--models_dir', type=str, nargs='?', action='store', default='BBP_VGG11_models',
-                    help='Where to save learnt weights and train vectors. Default: \'BBP_VGG11_models\'.')
-parser.add_argument('--results_dir', type=str, nargs='?', action='store', default='BBP_VGG11_results',
-                    help='Where to save learnt training plots. Default: \'BBP_VGG11_results\'.')
 args = parser.parse_args()
 
 
@@ -35,7 +29,6 @@ args = parser.parse_args()
 # train config
 NTrainPointsCIFAR10 = 50000
 batch_size = 32
-nb_epochs = args.epochs
 log_interval = 1
 
 
@@ -77,13 +70,42 @@ else:
 # net dims
 cprint('c', '\nNetwork:')
 
-lr = args.lr
 nsamples = int(args.n_samples)  # How many samples to estimate ELBO with at each iteration
+models_dir = args.models_dir
+results_dir = args.results_dir
 ########################################################################################
 
+#通常のnetの定義
+net = BBP_Bayes_VGG11_Net(channels_in=3, side_in = 32, cuda=use_cuda, classes=10, batch_size=batch_size, Nbatches=(NTrainPointsCIFAR10 / batch_size), prior_instance=isotropic_gauss_prior(mu=0, sigma=args.prior_sig))
+cprint('c', 'Reading %s\n' % models_dir)
+state_dict = torch.load(models_dir)
+net.epoch = state_dict['epoch']
+net.lr = state_dict['lr']
+for (param1, param2) in zip(net.model.parameters(),state_dict['model'].parameters()):
+  param1.data = param2.data
+net.optimizer = state_dict['optimizer']
+print('  restoring epoch: %d, lr: %f' % (net.epoch, net.lr))
+# net.load(models_dir)
+net.set_mode_train(False)
 
-net = BBP_Bayes_VGG11_Net(lr=lr, channels_in=3, side_in = 32, cuda=use_cuda, classes=10, batch_size=batch_size, Nbatches=(NTrainPointsCIFAR10 / batch_size), prior_instance=isotropic_gauss_prior(mu=0, sigma=args.prior_sig))
-net.load('./BBP_VGG11_models/theta_best.dat')
+
+
+# act dropを行うnetの定義
+# act_net = BBP_Bayes_VGG11_Net(channels_in=3, side_in = 32, cuda=use_cuda, classes=10, batch_size=batch_size, Nbatches=(NTrainPointsCIFAR10 / batch_size), prior_instance=isotropic_gauss_prior(mu=0, sigma=args.prior_sig),act_drop=True)
+# cprint('c', 'Reading %s\n' % models_dir)
+# state_dict = torch.load(models_dir)
+# act_net.epoch = state_dict['epoch']
+# act_net.lr = state_dict['lr']
+# for (param1, param2) in zip(act_net.model.parameters(),state_dict['model'].parameters()):
+#   param1.data = param2.data
+# act_net.optimizer = state_dict['optimizer']
+# print('  restoring epoch: %d, lr: %f' % (act_net.epoch, act_net.lr))
+# # net.load(models_dir)
+# act_net.set_mode_train(False)
+
+
+
+
 
 
 
@@ -97,38 +119,63 @@ print('  init cost variables:')
 cost_dev = 0
 err_dev = 0
 
+# # We draw more samples on the first epoch in order to ensure convergence
 
-# We draw more samples on the first epoch in order to ensure convergence
+err_results = np.zeros(nsamples)
 
 ELBO_samples = nsamples
 
-
-
-# ---- dev
-net.set_mode_train(False)
-nb_samples = 0
-for j, (x, y) in enumerate(valloader):
-    cost, err, probs = net.eval(x, y)  # This takes the expected weights to save time, not proper inference
-
+for n in range(1,ELBO_samples+1):
+  cost_dev = 0
+  err_dev = 0
+  net.set_mode_train(False)
+  nb_samples = 0
+  for j, (x, y) in enumerate(valloader):
+    cost, err, probs = net.sample_eval(x, y, n)  # This takes the expected weights to save time, not proper inference
     cost_dev += cost
     err_dev += err
     nb_samples += len(x)
+  cprint('g', '    Jdev = %f, err = %f\n' % (cost_dev.long()/nb_samples, err_dev.long()/nb_samples))
+  err_results[n-1] = err_dev.long()/nb_samples
 
-cprint('g', '    Jdev = %f, err = %f\n' % (cost_dev.long()/nb_samples, err_dev.long()/nb_samples))
+
+# plotしたいとき
+# plt.figure()
+# plt.title('compare inference error different samples')
+# plt.plot(np.arange(1,nsamples+1),err_results)
+# plt.xlabel('number of samples')
+# plt.ylabel('error')
+# plt.savefig(results_dir)
 
 
 
-cost_dev = 0
-err_dev = 0
 
-net.set_mode_train(False)
-nb_samples = 0
-for j, (x, y) in enumerate(valloader):
-    cost, err, probs = net.sample_eval(x, y, ELBO_samples)  # This takes the expected weights to save time, not proper inference
 
-    cost_dev += cost
-    err_dev += err
-    nb_samples += len(x)
+# 1サンプルだけしたいとき
+# n = 1
+# nb_samples = 0
+# for j, (x, y) in enumerate(valloader):
+#     cost, err, probs = net.sample_eval(x, y, n)  # This takes the expected weights to save time, not proper inference
+#     cost_dev += cost
+#     err_dev += err
+#     nb_samples += len(x)
+# cprint('g', '    Jdev = %f, err = %f\n' % (cost_dev.long()/nb_samples, err_dev.long()/nb_samples))
 
-cprint('g', '    Jdev = %f, err = %f\n' % (cost_dev.long()/nb_samples, err_dev.long()/nb_samples))
+
+
+# conv layerの描画を行う
+# for i in range(8):
+#   param_val = net.model.conv_out[i]
+#   param_name = 'conv' + str(i) + '_out'
+#   plt.figure()
+#   plt.title(param_name)
+#   plt.xlim(-0.1,0.1)
+#   tmp = param_val.cpu().detach().numpy()
+#   val = tmp.flatten()
+#   plt.hist(val,bins=1000,color='deepskyblue')
+#   plt.savefig('Graph' + '/Act/BBP_VGG11/' + param_name + '.png')
+
+
+
+
 
