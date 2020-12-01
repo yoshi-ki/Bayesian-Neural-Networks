@@ -157,17 +157,21 @@ class BayesConv_Normalq(nn.Module):
             else :
               if(first_layer):
                 # first layerではalphaの値が変わるので
-                alpha = 2
+                beta = 2
 
                 # # percent that satisfies the condition
-                # cond_num = torch.where(torch.abs(X)<alpha,torch.ones(X.size()).to(device='cuda'),torch.zeros(X.size()).to(device='cuda'))
+                # cond_num = torch.where(torch.abs(X)<beta,torch.ones(X.size()).to(device='cuda'),torch.zeros(X.size()).to(device='cuda'))
                 # print( torch.sum(cond_num)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3]) )
 
-                X_1 = torch.where(torch.abs(X) < alpha, X, torch.zeros(X.size()).to(device='cuda'))
-                X_2 = torch.where(torch.abs(X) < alpha,torch.zeros(X.size()).to(device='cuda'),X)
-                output1 = F.conv2d(X_1, self.W_mu, bias = b, padding=self.padding)
-                output2 = F.conv2d(X_2, W, padding=self.padding)
-                output = output1 + output2
+                # X_1 = torch.where(torch.abs(X) < beta, X, torch.zeros(X.size()).to(device='cuda'))
+                # X_2 = torch.where(torch.abs(X) < beta,torch.zeros(X.size()).to(device='cuda'),X)
+                # output1 = F.conv2d(X_1, self.W_mu, bias = self.b_mu, padding=self.padding)
+                # output2 = F.conv2d(X_2, W, padding=self.padding)
+                # output = output1 + output2
+
+                X_new = torch.where(torch.abs(X)<beta,torch.zeros(X.size()).to(device='cuda'), X)
+                output2 = F.conv2d(X_new, 1 * std_w * eps_W, padding=self.padding)
+                output = self.out_mean + output2
 
 
               else:
@@ -176,10 +180,10 @@ class BayesConv_Normalq(nn.Module):
                 beta = 0.1
                 X_diff = X - self.X_mean
                 # X_diff = torch.where(torch.logical_and(torch.abs(X_diff)<beta, X<alpha),torch.zeros(X_diff.size()).to(device='cuda'), X_diff)
-                X_diff = torch.where(torch.abs(X_diff)<beta,torch.zeros(X_diff.size()).to(device='cuda'), X_diff)
+                X_diff = torch.where(torch.abs(X_diff)<alpha,torch.zeros(X_diff.size()).to(device='cuda'), X_diff)
                 output1 = F.conv2d(X_diff, self.W_mu, padding=self.padding)
 
-                X_new = torch.where(X<alpha,torch.zeros(X.size()).to(device='cuda'), X)
+                X_new = torch.where(X<beta,torch.zeros(X.size()).to(device='cuda'), X)
                 output2 = F.conv2d(X_new, 1 * std_w * eps_W, padding=self.padding)
                 output = self.out_mean + output1 + output2
 

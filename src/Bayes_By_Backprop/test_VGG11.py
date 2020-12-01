@@ -123,7 +123,7 @@ class BayesConv_Normalq(nn.Module):
         self.lpw = 0
         self.lqw = 0
 
-    def forward(self, X, sample=False, act_drop=False):
+    def forward(self, X, sample=False, act_drop=False, first_layer=False):
         #         print(self.training)
 
         if not self.training and not sample:  # When training return MLE of w for quick validation
@@ -155,14 +155,35 @@ class BayesConv_Normalq(nn.Module):
             # b = self.b_mu
 
             if not(act_drop):
-              output = F.conv2d(X, W, bias = b, padding=self.padding)
+              output = F.conv2d(X.to(device='cuda'), W, bias = b, padding=self.padding)
             else :
-              alpha = 0.1
-              X_1 = torch.where(X < alpha, X, torch.zeros(X.size()).to(device='cuda'))
-              X_2 = torch.where(X < alpha,torch.zeros(X.size()).to(device='cuda'),X)
-              output1 = F.conv2d(X_1, self.W_mu, bias = b, padding=self.padding)
-              output2 = F.conv2d(X_2, W, padding=self.padding)
-              output = output1 + output2
+              if(first_layer):
+                alpha = 2
+
+                # # percent that satisfies the condition
+                # cond_num = torch.where(torch.abs(X)<alpha,torch.ones(X.size()).to(device='cuda'),torch.zeros(X.size()).to(device='cuda'))
+                # print( torch.sum(cond_num)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3]) )
+
+                X_1 = torch.where(torch.abs(X) < alpha, X, torch.zeros(X.size()).to(device='cuda'))
+                X_2 = torch.where(torch.abs(X) < alpha,torch.zeros(X.size()).to(device='cuda'),X)
+                output1 = F.conv2d(X_1, self.W_mu, bias = b, padding=self.padding)
+                output2 = F.conv2d(X_2, W, padding=self.padding)
+                output = output1 + output2
+
+
+              else:
+                alpha = 0.1
+
+                # # percent that satisfies the condition
+                # cond_num = torch.where(torch.abs(X)<alpha,torch.ones(X.size()).to(device='cuda'),torch.zeros(X.size()).to(device='cuda'))
+                # print( torch.sum(cond_num)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3]) )
+
+                X_1 = torch.where(X < alpha, X, torch.zeros(X.size()).to(device='cuda'))
+                X_2 = torch.where(X < alpha,torch.zeros(X.size()).to(device='cuda'),X)
+                output1 = F.conv2d(X_1, self.W_mu, bias = b, padding=self.padding)
+                output2 = F.conv2d(X_2, W, padding=self.padding)
+                output = output1 + output2
+
 
             return output, KL_gaussian(self.W_mu, std_w, self.prior.mu, self.prior.sigma), KL_gaussian(self.b_mu, std_b, self.prior.mu, self.prior.sigma)
 
@@ -222,7 +243,7 @@ class bayes_VGG11(nn.Module):
         tklb = 0
 
         # -----------------
-        x1, klw, klb = self.conv1(x, sample, self.act_drop)
+        x1, klw, klb = self.conv1(x, sample, self.act_drop, first_layer=True)
         tklw = tklw + klw
         tklb = tklb + klb
         x = self.act(x1)
@@ -418,7 +439,6 @@ class BBP_Bayes_VGG11_Net(BaseNet):
 
     def sample_eval(self, x, y, Nsamples, logits=True, train=False):
         """Prediction, only returining result with weights marginalised"""
-        x, y = to_variable(var=(x, y.long()), cuda=self.cuda)
 
         out, _, _ = self.model.sample_predict(x, Nsamples)
 
@@ -441,6 +461,10 @@ class BBP_Bayes_VGG11_Net(BaseNet):
 
     def all_sample_eval(self, x, y, Nsamples):
         """Returns predictions for each MC sample"""
+        # initialize seed if needed
+        torch.manual_seed(42)
+        torch.cuda.manual_seed(42)
+
         x, y = to_variable(var=(x, y.long()), cuda=self.cuda)
 
         out, _, _ = self.model.sample_predict(x, Nsamples)

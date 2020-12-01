@@ -91,17 +91,16 @@ net.set_mode_train(False)
 
 
 # act dropを行うnetの定義
-# act_net = BBP_Bayes_VGG11_Net(channels_in=3, side_in = 32, cuda=use_cuda, classes=10, batch_size=batch_size, Nbatches=(NTrainPointsCIFAR10 / batch_size), prior_instance=isotropic_gauss_prior(mu=0, sigma=args.prior_sig),act_drop=True)
-# cprint('c', 'Reading %s\n' % models_dir)
-# state_dict = torch.load(models_dir)
-# act_net.epoch = state_dict['epoch']
-# act_net.lr = state_dict['lr']
-# for (param1, param2) in zip(act_net.model.parameters(),state_dict['model'].parameters()):
-#   param1.data = param2.data
-# act_net.optimizer = state_dict['optimizer']
-# print('  restoring epoch: %d, lr: %f' % (act_net.epoch, act_net.lr))
-# # net.load(models_dir)
-# act_net.set_mode_train(False)
+act_net = BBP_Bayes_VGG11_Net(channels_in=3, side_in = 32, cuda=use_cuda, classes=10, batch_size=batch_size, Nbatches=(NTrainPointsCIFAR10 / batch_size), prior_instance=isotropic_gauss_prior(mu=0, sigma=args.prior_sig),act_drop=True)
+cprint('c', 'Reading %s\n' % models_dir)
+state_dict = torch.load(models_dir)
+act_net.epoch = state_dict['epoch']
+act_net.lr = state_dict['lr']
+for (param1, param2) in zip(act_net.model.parameters(),state_dict['model'].parameters()):
+  param1.data = param2.data
+act_net.optimizer = state_dict['optimizer']
+print('  restoring epoch: %d, lr: %f' % (act_net.epoch, act_net.lr))
+act_net.set_mode_train(False)
 
 
 
@@ -122,21 +121,20 @@ err_dev = 0
 # # We draw more samples on the first epoch in order to ensure convergence
 
 err_results = np.zeros(nsamples)
-
 ELBO_samples = nsamples
 
-for n in range(1,ELBO_samples+1):
-  cost_dev = 0
-  err_dev = 0
-  net.set_mode_train(False)
-  nb_samples = 0
-  for j, (x, y) in enumerate(valloader):
-    cost, err, probs = net.sample_eval(x, y, n)  # This takes the expected weights to save time, not proper inference
-    cost_dev += cost
-    err_dev += err
-    nb_samples += len(x)
-  cprint('g', '    Jdev = %f, err = %f\n' % (cost_dev.long()/nb_samples, err_dev.long()/nb_samples))
-  err_results[n-1] = err_dev.long()/nb_samples
+# for n in range(1,ELBO_samples+1):
+#   cost_dev = 0
+#   err_dev = 0
+#   net.set_mode_train(False)
+#   nb_samples = 0
+#   for j, (x, y) in enumerate(valloader):
+#     cost, err, probs = net.sample_eval(x, y, n)  # This takes the expected weights to save time, not proper inference
+#     cost_dev += cost
+#     err_dev += err
+#     nb_samples += len(x)
+#   cprint('g', '    Jdev = %f, err = %f\n' % (cost_dev.long()/nb_samples, err_dev.long()/nb_samples))
+#   err_results[n-1] = err_dev.long()/nb_samples
 
 
 # plotしたいとき
@@ -151,7 +149,7 @@ for n in range(1,ELBO_samples+1):
 
 
 
-# 1サンプルだけしたいとき
+# # 1サンプルだけしたいとき
 # n = 1
 # nb_samples = 0
 # for j, (x, y) in enumerate(valloader):
@@ -163,19 +161,38 @@ for n in range(1,ELBO_samples+1):
 
 
 
-# conv layerの描画を行う
+# # conv layerの描画を行う
 # for i in range(8):
 #   param_val = net.model.conv_out[i]
 #   param_name = 'conv' + str(i) + '_out'
 #   plt.figure()
 #   plt.title(param_name)
-#   plt.xlim(-0.1,0.1)
 #   tmp = param_val.cpu().detach().numpy()
 #   val = tmp.flatten()
-#   plt.hist(val,bins=1000,color='deepskyblue')
+#   plt.hist(val,bins=100,color='deepskyblue')
 #   plt.savefig('Graph' + '/Act/BBP_VGG11/' + param_name + '.png')
 
 
+
+# 通常convとact_drop convを比べる
+nb_samples = 0
+nb_equal = 0
+for j, (x, y) in enumerate(valloader):
+  prob_out1 = net.all_sample_eval(x, y, ELBO_samples)  # This takes the expected weights to save time, not proper inference
+  prob_out2 = act_net.all_sample_eval(x, y, ELBO_samples)
+  # 結果は(sample, batch, 10)となっている
+
+  # 予測の分布の一致をみるコード
+  # pred1 = prob_out1.max(dim=1,keepdim=False)[1]
+  # print(pred1.shape,pred1)
+
+  # 予測結果を取り出すコード
+  pred1 = prob_out1.mean(dim=0, keepdim=False).max(dim=1, keepdim=False)[1]
+  pred2 = prob_out2.mean(dim=0, keepdim=False).max(dim=1, keepdim=False)[1]
+  nb_equal += torch.sum(pred1==pred2)
+  nb_samples += len(x)
+print('sample = ' + str(nb_samples))
+print('diff = ' + str(nb_samples - nb_equal))
 
 
 
