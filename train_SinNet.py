@@ -23,8 +23,8 @@ parser.add_argument('--prior_sig', type=float, nargs='?', action='store', defaul
                     help='Standard deviation of prior. Default: 0.1.')
 parser.add_argument('--epochs', type=int, nargs='?', action='store', default=200,
                     help='How many epochs to train. Default: 200.')
-parser.add_argument('--lr', type=float, nargs='?', action='store', default=1e-3,
-                    help='learning rate. Default: 1e-3.')
+parser.add_argument('--lr', type=float, nargs='?', action='store', default=0.005,
+                    help='learning rate. Default: 0.005.')
 parser.add_argument('--n_samples', type=float, nargs='?', action='store', default=3,
                     help='How many MC samples to take when approximating the ELBO. Default: 3.')
 args = parser.parse_args()
@@ -75,11 +75,12 @@ lr = args.lr
 nsamples = int(args.n_samples)  # How many samples to estimate ELBO with at each iteration
 ########################################################################################
 
-
-net = BBP_Bayes_Sin_Net(lr=lr, channels_in=3, side_in = 32, cuda=use_cuda, classes=10, batch_size=batch_size, Nbatches=(NTrainPointsCIFAR10 / batch_size), prior_instance=isotropic_gauss_prior(mu=0, sigma=args.prior_sig))
-
 train_x = torch.Tensor([-0.55,-0.4,-0.38,-0.35,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.17,0.30,0.35,0.4,0.5,0.9,0.95])
 train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
+
+#TODO: 学習サイズを変える時はここも変えなければならないことに注意
+net = BBP_Bayes_Sin_Net(lr=lr, channels_in=3, side_in = 32, cuda=use_cuda, classes=10, batch_size=batch_size, Nbatches=1, prior_instance=isotropic_gauss_prior(mu=0, sigma=args.prior_sig))
+
 
 ## ---------------------------------------------------------------------------------------------------------------------
 # train
@@ -108,55 +109,97 @@ for i in range(epoch, nb_epochs):
     net.set_mode_train(True)
     tic = time.time()
     nb_samples = 0
+    # データ一点一点で学習する方法
+    train_x = train_x.data.new(train_x.size()).uniform_(-1,1)
+    train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
     for j in range(len(train_x)):
         x = torch.Tensor([train_x[j]])
-        y = train_y[j]
-        cost_dkl, cost_pred, err = net.fit(x, y, samples=ELBO_samples)
-        err_train[j] += err
-        kl_cost_train[j] += cost_dkl
-        pred_cost_train[j] += cost_pred
+        y = torch.Tensor([train_y[j]])
+        # y = y + 0.1 * y.data.new(y.size()).normal_()
+        cost_dkl, err = net.fit(x, y, samples=ELBO_samples)
+        kl_cost_train[i] += cost_dkl
+        err_train[i] += err
         nb_samples += len(x)
 
-    # for x, y in trainloader:
-    #     cost_dkl, cost_pred, err = net.fit(x, y, samples=ELBO_samples)
-    #     err_train[i] += err
-    #     kl_cost_train[i] += cost_dkl
-    #     pred_cost_train[i] += cost_pred
-    #     nb_samples += len(x)
+    # データを一気に与えて学習する方法
+    # train_x = train_x.data.new(train_x.size()).uniform_(-1,1)
+    # train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
+    # x = torch.Tensor(train_x)
+    # y = torch.Tensor(train_y)
+    # x = train_x
+    # y = train_y
+    # y = y + 0.1 * y.data.new(y.size()).normal_()
+    # cost_dkl, err = net.fit(x, y, samples=ELBO_samples)
+    # err_train[i] += err
+    # kl_cost_train[i] += cost_dkl
+    # nb_samples += len(x)
 
-    kl_cost_train[i] /= nb_samples  # Normalise by number of samples in order to get comparable number to the -log like
-    pred_cost_train[i] /= nb_samples
-    err_train[i] /= nb_samples
+
+    # kl_cost_train[i] /= nb_samples  # Normalise by number of samples in order to get comparable number to the -log like
+    # err_train[i] /= nb_samples
 
     toc = time.time()
     net.epoch = i
     # ---- print
-    print("it %d/%d, Jtr_KL = %f, Jtr_pred = %f, err = %f, " % (
-    i, nb_epochs, kl_cost_train[i], pred_cost_train[i], err_train[i]), end="")
+    print("it %d/%d, Jtr_KL = %f, err = %f, " % (
+    i, nb_epochs, kl_cost_train[i], err_train[i]), end="")
     cprint('r', '   time: %f seconds\n' % (toc - tic))
 
     # ---- dev
     if i % nb_its_dev == 0:
         net.set_mode_train(False)
         nb_samples = 0
+        out = np.zeros(20)
+        # train_x = torch.Tensor([-0.55,-0.4,-0.38,-0.35,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.17,0.30,0.35,0.4,0.5,0.9,0.95])
+        train_x = torch.Tensor([-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.95])
+        train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
         for j in range(len(train_x)):
             x = torch.Tensor([train_x[j]])
-            y = train_y[j]
-            cost = net.eval(x, y)  # This takes the expected weights to save time, not proper inference
+            y = torch.Tensor([train_y[j]])
+            cost, out[j] = net.eval(x, y)  # This takes the expected weights to save time, not proper inference
 
             cost_dev[i] += cost
             # err_dev[i] += err
             nb_samples += len(x)
+        # train_x = torch.Tensor([-0.55,-0.4,-0.38,-0.35,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.17,0.30,0.35,0.4,0.5,0.9,0.95])
+        # train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
+        # x = train_x
+        # y = train_y
+        # cost, out = net.eval(x,y)
+        # cost_dev[i] = cost
 
-        cost_dev[i] /= nb_samples
+        # cost_dev[i] /= nb_samples
         # err_dev[i] /= nb_samples
 
         cprint('g', '    square root error = %f' % cost_dev[i])
 
         if cost_dev[i] < best_err:
             best_err = cost_dev[i]
+            print(out,train_y)
             cprint('b', 'best test error')
             net.save(models_dir + '/theta_best.dat')
+
+    if i % 100 == 0:
+      print(out)
+      textsize = 15
+      marker = 5
+
+      plt.figure(dpi=100)
+      fig, ax1 = plt.subplots()
+      ax1.plot(err_train[:i], 'r--')
+      ax1.plot(range(0, i, nb_its_dev), cost_dev[:i], 'b-')
+      ax1.set_ylabel('Squared error')
+      plt.xlabel('epoch')
+      plt.grid(b=True, which='major', color='k', linestyle='-')
+      plt.grid(b=True, which='minor', color='k', linestyle='--')
+      lgd = plt.legend(['train error', 'test error'], markerscale=marker, prop={'size': textsize, 'weight': 'normal'})
+      ax = plt.gca()
+      plt.title('regression costs')
+      for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] +
+                  ax.get_xticklabels() + ax.get_yticklabels()):
+          item.set_fontsize(textsize)
+          item.set_weight('normal')
+      plt.savefig(results_dir + '/pred_cost.png', bbox_extra_artists=(lgd,), bbox_inches='tight')
 
 toc0 = time.time()
 runtime_per_it = (toc0 - tic0) / float(nb_epochs)
@@ -187,25 +230,25 @@ np.save(results_dir + '/err_train.npy', err_train)
 ## ---------------------------------------------------------------------------------------------------------------------
 # fig cost vs its
 
-textsize = 15
-marker = 5
+# textsize = 15
+# marker = 5
 
-plt.figure(dpi=100)
-fig, ax1 = plt.subplots()
-ax1.plot(pred_cost_train, 'r--')
-ax1.plot(range(0, nb_epochs, nb_its_dev), cost_dev[::nb_its_dev], 'b-')
-ax1.set_ylabel('Squared error')
-plt.xlabel('epoch')
-plt.grid(b=True, which='major', color='k', linestyle='-')
-plt.grid(b=True, which='minor', color='k', linestyle='--')
-lgd = plt.legend(['train error', 'test error'], markerscale=marker, prop={'size': textsize, 'weight': 'normal'})
-ax = plt.gca()
-plt.title('regression costs')
-for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] +
-             ax.get_xticklabels() + ax.get_yticklabels()):
-    item.set_fontsize(textsize)
-    item.set_weight('normal')
-plt.savefig(results_dir + '/pred_cost.png', bbox_extra_artists=(lgd,), bbox_inches='tight')
+# plt.figure(dpi=100)
+# fig, ax1 = plt.subplots()
+# ax1.plot(pred_cost_train, 'r--')
+# ax1.plot(range(0, nb_epochs, nb_its_dev), cost_dev[::nb_its_dev], 'b-')
+# ax1.set_ylabel('Squared error')
+# plt.xlabel('epoch')
+# plt.grid(b=True, which='major', color='k', linestyle='-')
+# plt.grid(b=True, which='minor', color='k', linestyle='--')
+# lgd = plt.legend(['train error', 'test error'], markerscale=marker, prop={'size': textsize, 'weight': 'normal'})
+# ax = plt.gca()
+# plt.title('regression costs')
+# for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] +
+#              ax.get_xticklabels() + ax.get_yticklabels()):
+#     item.set_fontsize(textsize)
+#     item.set_weight('normal')
+# plt.savefig(results_dir + '/pred_cost.png', bbox_extra_artists=(lgd,), bbox_inches='tight')
 
 # plt.figure()
 # fig, ax1 = plt.subplots()

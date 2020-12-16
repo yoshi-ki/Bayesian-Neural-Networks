@@ -32,6 +32,65 @@ def inverse_softplus(x, beta = 1, threshold=20):
       return np.log(np.exp(beta * x) - 1) / beta
 
 
+
+
+# class BayesLinear_Normalq(nn.Module):
+#     """Linear Layer where weights are sampled from a fully factorised Normal with learnable parameters. The likelihood
+#      of the weight samples under the prior and the approximate posterior are returned with each forward pass in order
+#      to estimate the KL term in the ELBO.
+#     """
+#     def __init__(self, n_in, n_out, prior_class):
+#         super(BayesLinear_Normalq, self).__init__()
+#         self.n_in = n_in
+#         self.n_out = n_out
+#         self.prior = prior_class
+
+#         # Learnable parameters -> Initialisation is set empirically.
+#         self.W_mu = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-0.1, 0.1))
+#         self.W_p = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-3, -2))
+#         # self.W_p = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(0, 2))
+
+#         self.b_mu = nn.Parameter(torch.Tensor(self.n_out).uniform_(-0.1, 0.1))
+#         self.b_p = nn.Parameter(torch.Tensor(self.n_out).uniform_(-3, -2))
+#         #self.b_p = nn.Parameter(torch.Tensor(self.n_out).uniform_(0, 2))
+
+#         self.lpw = 0
+#         self.lqw = 0
+
+#     def forward(self, X, sample=False):
+#         #         print(self.training)
+
+#         if not self.training and not sample:  # When training return MLE of w for quick validation
+#             output = torch.mm(X, self.W_mu) + self.b_mu.expand(X.size()[0], self.n_out)
+#             return output, 0, 0
+
+#         else:
+
+#             # Tensor.new()  Constructs a new tensor of the same data type as self tensor.
+#             # the same random sample is used for every element in the minibatch
+#             eps_W = Variable(self.W_mu.data.new(self.W_mu.size()).normal_())
+#             eps_b = Variable(self.b_mu.data.new(self.b_mu.size()).normal_())
+
+#             # sample parameters
+#             std_w = 1e-6 + F.softplus(self.W_p, beta=1, threshold=20)
+#             std_b = 1e-6 + F.softplus(self.b_p, beta=1, threshold=20)
+
+#             # W = self.W_mu + 1 * std_w * eps_W
+#             # b = self.b_mu + 1 * std_b * eps_b
+#             W = self.W_mu
+#             b = self.b_mu
+
+#             output = torch.mm(X, W) + b.unsqueeze(0).expand(X.shape[0], -1)  # (batch_size, n_output)
+
+#             lqw = isotropic_gauss_loglike(W, self.W_mu, std_w) + isotropic_gauss_loglike(b, self.b_mu, std_b)
+#             lpw = self.prior.loglike(W) + self.prior.loglike(b)
+#             # print(W.max())
+#             # print(b.max())
+#             # print(lpw.max())
+#             # print('a')
+#             return output, lqw, lpw
+
+
 class BayesLinear_Normalq(nn.Module):
     """Linear Layer where weights are sampled from a fully factorised Normal with learnable parameters. The likelihood
      of the weight samples under the prior and the approximate posterior are returned with each forward pass in order
@@ -43,11 +102,25 @@ class BayesLinear_Normalq(nn.Module):
         self.n_out = n_out
         self.prior = prior_class
 
+        # self.W_mu = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-0.1, 0.1))
+        # self.W_p = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-3, -2))
+        # # self.W_p = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(0, 2))
+
+        # self.b_mu = nn.Parameter(torch.Tensor(self.n_out).uniform_(-0.1, 0.1))
+        # self.b_p = nn.Parameter(torch.Tensor(self.n_out).uniform_(-3, -2))
+
+
+
         # Learnable parameters -> Initialisation is set empirically.
-        self.W_mu = nn.Parameter(torch.zeros(self.n_in, self.n_out))
+        # self.W_mu = nn.Parameter(torch.zeros(self.n_in, self.n_out))
+        # self.W_mu = nn.Parameter(torch.full_like(torch.zeros(self.n_in, self.n_out), 1e-2 ))
+        self.W_mu = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-0.001, 0.001))
         self.W_p = nn.Parameter(torch.full_like(torch.zeros(self.n_in, self.n_out), inverse_softplus(np.sqrt(2/self.n_in)) ))
 
-        self.b_mu = nn.Parameter(torch.zeros(self.n_out))
+        # self.b_mu = nn.Parameter(torch.zeros(self.n_out))
+        # self.b_mu = nn.Parameter(torch.full_like(torch.zeros(self.n_out), 1e-2))
+        self.b_mu = nn.Parameter(torch.Tensor(self.n_out).uniform_(-0.001, 0.001))
+
         self.b_p = nn.Parameter(torch.full_like(torch.zeros(self.n_out), inverse_softplus(1e-6)) )
 
         self.lpw = 0
@@ -74,6 +147,8 @@ class BayesLinear_Normalq(nn.Module):
 
             W = self.W_mu + 1 * std_w * eps_W
             b = self.b_mu + 1 * std_b * eps_b
+            # W = self.W_mu
+            # b = self.b_mu
 
             output = torch.mm(X, W) + b.unsqueeze(0).expand(X.shape[0], -1)  # (batch_size, n_output)
 
@@ -92,12 +167,12 @@ class bayes_Sin_Net(nn.Module):
         self.input_dim = input_dim
         self.output_dim = output_dim
 
-        self.bfc1 = BayesLinear_Normalq(1,1024, self.prior_instance)
-        self.bfc2 = BayesLinear_Normalq(1024,512, self.prior_instance)
-        self.bfc3 = BayesLinear_Normalq(512,512, self.prior_instance)
+        self.bfc1 = BayesLinear_Normalq(1,512, self.prior_instance)
+        self.bfc2 = BayesLinear_Normalq(512,1024, self.prior_instance)
+        self.bfc3 = BayesLinear_Normalq(1024,512, self.prior_instance)
         self.bfc4 = BayesLinear_Normalq(512, 1, self.prior_instance)
 
-        self.act = nn.ReLU(inplace=True)
+        self.act = nn.ReLU()
 
     def forward(self, x, sample=False):
         tklw = 0
@@ -117,7 +192,9 @@ class bayes_Sin_Net(nn.Module):
         x, klw, klb = self.bfc3(x, sample)
         tklw = tklw + klw
         tklb = tklb + klb
+        x = self.act(x)
         y, klw, klb = self.bfc4(x, sample)
+        # print(y)
         tklw = tklw + klw
         tklb = tklb + klb
 
@@ -181,32 +258,54 @@ class BBP_Bayes_Sin_Net(BaseNet):
     #         self.sched = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=1, gamma=10, last_epoch=-1)
 
     def fit(self, x, y, samples=1):
-        x, y = to_variable(var=(x, y.long()), cuda=self.cuda)
+        x, y = to_variable(var=(x, y), cuda=self.cuda)
 
         self.optimizer.zero_grad()
         loss = 0
         for i in range(samples):
+            # print("fit")
             out, tklw, tklb = self.model(x)
-            mlpdw = (out-y) * (out-y)
+            y = y.reshape(out.shape)
+            # mlpdw = (out-y)*(out-y)/ self.Nbatches
+            mlpdw = nn.functional.mse_loss(out, y) / self.Nbatches
             Edkl = (tklw + tklb) / self.Nbatches
-            loss = loss + Edkl + mlpdw
+            loss = loss + Edkl/10000 + mlpdw
         loss = loss / samples
         loss.backward()
+        # for i, param in enumerate(self.model.parameters()):
+        #     param_name = list(self.model.state_dict().keys())[i]
+        #     print(param_name)
+        #     print(param.grad.max())
         self.optimizer.step()
 
 
-        # out: (batch_size, out_channels, out_caps_dims)
-        pred = out.data.max(dim=1, keepdim=False)[1]  # get the index of the max log-probability
-        err = pred.ne(y.data).sum()
+        # # 1sampleにつき1回学習させる方法
+        # for i in range(samples):
+        #     self.optimizer.zero_grad()
+        #     loss = 0
+        #     out, tklw, tklb = self.model(x)
+        #     y = y.reshape(out.shape)
+        #     mlpdw = ((out-y) * (out-y)).sum() / self.Nbatches
+        #     Edkl = (tklw + tklb) / self.Nbatches
+        #     loss = loss + 0.001*Edkl + mlpdw
+        #     loss.backward()
+        #     self.optimizer.step()
 
-        return Edkl.data, mlpdw.data, err
+
+        # out: (batch_size, out_channels, out_caps_dims)
+
+        return Edkl.data, mlpdw.data
 
     def eval(self, x, y, train=False):
-        x, y = to_variable(var=(x, y.long()), cuda=self.cuda)
+        x, y = to_variable(var=(x, y), cuda=self.cuda)
 
+        # print("eval")
+        # print(x)
         out, _, _ = self.model(x)
-
-        loss = (out-y) * (out-y)
+        # print(out)
+        y = y.reshape(out.shape)
+        loss = nn.functional.mse_loss(out, y)
+        loss = loss / self.Nbatches
 
         # probs = F.softmax(out, dim=1).data.cpu()
 
@@ -214,7 +313,14 @@ class BBP_Bayes_Sin_Net(BaseNet):
         # err = pred.ne(y.data).sum()
 
         # return loss.data, err, probs
-        return loss.data
+        return loss.data, out
+
+    def inference(self, x, train=False):
+        x = x.reshape(1)
+        x = to_variable(var=(x), cuda=self.cuda)
+        x = x[0].reshape(1)
+        out, _, _ = self.model(x)
+        return out.data
 
     def sample_eval(self, x, y, Nsamples, logits=True, train=False):
         """Prediction, only returining result with weights marginalised"""
