@@ -74,12 +74,17 @@ cprint('c', '\nNetwork:')
 lr = args.lr
 nsamples = int(args.n_samples)  # How many samples to estimate ELBO with at each iteration
 ########################################################################################
-
-train_x = torch.Tensor([-0.55,-0.4,-0.38,-0.35,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.17,0.30,0.35,0.4,0.5,0.9,0.95])
+# train_x = torch.Tensor([-0.55,-0.4,-0.38,-0.35,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.17,0.30,0.35,0.4,0.5,0.9,0.95])
+# train_x = torch.Tensor([-0.48,-0.38,-0.35,-0.33,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.20,0.30,0.35,0.41,0.5,0.96,0.99])
+train_x = torch.Tensor([-0.55,-0.4,-0.38,-0.35,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.20,0.30,0.35,0.4,0.5,0.96,0.99])
 train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
 
+
+
+
+batch_size = 20
 #TODO: 学習サイズを変える時はここも変えなければならないことに注意
-net = BBP_Bayes_Sin_Net(lr=lr, channels_in=3, side_in = 32, cuda=use_cuda, classes=10, batch_size=batch_size, Nbatches=1, prior_instance=isotropic_gauss_prior(mu=0, sigma=args.prior_sig))
+net = BBP_Bayes_Sin_Net(lr=lr, channels_in=3, side_in = 32, cuda=use_cuda, classes=10, batch_size=batch_size, Nbatches=batch_size, prior_instance=isotropic_gauss_prior(mu=0, sigma=args.prior_sig))
 
 
 ## ---------------------------------------------------------------------------------------------------------------------
@@ -109,34 +114,34 @@ for i in range(epoch, nb_epochs):
     net.set_mode_train(True)
     tic = time.time()
     nb_samples = 0
-    # データ一点一点で学習する方法
-    train_x = train_x.data.new(train_x.size()).uniform_(-1,1)
-    train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
-    for j in range(len(train_x)):
-        x = torch.Tensor([train_x[j]])
-        y = torch.Tensor([train_y[j]])
-        # y = y + 0.1 * y.data.new(y.size()).normal_()
-        cost_dkl, err = net.fit(x, y, samples=ELBO_samples)
-        kl_cost_train[i] += cost_dkl
-        err_train[i] += err
-        nb_samples += len(x)
+    # # データ一点一点で学習する方法
+    # train_x = train_x.data.new(train_x.size()).uniform_(-1,1)
+    # # train_x = torch.Tensor([-0.55,-0.4,-0.38,-0.35,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.17,0.30,0.35,0.4,0.5,0.9,0.95])
+    # train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
+    # for j in range(len(train_x)):
+    #     x = torch.Tensor([train_x[j]])
+    #     y = torch.Tensor([train_y[j]])
+    #     y = y + 0.1 * y.data.new(y.size()).normal_()
+    #     cost_dkl, err = net.fit(x, y, samples=ELBO_samples)
+    #     kl_cost_train[i] += cost_dkl
+    #     err_train[i] += err
+    #     nb_samples += len(x)
 
     # データを一気に与えて学習する方法
     # train_x = train_x.data.new(train_x.size()).uniform_(-1,1)
-    # train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
-    # x = torch.Tensor(train_x)
-    # y = torch.Tensor(train_y)
-    # x = train_x
-    # y = train_y
-    # y = y + 0.1 * y.data.new(y.size()).normal_()
-    # cost_dkl, err = net.fit(x, y, samples=ELBO_samples)
-    # err_train[i] += err
-    # kl_cost_train[i] += cost_dkl
-    # nb_samples += len(x)
+    num_loop = 20
+    for loop in range(num_loop):
+      train_x = torch.Tensor([-0.55,-0.4,-0.38,-0.35,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.20,0.30,0.35,0.4,0.5,0.96,0.99])
+      train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
+      x = train_x
+      y = train_y
+      y = y + 0.05 * y.data.new(y.size()).normal_()
+      cost_dkl, err = net.fit(x, y, samples=ELBO_samples)
+      err_train[i] += err
+      kl_cost_train[i] += cost_dkl
 
-
-    # kl_cost_train[i] /= nb_samples  # Normalise by number of samples in order to get comparable number to the -log like
-    # err_train[i] /= nb_samples
+    kl_cost_train[i] /= num_loop  # Normalise by number of samples in order to get comparable number to the -log like
+    err_train[i] /= num_loop
 
     toc = time.time()
     net.epoch = i
@@ -150,23 +155,26 @@ for i in range(epoch, nb_epochs):
         net.set_mode_train(False)
         nb_samples = 0
         out = np.zeros(20)
+        # データ一点一点で学習する方法
         # train_x = torch.Tensor([-0.55,-0.4,-0.38,-0.35,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.17,0.30,0.35,0.4,0.5,0.9,0.95])
-        train_x = torch.Tensor([-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.95])
-        train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
-        for j in range(len(train_x)):
-            x = torch.Tensor([train_x[j]])
-            y = torch.Tensor([train_y[j]])
-            cost, out[j] = net.eval(x, y)  # This takes the expected weights to save time, not proper inference
-
-            cost_dev[i] += cost
-            # err_dev[i] += err
-            nb_samples += len(x)
-        # train_x = torch.Tensor([-0.55,-0.4,-0.38,-0.35,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.17,0.30,0.35,0.4,0.5,0.9,0.95])
+        # # train_x = torch.Tensor([-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.95])
         # train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
-        # x = train_x
-        # y = train_y
-        # cost, out = net.eval(x,y)
-        # cost_dev[i] = cost
+        # for j in range(len(train_x)):
+        #     x = torch.Tensor([train_x[j]])
+        #     y = torch.Tensor([train_y[j]])
+        #     cost, out[j] = net.eval(x, y)  # This takes the expected weights to save time, not proper inference
+
+        #     cost_dev[i] += cost
+        #     # err_dev[i] += err
+        #     nb_samples += len(x)
+
+        # データを一気に与えて学習する方法
+        train_x = torch.Tensor([-0.55,-0.4,-0.38,-0.35,-0.3,-0.25,-0.21,-0.15,-0.05,-0.03,0.0,0.05,0.06,0.20,0.30,0.35,0.4,0.5,0.96,0.99])
+        train_y = torch.sin(4*train_x) * torch.cos(14*train_x)
+        x = train_x
+        y = train_y
+        cost, out = net.eval(x,y)
+        cost_dev[i] = cost
 
         # cost_dev[i] /= nb_samples
         # err_dev[i] /= nb_samples
@@ -190,6 +198,7 @@ for i in range(epoch, nb_epochs):
       ax1.plot(range(0, i, nb_its_dev), cost_dev[:i], 'b-')
       ax1.set_ylabel('Squared error')
       plt.xlabel('epoch')
+      plt.ylim(0,2)
       plt.grid(b=True, which='major', color='k', linestyle='-')
       plt.grid(b=True, which='minor', color='k', linestyle='--')
       lgd = plt.legend(['train error', 'test error'], markerscale=marker, prop={'size': textsize, 'weight': 'normal'})
@@ -225,60 +234,3 @@ np.save(results_dir + '/KL_cost_train.npy', kl_cost_train)
 np.save(results_dir + '/pred_cost_train.npy', pred_cost_train)
 np.save(results_dir + '/cost_dev.npy', cost_dev)
 np.save(results_dir + '/err_train.npy', err_train)
-
-
-## ---------------------------------------------------------------------------------------------------------------------
-# fig cost vs its
-
-# textsize = 15
-# marker = 5
-
-# plt.figure(dpi=100)
-# fig, ax1 = plt.subplots()
-# ax1.plot(pred_cost_train, 'r--')
-# ax1.plot(range(0, nb_epochs, nb_its_dev), cost_dev[::nb_its_dev], 'b-')
-# ax1.set_ylabel('Squared error')
-# plt.xlabel('epoch')
-# plt.grid(b=True, which='major', color='k', linestyle='-')
-# plt.grid(b=True, which='minor', color='k', linestyle='--')
-# lgd = plt.legend(['train error', 'test error'], markerscale=marker, prop={'size': textsize, 'weight': 'normal'})
-# ax = plt.gca()
-# plt.title('regression costs')
-# for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] +
-#              ax.get_xticklabels() + ax.get_yticklabels()):
-#     item.set_fontsize(textsize)
-#     item.set_weight('normal')
-# plt.savefig(results_dir + '/pred_cost.png', bbox_extra_artists=(lgd,), bbox_inches='tight')
-
-# plt.figure()
-# fig, ax1 = plt.subplots()
-# ax1.plot(kl_cost_train, 'r')
-# ax1.set_ylabel('nats?')
-# plt.xlabel('epoch')
-# plt.grid(b=True, which='major', color='k', linestyle='-')
-# plt.grid(b=True, which='minor', color='k', linestyle='--')
-# ax = plt.gca()
-# plt.title('DKL (per sample)')
-# for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] +
-#              ax.get_xticklabels() + ax.get_yticklabels()):
-#     item.set_fontsize(textsize)
-#     item.set_weight('normal')
-# plt.savefig(results_dir + '/KL_cost.png', bbox_extra_artists=(lgd,), bbox_inches='tight')
-
-# plt.figure(dpi=100)
-# fig2, ax2 = plt.subplots()
-# ax2.set_ylabel('% error')
-# ax2.semilogy(range(0, nb_epochs, nb_its_dev), 100 * err_dev[::nb_its_dev], 'b-')
-# ax2.semilogy(100 * err_train, 'r--')
-# plt.xlabel('epoch')
-# plt.grid(b=True, which='major', color='k', linestyle='-')
-# plt.grid(b=True, which='minor', color='k', linestyle='--')
-# ax2.get_yaxis().set_minor_formatter(matplotlib.ticker.ScalarFormatter())
-# ax2.get_yaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
-# lgd = plt.legend(['test error', 'train error'], markerscale=marker, prop={'size': textsize, 'weight': 'normal'})
-# ax = plt.gca()
-# for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] +
-#              ax.get_xticklabels() + ax.get_yticklabels()):
-#     item.set_fontsize(textsize)
-#     item.set_weight('normal')
-# plt.savefig(results_dir + '/err.png', bbox_extra_artists=(lgd,), box_inches='tight')
