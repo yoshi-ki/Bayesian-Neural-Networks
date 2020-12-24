@@ -191,29 +191,120 @@ ELBO_samples = nsamples
 # print('diff = ' + str(nb_samples - nb_equal))
 
 
-# 確率分布の差の形で比べられるコード
-for j, (x, y) in enumerate(valloader):
-  prob_out1 = net.all_sample_eval(x, y, ELBO_samples)  # This takes the expected weights to save time, not proper inference
-  prob_out2 = act_net.all_sample_eval(x, y, ELBO_samples)
-  # 結果は(sample, batch, 10)となっている
+# # 確率分布の差の形で比べられるコード
+# # batchごとに出力している
+# for j, (x, y) in enumerate(valloader):
+#   prob_out1 = net.all_sample_eval(x, y, ELBO_samples)  # This takes the expected weights to save time, not proper inference
+#   prob_out2 = act_net.all_sample_eval(x, y, ELBO_samples)
+#   # 結果は(sample, batch, 10)となっている
 
-  # 予測結果を取り出すコード
-  pred1 = prob_out1[1:].max(dim=2, keepdim=False)[1]
-  count1 = np.zeros((batch_size,10))
-  for i in range(ELBO_samples-1):
-    for j in range(batch_size):
-      count1[j][pred1[i][j].data] += 1
+#   # 予測結果を取り出すコード
+#   pred1 = prob_out1[1:].max(dim=2, keepdim=False)[1]
+#   count1 = np.zeros((batch_size,10))
+#   for i in range(ELBO_samples-1):
+#     for j in range(batch_size):
+#       count1[j][pred1[i][j].data] += 1
 
-  pred2 = prob_out2[1:].max(dim=2, keepdim=False)[1]
-  count2 = np.zeros((batch_size,10))
-  for i in range(ELBO_samples-1):
-    for j in range(batch_size):
-      count2[j][pred2[i][j].data] += 1
+#   pred2 = prob_out2[1:].max(dim=2, keepdim=False)[1]
+#   count2 = np.zeros((batch_size,10))
+#   for i in range(ELBO_samples-1):
+#     for j in range(batch_size):
+#       count2[j][pred2[i][j].data] += 1
 
-  for i in range(batch_size):
-    print(count1[i])
-    print(count2[i])
-  print('end of batch')
+#   for i in range(batch_size):
+#     print(count1[i])
+#     print(count2[i])
+#     print('')
+#   print('end of batch')
 
 
+## ---------------------------------------------------------------------------------------------------------------------
+# code for evaluation 5-1
+## ---------------------------------------------------------------------------------------------------------------------
+# L2 distanceを描画するコード
+alpha_list = [0.01,0.04,0.16,0.64,2.56]
+beta_list  = [2.56,0.64,0.16,0.04,0.01]
+results    = np.zeros((len(alpha_list), len(beta_list)))
+drop_rates = np.zeros((len(alpha_list), len(beta_list)))
+for result_i, beta in enumerate(beta_list):
+  for result_j, alpha in enumerate(alpha_list):
+    # sample回数
+    ELBO_samples = nsamples
+    for batch, (x, y) in enumerate(valloader):
+      # 結果は(sample, batch, 10)となっている
+      prob_out1,_,_ = net.all_sample_eval(x, y, ELBO_samples)  # This takes the expected weights to save time, not proper inference
+      prob_out2, drop_rate_alpha, drop_rate_beta = act_net.all_sample_eval(x, y, ELBO_samples, alpha=alpha, beta=beta)
 
+      print(drop_rate_alpha, drop_rate_beta)
+      drop_rates[result_i][result_j] = (drop_rate_alpha + drop_rate_beta) / 2
+
+      # 予測結果を取り出すコード
+      pred1 = prob_out1[0:].max(dim=2, keepdim=False)[1]
+      count1 = np.zeros((batch_size,10))
+      for i in range(ELBO_samples):
+        for j in range(batch_size):
+          count1[j][pred1[i][j].data] += 1
+
+      pred2 = prob_out2[0:].max(dim=2, keepdim=False)[1]
+      count2 = np.zeros((batch_size,10))
+      for i in range(ELBO_samples):
+        for j in range(batch_size):
+          count2[j][pred2[i][j].data] += 1
+
+      distance_sum = 0
+      for i in range(batch_size):
+        # 確率の値にする
+        count1[i] = count1[i]/ELBO_samples
+        count2[i] = count2[i]/ELBO_samples
+        # compute L2 distance
+        distance = 0
+        for c1,c2 in zip(count1[i], count2[i]):
+          distance = distance + (c1 - c2) * (c1 - c2)
+        distance = distance / 10
+        distance_sum = distance_sum + distance
+      distance_sum = distance_sum / batch_size
+      results[result_i][result_j] = distance_sum
+      #1 batchのみ行って，その次のalphaとbetaの値へ
+      break
+print(results)
+
+# plot results
+fig, ax = plt.subplots()
+im = ax.imshow(results)
+
+ax.set_xticks(np.arange(len(alpha_list)))
+ax.set_yticks(np.arange(len(beta_list)))
+ax.set_xticklabels(alpha_list)
+ax.set_yticklabels(beta_list)
+ax.set_xlabel('alpha')
+ax.set_ylabel('beta')
+
+for i in range(len(alpha_list)):
+    for j in range(len(beta_list)):
+        text = ax.text(j, i, "{:.5f}".format(results[i, j]),ha="center", va="center", color="w")
+
+ax.set_title("L2 norm and hyper parameters")
+fig.tight_layout()
+plt.savefig("THESIS_DATA/5-1/l2norm.png")
+
+
+# draw drop rates
+fig, ax = plt.subplots()
+im = ax.imshow(drop_rates)
+
+# We want to show all ticks...
+ax.set_xticks(np.arange(len(alpha_list)))
+ax.set_yticks(np.arange(len(beta_list)))
+# ... and label them with the respective list entries
+ax.set_xticklabels(alpha_list)
+ax.set_yticklabels(beta_list)
+ax.set_xlabel('alpha')
+ax.set_ylabel('beta')
+
+for i in range(len(alpha_list)):
+    for j in range(len(beta_list)):
+        text = ax.text(j, i, "{:.1f}%".format(drop_rates[i, j]*100),ha="center", va="center", color="w")
+
+ax.set_title("drop rates and hyper parameters")
+fig.tight_layout()
+plt.savefig("THESIS_DATA/5-1/drop_rate.png")

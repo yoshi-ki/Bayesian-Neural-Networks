@@ -46,25 +46,29 @@ class BayesLinear_Normalq(nn.Module):
 
         # Learnable parameters -> Initialisation is set empirically.
         self.W_mu = nn.Parameter(torch.zeros(self.n_in, self.n_out))
-        # self.W_mu = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-0.1, 0.1))
         self.W_p = nn.Parameter(torch.full_like(torch.zeros(self.n_in, self.n_out), inverse_softplus(np.sqrt(2/self.n_in)) ))
-        # self.W_p = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-3, -2))
 
         self.b_mu = nn.Parameter(torch.zeros(self.n_out))
-        # self.b_mu = nn.Parameter(torch.Tensor(self.n_out).uniform_(-0.1, 0.1))
-        # self.b_mu = nn.Parameter(nn.init.xavier_normal_(torch.empty(self.n_out)))
         self.b_p = nn.Parameter(torch.full_like(torch.zeros(self.n_out), inverse_softplus(1e-6)) )
-        # self.b_p = nn.Parameter(torch.Tensor(self.n_out).uniform_(-3, -2))
-        # self.b_p = nn.Parameter(nn.init.xavier_normal_(torch.empty(self.n_out)))
 
         self.lpw = 0
         self.lqw = 0
 
-    def forward(self, X, sample=False):
+    def forward(self, X, sample=False, act_drop=False, first_layer=False, first_sample=False, given_alpha=0, given_beta=0):
         #         print(self.training)
+
+        drop_rate_alpha = 0
+        drop_rate_beta  = 0
 
         if not self.training and not sample:  # When training return MLE of w for quick validation
             output = torch.mm(X, self.W_mu) + self.b_mu.expand(X.size()[0], self.n_out)
+            return output, 0, 0
+
+        elif first_sample:
+            output = torch.mm(X, self.W_mu) + self.b_mu.unsqueeze(0).expand(X.shape[0], -1)
+            self.input_first = X
+            # 小さすぎるものはのぞいておく
+            self.output_first = torch.where(torch.abs(output) > 1e-6, output, torch.zeros(output.size()).to(device='cuda'))
             return output, 0, 0
 
         else:
@@ -78,21 +82,39 @@ class BayesLinear_Normalq(nn.Module):
             std_w = 1e-6 + F.softplus(self.W_p, beta=1, threshold=20)
             std_b = 1e-6 + F.softplus(self.b_p, beta=1, threshold=20)
 
-            # # inference only part : randomly mask the weight value's std
-            # thre = 0.8
-            # mask = torch.nn.init.uniform_(torch.zeros(std_w.size()))
-            # mask = torch.where(mask < thre, torch.ones(mask.size()), torch.zeros(mask.size()))
-            # mask = mask.to(device='cuda')
-            # std_w = std_w * mask
-
             W = self.W_mu + 1 * std_w * eps_W
             b = self.b_mu + 1 * std_b * eps_b
-            # W = self.W_mu
-            # b = self.b_mu
 
-            output = torch.mm(X, W) + b.unsqueeze(0).expand(X.shape[0], -1)  # (batch_size, n_output)
+            if (not(act_drop)):
+              output = torch.mm(X, W) + b.unsqueeze(0).expand(X.shape[0], -1)  # (batch_size, n_output)
+            else:
+              if(first_layer):
+                # first layerではalphaの値が変わるので
+                beta = 2
 
-            return output, KL_gaussian(self.W_mu, std_w, self.prior.mu, self.prior.sigma), KL_gaussian(self.b_mu, std_b, self.prior.mu, self.prior.sigma)
+                X_new = torch.where(torch.abs(X)<beta,torch.zeros(X.size()).to(device='cuda'), X)
+                output2 = torch.mm(X_new,1 * std_w * eps)
+                output = self.output_first + output2
+              else:
+                alpha = given_alpha
+                beta = given_beta
+
+                X_1 = X - self.input_first
+                X_2 = X
+                X_1 = torch.where(torch.abs(X_1) < alpha,torch.zeros(X_1.size()).to(device='cuda'),X_1)
+                X_2 = torch.where(torch.abs(X_2) < beta ,torch.zeros(X_2.size()).to(device='cuda'),X_2)
+                output1 = torch.mm(X_1, self.W_mu)
+                output2 = torch.mm(X_2, std_w * eps_W)
+                output = self.output_first + output1 + output2
+
+                # # percent that satisfies the condition
+                cond_num = torch.where(torch.abs(X_1) < alpha,torch.ones(X_1.size()).to(device='cuda'),torch.zeros(X_1.size()).to(device='cuda'))
+                drop_rate_alpha = torch.sum(cond_num)/(X_1.shape[0]*X_1.shape[1])
+                cond_num = torch.where(torch.abs(X_2) < beta ,torch.ones(X_2.size()).to(device='cuda'),torch.zeros(X_2.size()).to(device='cuda'))
+                drop_rate_beta = torch.sum(cond_num)/(X_2.shape[0]*X_2.shape[1])
+
+
+            return output, drop_rate_alpha, drop_rate_beta
 
 class BayesConv_Normalq(nn.Module):
     """Conv Layer where weights are sampled from a fully factorised Normal with learnable parameters. The likelihood
@@ -110,21 +132,19 @@ class BayesConv_Normalq(nn.Module):
 
         # Learnable parameters -> Initialisation is set empirically.
         self.W_mu = nn.Parameter(torch.zeros(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size))
-        # self.W_mu = nn.Parameter(torch.Tensor(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size).uniform_(-0.1, 0.1))
         self.W_p = nn.Parameter(torch.full_like(torch.zeros(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size), inverse_softplus(np.sqrt(2/(self.in_channels*self.kernel_size*self.kernel_size))) ))
-        # self.W_p = nn.Parameter(torch.Tensor(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size).uniform_(-3, -2))
 
         self.b_mu = nn.Parameter(torch.zeros(self.out_channels))
-        # self.b_mu = nn.Parameter(torch.Tensor(self.out_channels).uniform_(-0.1, 0.1))
-
         self.b_p = nn.Parameter(torch.full_like(torch.zeros(self.out_channels), inverse_softplus(1e-6)) )
-        # self.b_p = nn.Parameter(torch.Tensor(self.out_channels).uniform_(-3, -2))
 
         self.lpw = 0
         self.lqw = 0
 
-    def forward(self, X, sample=False, act_drop=False, first_layer=False, first_sample=False):
+    def forward(self, X, sample=False, act_drop=False, first_layer=False, first_sample=False, given_alpha=0, given_beta=0):
         #         print(self.training)
+
+        drop_rate_alpha = 0
+        drop_rate_beta  = 0
 
         if not self.training and not sample:  # When training return MLE of w for quick validation
             # output = torch.mm(X, self.W_mu) + self.b_mu.expand(X.size()[0], self.n_out)
@@ -133,9 +153,9 @@ class BayesConv_Normalq(nn.Module):
 
         elif first_sample:
             output = F.conv2d(X, self.W_mu, bias = self.b_mu, padding = self.padding)
-            self.X_mean = X
+            self.input_first = X
             # 小さすぎるものはのぞいておく
-            self.out_mean = torch.where(torch.abs(output) > 1e-6, output, torch.zeros(output.size()).to(device='cuda'))
+            self.output_first = torch.where(torch.abs(output) > 1e-6, output, torch.zeros(output.size()).to(device='cuda'))
             return output, 0, 0
 
         else:
@@ -157,50 +177,31 @@ class BayesConv_Normalq(nn.Module):
             else :
               if(first_layer):
                 # first layerではalphaの値が変わるので
-                beta = 2
-
-                # # percent that satisfies the condition
-                # cond_num = torch.where(torch.abs(X)<beta,torch.ones(X.size()).to(device='cuda'),torch.zeros(X.size()).to(device='cuda'))
-                # print( torch.sum(cond_num)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3]) )
-
-                # X_1 = torch.where(torch.abs(X) < beta, X, torch.zeros(X.size()).to(device='cuda'))
-                # X_2 = torch.where(torch.abs(X) < beta,torch.zeros(X.size()).to(device='cuda'),X)
-                # output1 = F.conv2d(X_1, self.W_mu, bias = self.b_mu, padding=self.padding)
-                # output2 = F.conv2d(X_2, W, padding=self.padding)
-                # output = output1 + output2
+                beta = 0
 
                 X_new = torch.where(torch.abs(X)<beta,torch.zeros(X.size()).to(device='cuda'), X)
                 output2 = F.conv2d(X_new, 1 * std_w * eps_W, padding=self.padding)
-                output = self.out_mean + output2
+                output = self.output_first + output2
 
 
               else:
                 #平均を使うsampling手法
-                alpha = 0.1
-                beta = 0.1
-                X_diff = X - self.X_mean
+                alpha = given_alpha
+                beta  = given_beta
+                X_diff = X - self.input_first
                 # X_diff = torch.where(torch.logical_and(torch.abs(X_diff)<beta, X<alpha),torch.zeros(X_diff.size()).to(device='cuda'), X_diff)
                 X_diff = torch.where(torch.abs(X_diff)<alpha,torch.zeros(X_diff.size()).to(device='cuda'), X_diff)
                 output1 = F.conv2d(X_diff, self.W_mu, padding=self.padding)
 
                 X_new = torch.where(X<beta,torch.zeros(X.size()).to(device='cuda'), X)
                 output2 = F.conv2d(X_new, 1 * std_w * eps_W, padding=self.padding)
-                output = self.out_mean + output1 + output2
+                output = self.output_first + output1 + output2
 
                 # # print how many samples are skipped
-                # print(torch.sum(torch.abs(X_diff)<beta)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3]))
-                # print(torch.sum(X<alpha)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3]))
-                # print(torch.sum(tor0ch.logical_or(X<alpha,torch.abs(X_diff)<beta))/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3]))
+                drop_rate_alpha = torch.sum(X<alpha)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3])
+                drop_rate_beta  = torch.sum(torch.abs(X_diff)<beta)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3])
 
-
-                # # 平均の値を使わないsampling手法
-                # alpha = 0.1
-                # X_2 = torch.where(torch.abs(X) < alpha,torch.zeros(X.size()).to(device='cuda'),X)
-                # output2 = F.conv2d(X_2, W, padding=self.padding)
-                # output = output2
-
-
-            return output, KL_gaussian(self.W_mu, std_w, self.prior.mu, self.prior.sigma), KL_gaussian(self.b_mu, std_b, self.prior.mu, self.prior.sigma)
+            return output, drop_rate_alpha, drop_rate_beta
 
 
 
@@ -211,9 +212,6 @@ class bayes_VGG11(nn.Module):
     def __init__(self, input_dim, in_channels, output_dim, prior_instance, act_drop):
         super(bayes_VGG11, self).__init__()
 
-        # prior_instance = isotropic_gauss_prior(mu=0, sigma=0.1)
-        # prior_instance = spike_slab_2GMM(mu1=0, mu2=0, sigma1=0.135, sigma2=0.001, pi=0.5)
-        # prior_instance = isotropic_gauss_prior(mu=0, sigma=0.1)
         self.prior_instance = prior_instance
 
         self.in_channels = in_channels
@@ -244,100 +242,126 @@ class bayes_VGG11(nn.Module):
 
         self.count = 0
 
-        # choose your non linearity
-        # self.act = nn.Tanh()
-        # self.act = nn.Sigmoid()
         self.act = nn.ReLU(inplace=True)
-        # self.act = nn.ELU(inplace=True)
-        # self.act = nn.SELU(inplace=True)
 
         self.act_drop = act_drop
 
-    def forward(self, x, sample=False, first_sample=False):
-        tklw = 0
-        tklb = 0
+    def forward(self, x, sample=False, first_sample=False, alpha=0, beta=0):
+        # dropout rateの平均を計算するための変数
+        sum_a = 0
+        sum_b = 0
+        computation_count = 0
 
         # -----------------
-        x1, klw, klb = self.conv1(x, sample, self.act_drop, first_layer=True, first_sample=first_sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x1, a1, b1 = self.conv1(x, sample, self.act_drop, first_layer=True, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
+        comp = (3 * 3 * self.in_channels * 64) * x.shape[2] * x.shape[3]
+        sum_a = sum_a + a1 * comp
+        sum_b = sum_b + b1 * comp
+        computation_count = computation_count + comp
         x = self.act(x1)
         x = self.pool1(x)
         # -----------------
-        x2, klw, klb = self.conv2(x, sample, self.act_drop, first_layer=False, first_sample=first_sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x2, a2, b2 = self.conv2(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
+        comp = (3 * 3 * 64 * 128) * x.shape[2] * x.shape[3]
+        sum_a = sum_a + a2 * comp
+        sum_b = sum_b + b2 * comp
+        computation_count = computation_count + comp
         x = self.act(x2)
         x = self.pool2(x)
         # -----------------
-        x3, klw, klb = self.conv3(x, sample, self.act_drop, first_layer=False, first_sample=first_sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x3, a3, b3 = self.conv3(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
+        comp = (3 * 3 * 128 * 256) * x.shape[2] * x.shape[3]
+        sum_a = sum_a + a3 * comp
+        sum_b = sum_b + b3 * comp
+        computation_count = computation_count + comp
         x = self.act(x3)
-        x4, klw, klb = self.conv4(x, sample, self.act_drop, first_layer=False, first_sample=first_sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x4, a4, b4 = self.conv4(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
+        comp = (3 * 3 * 256 * 256) * x.shape[2] * x.shape[3]
+        sum_a = sum_a + a4 * comp
+        sum_b = sum_b + b4 * comp
+        computation_count = computation_count + comp
         x = self.act(x4)
         x = self.pool3(x)
         # -----------------
-        x5, klw, klb = self.conv5(x, sample, self.act_drop, first_layer=False, first_sample=first_sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x5, a5, b5 = self.conv5(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
+        comp = (3 * 3 * 256 * 512) * x.shape[2] * x.shape[3]
+        sum_a = sum_a + a5 * comp
+        sum_b = sum_b + b5 * comp
+        computation_count = computation_count + comp
         x = self.act(x5)
-        x6, klw, klb = self.conv6(x, sample, self.act_drop, first_layer=False, first_sample=first_sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x6, a6, b6 = self.conv6(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
+        comp = (3 * 3 * 512 * 512) * x.shape[2] * x.shape[3]
+        sum_a = sum_a + a6 * comp
+        sum_b = sum_b + b6 * comp
+        computation_count = computation_count + comp
         x = self.act(x6)
         x = self.pool4(x)
         # -----------------
-        x7, klw, klb = self.conv7(x, sample, self.act_drop, first_layer=False, first_sample=first_sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x7, a7, b7 = self.conv7(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
+        comp = (3 * 3 * 512 * 512) * x.shape[2] * x.shape[3]
+        sum_a = sum_a + a7 * comp
+        sum_b = sum_b + b7 * comp
+        computation_count = computation_count + comp
         x = self.act(x7)
-        x8, klw, klb = self.conv8(x, sample, self.act_drop, first_layer=False, first_sample=first_sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x8, a8, b8 = self.conv8(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
+        comp = (3 * 3 * 512 * 512) * x.shape[2] * x.shape[3]
+        sum_a = sum_a + a8 * comp
+        sum_b = sum_b + b8 * comp
+        computation_count = computation_count + comp
         x = self.act(x8)
         x = self.pool5(x)
         # -----------------
         x = x.view(x.shape[0],-1)
         # -----------------
-        x, klw, klb = self.bfc1(x, sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x, a9, b9 = self.bfc1(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
+        comp = 512 * 4096
+        sum_a = sum_a + a9 * comp
+        sum_b = sum_b + b9 * comp
+        computation_count = computation_count + comp
         x = self.act(x)
-        x, klw, klb = self.bfc2(x, sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x, a10, b10 = self.bfc2(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
+        comp = 4096 * 4096
+        sum_a = sum_a + a10 * comp
+        sum_b = sum_b + b10 * comp
+        computation_count = computation_count + comp
         x = self.act(x)
-        y, klw, klb = self.bfc3(x, sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        y, a11, b11 = self.bfc3(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
+        comp = 4096 * 10
+        sum_a = sum_a + a11 * comp
+        sum_b = sum_b + b11 * comp
+        computation_count = computation_count + comp
 
 
         if(self.count == 22):
           self.conv_out = [x1,x2,x3,x4,x5,x6,x7,x8]
         self.count = self.count + 1
 
-        return y, tklw, tklb
+        # dropout rateの平均を計算
+        sum_a = sum_a / computation_count
+        sum_b = sum_b / computation_count
+        return y, sum_a, sum_b
 
-    def sample_predict(self, x, Nsamples):
+    def sample_predict(self, x, Nsamples, alpha=0, beta=0):
         """Used for estimating the data's likelihood by approximately marginalising the weights with MC"""
         # Just copies type from x, initializes new vector
         predictions = x.data.new(Nsamples, x.shape[0], self.output_dim)
-        tklw_vec = np.zeros(Nsamples)
-        tklb_vec = np.zeros(Nsamples)
+        drop_rate_alpha = 0
+        drop_rate_beta  = 0
 
-        for i in range(Nsamples):
+        for i in range(Nsamples+1):
             if(i == 0):
                 y, tklw, tklb = self.forward(x, sample=True, first_sample=True)
             else:
-                y, tklw, tklb = self.forward(x, sample=True, first_sample=False)
-            predictions[i] = y
-            tklw_vec[i] = tklw
-            tklb_vec[i] = tklb
+                y, tklw, tklb = self.forward(x, sample=True, first_sample=False, alpha=alpha, beta=beta)
+                predictions[i-1] = y
+                drop_rate_alpha = drop_rate_alpha + tklw
+                drop_rate_beta  = drop_rate_beta  + tklb
 
-        return predictions, tklw_vec, tklb_vec
+        # dropout rateの平均をとる
+        drop_rate_alpha = drop_rate_alpha / Nsamples
+        drop_rate_beta  = drop_rate_beta  / Nsamples
+
+        return predictions, drop_rate_alpha, drop_rate_beta
 
 class BBP_Bayes_VGG11_Net(BaseNet):
     """Full network wrapper for Bayes By Backprop nets with methods for training, prediction and weight prunning"""
@@ -379,20 +403,8 @@ class BBP_Bayes_VGG11_Net(BaseNet):
         #                                           weight_decay=0)
         self.optimizer = torch.optim.SGD(self.model.parameters(), lr=self.lr, momentum=0)
 
-    #         self.optimizer = torch.optim.SGD(self.model.parameters(), lr=self.lr, momentum=0.9)
-    #         self.sched = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=1, gamma=10, last_epoch=-1)
-
     def fit(self, x, y, samples=1):
         x, y = to_variable(var=(x, y.long()), cuda=self.cuda)
-
-        # for i in range(samples):
-        #     self.optimizer.zero_grad()
-        #     out, tklw, tklb = self.model(x)
-        #     mlpdw = F.cross_entropy(out,y,reduction='sum')
-        #     Edkl = (tklw + tklb) / self.Nbatches
-        #     loss = Edkl + mlpdw
-        #     loss.backward()
-        #     self.optimizer.step()
 
         self.optimizer.zero_grad()
         loss = 0
@@ -404,36 +416,6 @@ class BBP_Bayes_VGG11_Net(BaseNet):
         loss = loss / samples
         loss.backward()
         self.optimizer.step()
-
-        # ---------    samples and train ----------- #
-        # self.optimizer.zero_grad()
-        # if samples == 1:
-        #     out, tlqw, tlpw = self.model(x)
-        #     mlpdw = F.cross_entropy(out, y, reduction='sum')
-        #     Edkl = (tlqw - tlpw) / self.Nbatches
-
-        # elif samples > 1:
-        #     mlpdw_cum = 0
-        #     Edkl_cum = 0
-
-        #     for i in range(samples):
-        #         out, tlqw, tlpw = self.model(x, sample=True)
-        #         mlpdw_i = F.cross_entropy(out, y, reduction='sum')
-        #         Edkl_i = (tlqw - tlpw) / self.Nbatches
-        #         mlpdw_cum = mlpdw_cum + mlpdw_i
-        #         Edkl_cum = Edkl_cum + Edkl_i
-
-        #     mlpdw = mlpdw_cum / samples
-        #     Edkl = Edkl_cum / samples
-
-        # loss = Edkl + mlpdw
-        # loss.backward()
-
-        # #print(self.model.bfc1.W_mu.grad)
-
-        # self.optimizer.step()
-        # ---------    samples and train ----------- #
-
 
         # out: (batch_size, out_channels, out_caps_dims)
         pred = out.data.max(dim=1, keepdim=False)[1]  # get the index of the max log-probability
@@ -477,7 +459,7 @@ class BBP_Bayes_VGG11_Net(BaseNet):
 
         return loss.data, err, probs
 
-    def all_sample_eval(self, x, y, Nsamples):
+    def all_sample_eval(self, x, y, Nsamples, alpha=0, beta=0):
         """Returns predictions for each MC sample"""
         # initialize seed if needed
         torch.manual_seed(42)
@@ -485,12 +467,12 @@ class BBP_Bayes_VGG11_Net(BaseNet):
 
         x, y = to_variable(var=(x, y.long()), cuda=self.cuda)
 
-        out, _, _ = self.model.sample_predict(x, Nsamples)
+        out, drop_rate_alpha, drop_rate_beta = self.model.sample_predict(x, Nsamples, alpha=alpha, beta=beta)
 
         prob_out = F.softmax(out, dim=2)
         prob_out = prob_out.data
 
-        return prob_out
+        return prob_out, drop_rate_alpha, drop_rate_beta
 
     def get_weight_samples(self, Nsamples=10):
         state_dict = self.model.state_dict()
