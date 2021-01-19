@@ -155,8 +155,12 @@ class BayesConv_Normalq(nn.Module):
         drop_rate_beta  = 0
 
         if not self.training and not sample:  # When training return MLE of w for quick validation
+        # if not self.training or sample:  # When training return MLE of w for quick validation
             # output = torch.mm(X, self.W_mu) + self.b_mu.expand(X.size()[0], self.n_out)
             output = F.conv2d(X, self.W_mu, bias = self.b_mu, padding = self.padding)
+            # cond_num = torch.where(torch.abs(X) < 1e-20,torch.ones(X.size()).to(device='cuda'),torch.zeros(X.size()).to(device='cuda'))
+            # drop_rate = torch.sum(cond_num)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3])
+            # print(drop_rate)
             return output, 0, 0
 
         elif first_sample:
@@ -181,7 +185,11 @@ class BayesConv_Normalq(nn.Module):
             b = self.b_mu + 1 * std_b * eps_b
 
             if not(act_drop):
-              output = F.conv2d(X.to(device='cuda'), W, bias = b, padding=self.padding)
+              # output = F.conv2d(X.to(device='cuda'), W, bias = b, padding=self.padding)
+              output = F.conv2d(X.to(device='cuda'), W, padding=self.padding)
+              # cond_num = torch.where(output < -1e-6,torch.ones(output.size()).to(device='cuda'),torch.zeros(output.size()).to(device='cuda'))
+              # drop_rate = torch.sum(cond_num)/(output.shape[0]*output.shape[1]*output.shape[2]*output.shape[3])
+              # print(drop_rate)
             else :
               if(first_layer):
                 # first layerではalphaの値が変わるので

@@ -321,6 +321,7 @@ class BBP_Bayes_VGG11_Net(BaseNet):
     def create_opt(self):
         #         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr, betas=(0.9, 0.999), eps=1e-08,
         #                                           weight_decay=0)
+        # weight decay 1e-5を入れているらしい
         self.optimizer = torch.optim.SGD(self.model.parameters(), lr=self.lr, momentum=0)
 
     #         self.optimizer = torch.optim.SGD(self.model.parameters(), lr=self.lr, momentum=0.9)

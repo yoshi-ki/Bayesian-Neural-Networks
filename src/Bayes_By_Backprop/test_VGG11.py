@@ -110,15 +110,11 @@ class BayesConv_Normalq(nn.Module):
 
         # Learnable parameters -> Initialisation is set empirically.
         self.W_mu = nn.Parameter(torch.zeros(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size))
-        # self.W_mu = nn.Parameter(torch.Tensor(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size).uniform_(-0.1, 0.1))
         self.W_p = nn.Parameter(torch.full_like(torch.zeros(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size), inverse_softplus(np.sqrt(2/(self.in_channels*self.kernel_size*self.kernel_size))) ))
-        # self.W_p = nn.Parameter(torch.Tensor(self.out_channels, self.in_channels, self.kernel_size, self.kernel_size).uniform_(-3, -2))
 
         self.b_mu = nn.Parameter(torch.zeros(self.out_channels))
-        # self.b_mu = nn.Parameter(torch.Tensor(self.out_channels).uniform_(-0.1, 0.1))
 
         self.b_p = nn.Parameter(torch.full_like(torch.zeros(self.out_channels), inverse_softplus(1e-6)) )
-        # self.b_p = nn.Parameter(torch.Tensor(self.out_channels).uniform_(-3, -2))
 
         self.lpw = 0
         self.lqw = 0
@@ -142,17 +138,8 @@ class BayesConv_Normalq(nn.Module):
             std_w = 1e-6 + F.softplus(self.W_p, beta=1, threshold=20)
             std_b = 1e-6 + F.softplus(self.b_p, beta=1, threshold=20)
 
-            # # inference only part : randomly mask the weight value's std
-            # thre = 0.8
-            # mask = torch.nn.init.uniform_(torch.zeros(std_w.size()))
-            # mask = torch.where(mask < thre, torch.ones(mask.size()), torch.zeros(mask.size()))
-            # mask = mask.to(device='cuda')
-            # std_w = std_w * mask
-
             W = self.W_mu + 1 * std_w * eps_W
             b = self.b_mu + 1 * std_b * eps_b
-            # W = self.W_mu
-            # b = self.b_mu
 
             if not(act_drop):
               output = F.conv2d(X.to(device='cuda'), W, bias = b, padding=self.padding)

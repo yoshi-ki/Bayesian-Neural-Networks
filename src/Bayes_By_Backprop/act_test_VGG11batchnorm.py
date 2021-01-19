@@ -54,6 +54,13 @@ class BayesLinear_Normalq(nn.Module):
         self.lpw = 0
         self.lqw = 0
 
+        self.droprate_alpha_mean = 0
+        self.droprate_alpha_count = 0
+        self.droprate_beta_mean = 0
+        self.droprate_beta_count = 0
+        self.droprate_relu_mean = 0
+        self.droprate_relu_count = 0
+
     def forward(self, X, sample=False, act_drop=False, first_layer=False, first_sample=False, given_alpha=0, given_beta=0):
         #         print(self.training)
 
@@ -87,14 +94,21 @@ class BayesLinear_Normalq(nn.Module):
 
             if (not(act_drop)):
               output = torch.mm(X, W) + b.unsqueeze(0).expand(X.shape[0], -1)  # (batch_size, n_output)
+              cond_num = torch.where(torch.abs(X) < 1e-6,torch.ones(X.size()).to(device='cuda'),torch.zeros(X.size()).to(device='cuda'))
+              drop_rate = torch.sum(cond_num)/(X.shape[0]*X.shape[1])
+              self.droprate_relu_mean = (self.droprate_relu_mean * self.droprate_relu_count + drop_rate) / (self.droprate_relu_count + 1)
+              self.droprate_relu_count = self.droprate_relu_count + 1
             else:
               if(first_layer):
                 # first layerではalphaの値が変わるので
-                beta = 2
+                beta = given_beta
 
                 X_new = torch.where(torch.abs(X)<beta,torch.zeros(X.size()).to(device='cuda'), X)
                 output2 = torch.mm(X_new,1 * std_w * eps)
                 output = self.output_first + output2
+                drop_rate_beta  = torch.sum(torch.abs(X)<beta)/(X.shape[0]*X.shape[1])
+                self.droprate_beta_mean  = (self.droprate_beta_mean  * self.droprate_beta_count  + drop_rate_beta ) / (self.droprate_beta_count  + 1)
+                self.droprate_beta_count = self.droprate_beta_count + 1
               else:
                 alpha = given_alpha
                 beta = given_beta
@@ -120,6 +134,10 @@ class BayesLinear_Normalq(nn.Module):
                 drop_rate_alpha = torch.sum(cond_num)/(X_1.shape[0]*X_1.shape[1])
                 cond_num = torch.where(torch.abs(X_2) < beta ,torch.ones(X_2.size()).to(device='cuda'),torch.zeros(X_2.size()).to(device='cuda'))
                 drop_rate_beta = torch.sum(cond_num)/(X_2.shape[0]*X_2.shape[1])
+                self.droprate_alpha_mean = (self.droprate_alpha_mean * self.droprate_alpha_count + drop_rate_alpha) / (self.droprate_alpha_count + 1)
+                self.droprate_alpha_count = self.droprate_alpha_count + 1
+                self.droprate_beta_mean  = (self.droprate_beta_mean  * self.droprate_beta_count  + drop_rate_beta ) / (self.droprate_beta_count  + 1)
+                self.droprate_beta_count = self.droprate_beta_count + 1
 
 
             return output, drop_rate_alpha, drop_rate_beta
@@ -147,6 +165,13 @@ class BayesConv_Normalq(nn.Module):
 
         self.lpw = 0
         self.lqw = 0
+
+        self.droprate_alpha_mean = 0
+        self.droprate_alpha_count = 0
+        self.droprate_beta_mean = 0
+        self.droprate_beta_count = 0
+        self.droprate_relu_mean = 0
+        self.droprate_relu_count = 0
 
     def forward(self, X, sample=False, act_drop=False, first_layer=False, first_sample=False, given_alpha=0, given_beta=0):
         #         print(self.training)
@@ -182,14 +207,21 @@ class BayesConv_Normalq(nn.Module):
 
             if not(act_drop):
               output = F.conv2d(X.to(device='cuda'), W, bias = b, padding=self.padding)
+              cond_num = torch.where(torch.abs(X) < 1e-6,torch.ones(X.size()).to(device='cuda'),torch.zeros(X.size()).to(device='cuda'))
+              drop_rate = torch.sum(cond_num)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3])
+              self.droprate_relu_mean = (self.droprate_relu_mean * self.droprate_relu_count + drop_rate) / (self.droprate_relu_count + 1)
+              self.droprate_relu_count = self.droprate_relu_count + 1
             else :
               if(first_layer):
                 # first layerではalphaの値が変わるので
-                beta = 0
+                beta = given_beta
 
                 X_new = torch.where(torch.abs(X)<beta,torch.zeros(X.size()).to(device='cuda'), X)
                 output2 = F.conv2d(X_new, 1 * std_w * eps_W, padding=self.padding)
                 output = self.output_first + output2
+                drop_rate_beta  = torch.sum(torch.abs(X)<beta)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3])
+                self.droprate_beta_mean  = (self.droprate_beta_mean  * self.droprate_beta_count  + drop_rate_beta ) / (self.droprate_beta_count  + 1)
+                self.droprate_beta_count = self.droprate_beta_count + 1
 
 
               else:
@@ -214,9 +246,13 @@ class BayesConv_Normalq(nn.Module):
                 self.x2_for_save = X_new
 
                 # # print how many samples are skipped
-                drop_rate_alpha = torch.sum(X<alpha)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3])
-                drop_rate_beta  = torch.sum(torch.abs(X_diff)<beta)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3])
+                drop_rate_alpha = torch.sum(torch.abs(X_diff)<alpha)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3])
+                drop_rate_beta  = torch.sum(X<beta)/(X.shape[0]*X.shape[1]*X.shape[2]*X.shape[3])
                 # print(drop_rate_alpha,drop_rate_beta)
+                self.droprate_alpha_mean = (self.droprate_alpha_mean * self.droprate_alpha_count + drop_rate_alpha) / (self.droprate_alpha_count + 1)
+                self.droprate_alpha_count = self.droprate_alpha_count + 1
+                self.droprate_beta_mean  = (self.droprate_beta_mean  * self.droprate_beta_count  + drop_rate_beta ) / (self.droprate_beta_count  + 1)
+                self.droprate_beta_count = self.droprate_beta_count + 1
 
             return output, drop_rate_alpha, drop_rate_beta
 
@@ -236,25 +272,35 @@ class bayes_VGG11(nn.Module):
         self.output_dim = output_dim
 
         self.conv1 = BayesConv_Normalq(self.in_channels,64,3,self.prior_instance,padding=1)
+        self.batchnorm1 = nn.BatchNorm2d(64)
         self.pool1 = nn.MaxPool2d(2,2)
 
         self.conv2 = BayesConv_Normalq(64,128,3,self.prior_instance,padding=1)
+        self.batchnorm2 = nn.BatchNorm2d(128)
         self.pool2 = nn.MaxPool2d(2,2)
 
         self.conv3 = BayesConv_Normalq(128,256,3,self.prior_instance,padding=1)
+        self.batchnorm3 = nn.BatchNorm2d(256)
         self.conv4 = BayesConv_Normalq(256,256,3,self.prior_instance,padding=1)
+        self.batchnorm4 = nn.BatchNorm2d(256)
         self.pool3 = nn.MaxPool2d(2,2)
 
         self.conv5 = BayesConv_Normalq(256,512,3,self.prior_instance,padding=1)
+        self.batchnorm5 = nn.BatchNorm2d(512)
         self.conv6 = BayesConv_Normalq(512,512,3,self.prior_instance,padding=1)
+        self.batchnorm6 = nn.BatchNorm2d(512)
         self.pool4 = nn.MaxPool2d(2,2)
 
         self.conv7 = BayesConv_Normalq(512,512,3,self.prior_instance,padding=1)
+        self.batchnorm7 = nn.BatchNorm2d(512)
         self.conv8 = BayesConv_Normalq(512,512,3,self.prior_instance,padding=1)
+        self.batchnorm8 = nn.BatchNorm2d(512)
         self.pool5 = nn.MaxPool2d(2,2)
 
         self.bfc1 = BayesLinear_Normalq(512,4096, self.prior_instance)
+        self.batchnorm9 = nn.BatchNorm1d(4096)
         self.bfc2 = BayesLinear_Normalq(4096,4096, self.prior_instance)
+        self.batchnorm10 = nn.BatchNorm1d(4096)
         self.bfc3 = BayesLinear_Normalq(4096, self.output_dim, self.prior_instance)
 
         self.count = 0
@@ -275,6 +321,7 @@ class bayes_VGG11(nn.Module):
         sum_a = sum_a + a1 * comp
         sum_b = sum_b + b1 * comp
         computation_count = computation_count + comp
+        x1 = self.batchnorm1(x1)
         x = self.act(x1)
         x = self.pool1(x)
         # -----------------
@@ -283,6 +330,7 @@ class bayes_VGG11(nn.Module):
         sum_a = sum_a + a2 * comp
         sum_b = sum_b + b2 * comp
         computation_count = computation_count + comp
+        x2 = self.batchnorm2(x2)
         x = self.act(x2)
         x = self.pool2(x)
         # -----------------
@@ -291,12 +339,14 @@ class bayes_VGG11(nn.Module):
         sum_a = sum_a + a3 * comp
         sum_b = sum_b + b3 * comp
         computation_count = computation_count + comp
+        x3 = self.batchnorm3(x3)
         x = self.act(x3)
         x4, a4, b4 = self.conv4(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
         comp = (3 * 3 * 256 * 256) * x.shape[2] * x.shape[3]
         sum_a = sum_a + a4 * comp
         sum_b = sum_b + b4 * comp
         computation_count = computation_count + comp
+        x4 = self.batchnorm4(x4)
         x = self.act(x4)
         x = self.pool3(x)
         # -----------------
@@ -305,12 +355,14 @@ class bayes_VGG11(nn.Module):
         sum_a = sum_a + a5 * comp
         sum_b = sum_b + b5 * comp
         computation_count = computation_count + comp
+        x5 = self.batchnorm5(x5)
         x = self.act(x5)
         x6, a6, b6 = self.conv6(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
         comp = (3 * 3 * 512 * 512) * x.shape[2] * x.shape[3]
         sum_a = sum_a + a6 * comp
         sum_b = sum_b + b6 * comp
         computation_count = computation_count + comp
+        x6 = self.batchnorm6(x6)
         x = self.act(x6)
         x = self.pool4(x)
         # -----------------
@@ -319,12 +371,14 @@ class bayes_VGG11(nn.Module):
         sum_a = sum_a + a7 * comp
         sum_b = sum_b + b7 * comp
         computation_count = computation_count + comp
+        x7 = self.batchnorm7(x7)
         x = self.act(x7)
         x8, a8, b8 = self.conv8(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
         comp = (3 * 3 * 512 * 512) * x.shape[2] * x.shape[3]
         sum_a = sum_a + a8 * comp
         sum_b = sum_b + b8 * comp
         computation_count = computation_count + comp
+        x8 = self.batchnorm8(x8)
         x = self.act(x8)
         x = self.pool5(x)
         # -----------------
@@ -335,12 +389,14 @@ class bayes_VGG11(nn.Module):
         sum_a = sum_a + a9 * comp
         sum_b = sum_b + b9 * comp
         computation_count = computation_count + comp
+        x = self.batchnorm9(x)
         x = self.act(x)
         x, a10, b10 = self.bfc2(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
         comp = 4096 * 4096
         sum_a = sum_a + a10 * comp
         sum_b = sum_b + b10 * comp
         computation_count = computation_count + comp
+        x = self.batchnorm10(x)
         x = self.act(x)
         y, a11, b11 = self.bfc3(x, sample, self.act_drop, first_layer=False, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
         comp = 4096 * 10
