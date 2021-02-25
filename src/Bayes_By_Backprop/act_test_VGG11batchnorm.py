@@ -102,6 +102,7 @@ class BayesLinear_Normalq(nn.Module):
               if(first_layer):
                 # first layerではalphaの値が変わるので
                 beta = given_beta
+                beta = 0
 
                 X_new = torch.where(torch.abs(X)<beta,torch.zeros(X.size()).to(device='cuda'), X)
                 output2 = torch.mm(X_new,1 * std_w * eps)
@@ -112,6 +113,8 @@ class BayesLinear_Normalq(nn.Module):
               else:
                 alpha = given_alpha
                 beta = given_beta
+                alpha = 0
+                beta = 0
                 self.x_for_save = X
                 # cond_num = torch.where(torch.abs(X) < 1e-6,torch.ones(X.size()).to(device='cuda'),torch.zeros(X.size()).to(device='cuda'))
                 # drop_rate = torch.sum(cond_num)/(X.shape[0]*X.shape[1])

@@ -222,10 +222,10 @@ ELBO_samples = nsamples
 # code for evaluation 5-1
 ## ---------------------------------------------------------------------------------------------------------------------
 # L2 distanceを描画するコード
-alpha_list = [0.04,0.32,1.28,2.56,3.84]
-beta_list  = [3.84,2.56,1.28,0.32,0.04]
-# alpha_list = [2.56]
-# beta_list = [3.84]
+alpha_list = [0.04,0.32,0.64,1.28,2.56]
+beta_list  = [2.56,1.28,0.64,0.32,0.04]
+# alpha_list = [1.28]
+# beta_list = [2.56]
 results    = np.zeros((len(alpha_list), len(beta_list)))
 drop_rates = np.zeros((len(alpha_list), len(beta_list)))
 for result_i, beta in enumerate(beta_list):
@@ -258,11 +258,12 @@ for result_i, beta in enumerate(beta_list):
         # 確率の値にする
         count1[i] = count1[i]/ELBO_samples
         count2[i] = count2[i]/ELBO_samples
+        # print(count1[i],count2[i])
         # compute L2 distance
         distance = 0
         for c1,c2 in zip(count1[i], count2[i]):
           distance = distance + (c1 - c2) * (c1 - c2)
-        distance = distance / 10
+        # distance = distance / 10
         distance_sum = distance_sum + distance
       distance_sum = distance_sum / batch_size
       results[result_i][result_j] = distance_sum

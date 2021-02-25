@@ -45,24 +45,91 @@ class BayesLinear_Normalq(nn.Module):
         self.n_out = n_out
         self.prior = prior_class
 
-        # Learnable parameters -> Initialisation is set empirically.
         self.W_mu = nn.Parameter(torch.zeros(self.n_in, self.n_out))
         self.W_p = nn.Parameter(torch.full_like(torch.zeros(self.n_in, self.n_out), inverse_softplus(np.sqrt(2/self.n_in)) ))
 
         self.b_mu = nn.Parameter(torch.zeros(self.n_out))
+
         self.b_p = nn.Parameter(torch.full_like(torch.zeros(self.n_out), inverse_softplus(1e-6)) )
 
         self.lpw = 0
         self.lqw = 0
 
-    def forward(self, X, sample=False):
+    def forward(self, X, sample=False, act_drop=False, first_layer=False, first_sample=False, given_alpha=0, given_beta=0):
         #         print(self.training)
 
-        if not self.training and not sample:  # When training return MLE of w for quick validation
+        drop_rate_alpha = 0
+        drop_rate_beta = 0
+
+        if(first_sample):
+            eps_W = Variable(self.W_mu.data.new(self.W_mu.size()).normal_())
+            eps_b = Variable(self.b_mu.data.new(self.b_mu.size()).normal_())
+            std_w = 1e-6 + F.softplus(self.W_p, beta=1, threshold=20)
+            std_b = 1e-6 + F.softplus(self.b_p, beta=1, threshold=20)
+
+            W = self.W_mu + 1 * std_w * eps_W
+            b = self.b_mu + 1 * std_b * eps_b
             output = torch.mm(X, self.W_mu) + self.b_mu.expand(X.size()[0], self.n_out)
+            self.input_first = X
+            self.output_first = output
             return output, 0, 0
 
+        if not self.training and not sample:  # When training return MLE of w for quick validation
+            eps_W = Variable(self.W_mu.data.new(self.W_mu.size()).normal_())
+            eps_b = Variable(self.b_mu.data.new(self.b_mu.size()).normal_())
+            std_w = 1e-6 + F.softplus(self.W_p, beta=1, threshold=20)
+            std_b = 1e-6 + F.softplus(self.b_p, beta=1, threshold=20)
+
+            W = self.W_mu + 1 * std_w * eps_W
+            b = self.b_mu + 1 * std_b * eps_b
+            # output = torch.mm(X, W) + b.expand(X.size()[0], self.n_out)
+
+            # dropoutを付け加える
+            if not(act_drop):
+              output = torch.mm(X, W) + b.expand(X.size()[0], self.n_out)
+              # cond_num = torch.where(output < 0,torch.ones(output.size()).to(device='cuda'),torch.zeros(output.size()).to(device='cuda'))
+              # drop_rate = torch.sum(cond_num)/(output.shape[0]*output.shape[1])
+              # print(drop_rate)
+            else :
+              if(first_layer):
+                #ここのalphaは何にしても変わらない
+                alpha = 0
+                #ここのbetaは，回帰問題において，いじってはいけない
+                beta = 0
+
+                # # percent that satisfies the condition
+                # cond_num = torch.where(torch.abs(X)<alpha,torch.ones(X.size()).to(device='cuda'),torch.zeros(X.size()).to(device='cuda'))
+                # print( torch.sum(cond_num)/(X.shape[0]*X.shape[1]) )
+
+                X_1 = X - self.input_first
+                X_2 = X
+                X_1 = torch.where(torch.abs(X_1) < alpha,torch.zeros(X_1.size()).to(device='cuda'),X_1)
+                X_2 = torch.where(torch.abs(X_2) < beta ,torch.zeros(X_2.size()).to(device='cuda'),X_2)
+                output1 = torch.mm(X_1, self.W_mu)
+                output2 = torch.mm(X_2, std_w * eps_W)
+                output = self.output_first + output1 + output2
+
+              else:
+                alpha = given_alpha
+                beta = given_beta
+
+                X_1 = X - self.input_first
+                X_2 = X
+                X_1 = torch.where(torch.abs(X_1) < alpha,torch.zeros(X_1.size()).to(device='cuda'),X_1)
+                X_2 = torch.where(torch.abs(X_2) < beta ,torch.zeros(X_2.size()).to(device='cuda'),X_2)
+                output1 = torch.mm(X_1, self.W_mu)
+                output2 = torch.mm(X_2, std_w * eps_W)
+                output = self.output_first + output1 + output2
+
+                # # percent that satisfies the condition
+                cond_num = torch.where(torch.abs(X_1) < alpha,torch.ones(X_1.size()).to(device='cuda'),torch.zeros(X_1.size()).to(device='cuda'))
+                drop_rate_alpha = torch.sum(cond_num)/(X_1.shape[0]*X_1.shape[1])
+                cond_num = torch.where(torch.abs(X_2) < beta ,torch.ones(X_2.size()).to(device='cuda'),torch.zeros(X_2.size()).to(device='cuda'))
+                drop_rate_beta = torch.sum(cond_num)/(X_2.shape[0]*X_2.shape[1])
+            return output, drop_rate_alpha, drop_rate_beta
+
         else:
+            print('eval error!!')
 
             # Tensor.new()  Constructs a new tensor of the same data type as self tensor.
             # the same random sample is used for every element in the minibatch
@@ -76,6 +143,8 @@ class BayesLinear_Normalq(nn.Module):
 
             W = self.W_mu + 1 * std_w * eps_W
             b = self.b_mu + 1 * std_b * eps_b
+            # W = self.W_mu
+            # b = self.b_mu
 
             output = torch.mm(X, W) + b.unsqueeze(0).expand(X.shape[0], -1)  # (batch_size, n_output)
 
@@ -85,7 +154,7 @@ class BayesLinear_Normalq(nn.Module):
 
 class bayes_Sin_Net(nn.Module):
     """2 hidden layer Bayes By Backprop (VI) Network"""
-    def __init__(self, input_dim, in_channels, output_dim, prior_instance):
+    def __init__(self, input_dim, in_channels, output_dim, prior_instance,act_drop=False):
         super(bayes_Sin_Net, self).__init__()
 
         self.prior_instance = prior_instance
@@ -103,35 +172,31 @@ class bayes_Sin_Net(nn.Module):
         self.bfc4 = BayesLinear_Normalq(512, 1, self.prior_instance)
 
         self.act = nn.ReLU()
+        self.act_drop = act_drop
 
-    def forward(self, x, sample=False):
-        tklw = 0
-        tklb = 0
+    def forward(self, x, sample=False, first_sample=False, alpha=0, beta=0):
+        sum_alpha = 0
+        sum_beta = 0
 
         # print(x,x.shape)
         x = x.view(x.shape[0],-1)
         # -----------------
-        x, klw, klb = self.bfc1(x, sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x, drop_rate_alpha1, drop_rate_beta1 = self.bfc1(x, sample, act_drop=self.act_drop, first_layer=True, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
         x = self.batchnorm1(x)
         x = self.act(x)
-        x, klw, klb = self.bfc2(x, sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x, drop_rate_alpha2, drop_rate_beta2 = self.bfc2(x, sample, act_drop=self.act_drop, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
         x = self.batchnorm2(x)
         x = self.act(x)
-        x, klw, klb = self.bfc3(x, sample)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        x, drop_rate_alpha3, drop_rate_beta3 = self.bfc3(x, sample, act_drop=self.act_drop, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
         x = self.batchnorm3(x)
         x = self.act(x)
-        y, klw, klb = self.bfc4(x, sample)
+        y, drop_rate_alpha4, drop_rate_beta4 = self.bfc4(x, sample, act_drop=self.act_drop, first_sample=first_sample, given_alpha=alpha, given_beta=beta)
         # print(y)
-        tklw = tklw + klw
-        tklb = tklb + klb
+        sum_alpha = (drop_rate_alpha1 * 512 + drop_rate_alpha2 * 512 * 1024 + drop_rate_alpha3 * 1024 * 512 + drop_rate_alpha4 * 512) / (512 + 512 * 1024 * 2 + 512)
+        sum_beta  = (drop_rate_beta1  * 512 + drop_rate_beta2  * 512 * 1024 + drop_rate_beta3  * 1024 * 512 + drop_rate_beta4  * 512) / (512 + 512 * 1024 * 2 + 512)
 
-        return y, tklw, tklb
+        # 最初のlayerはdropoutを行わないので
+        return y, sum_alpha, sum_beta
 
     def sample_predict(self, x, Nsamples):
         """Used for estimating the data's likelihood by approximately marginalising the weights with MC"""
@@ -152,7 +217,7 @@ class BBP_Bayes_Sin_Net(BaseNet):
     """Full network wrapper for Bayes By Backprop nets with methods for training, prediction and weight prunning"""
     eps = 1e-6
 
-    def __init__(self, lr=1e-3, channels_in=3, side_in=28, cuda=True, classes=10, batch_size=128, Nbatches=0, prior_instance=laplace_prior(mu=0, b=0.1)):
+    def __init__(self, lr=1e-3, channels_in=3, side_in=28, cuda=True, classes=10, batch_size=128, Nbatches=0, prior_instance=laplace_prior(mu=0, b=0.1),act_drop=False):
         super(BBP_Bayes_Sin_Net, self).__init__()
         cprint('y', ' Creating Net!! ')
         self.lr = lr
@@ -164,6 +229,7 @@ class BBP_Bayes_Sin_Net(BaseNet):
         self.Nbatches = Nbatches
         self.prior_instance = prior_instance
         self.side_in = side_in
+        self.act_drop = act_drop
         self.create_net()
         self.create_opt()
         self.epoch = 0
@@ -175,7 +241,7 @@ class BBP_Bayes_Sin_Net(BaseNet):
         if self.cuda:
             torch.cuda.manual_seed(42)
 
-        self.model = bayes_Sin_Net(input_dim=self.channels_in * self.side_in * self.side_in,in_channels=self.channels_in, output_dim=self.classes, prior_instance=self.prior_instance)
+        self.model = bayes_Sin_Net(input_dim=self.channels_in * self.side_in * self.side_in,in_channels=self.channels_in, output_dim=self.classes, prior_instance=self.prior_instance,act_drop=self.act_drop)
         if self.cuda:
             self.model.cuda()
         #             cudnn.benchmark = True
@@ -202,7 +268,7 @@ class BBP_Bayes_Sin_Net(BaseNet):
             # mlpdw = (out-y)*(out-y)/ self.Nbatches
             mlpdw = nn.functional.mse_loss(out, y)
             Edkl = (tklw + tklb) / self.Nbatches
-            loss = loss + Edkl/1000000 + mlpdw
+            loss = loss + Edkl/100000 + mlpdw
         loss = loss / samples
         loss.backward()
         # for i, param in enumerate(self.model.parameters()):
@@ -252,18 +318,11 @@ class BBP_Bayes_Sin_Net(BaseNet):
         # return loss.data, err, probs
         return loss.data, out
 
-    # def inference(self, x, train=False):
-    #     x = x.reshape(1)
-    #     x = to_variable(var=(x), cuda=self.cuda)
-    #     x = x[0].reshape(1)
-    #     out, _, _ = self.model(x)
-    #     return out.data
-
-    def inference(self, x, y):
+    def inference(self, x, y, first_sample=False, train=False, alpha = 0, beta = 0):
         # x = x.reshape(1)
         x,y = to_variable(var=(x,y), cuda=self.cuda)
         # x = x[0].reshape(1)
-        out, drop_rate_alpha, drop_rate_beta = self.model(x)
+        out, drop_rate_alpha, drop_rate_beta = self.model(x,first_sample = first_sample, alpha = alpha, beta = beta)
         return out.data, drop_rate_alpha, drop_rate_beta
 
     def sample_eval(self, x, y, Nsamples, logits=True, train=False):
